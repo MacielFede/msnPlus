@@ -1,12 +1,8 @@
-#include "h/Sistema.h"
 #include <string>
-#include "h/Helpers.h"
 
 int main()
 {
-    Sistema &sistema = Sistema::getSistema();
-    // Obtengo una referencia a la unica instancia de Sistema
-
+/**
     string comando, nombreS, ciS, nomClase, tipoClase, enRambla;
     int idClase, dia, mes, anio, turno, cantBicis;
     Turno nuevoTurno;
@@ -167,5 +163,6 @@ int main()
         }
     } while (comando[0] != '7');
     delete &sistema;
+    **/
     return 0;
 }
