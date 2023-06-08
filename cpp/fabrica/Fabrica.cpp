@@ -13,19 +13,21 @@ Fabrica &Fabrica::getFabrica()
     return *instancia;
 }
 
-Fabrica::Fabrica(){
-  //this->ccontact = new CContacto();
-  //this->cconver = new CConversacion();
-  //this->caut = new CAutenticacion();
-}
+Fabrica::Fabrica(){}
 
 Fabrica::~Fabrica(){
   delete instancia;
 }
 
 // Definicion del constructor de copia y del operator override para que no se copie la instancia
-Fabrica::Fabrica(const Fabrica &) {}
+Fabrica::Fabrica(const Fabrica &) {
+
+}
 
 Fabrica &Fabrica::operator=(const Fabrica &){
     return *this;
+}
+
+CConversacion Fabrica::getCConversacion(){
+  return this->cconver.getCConversacion();
 }

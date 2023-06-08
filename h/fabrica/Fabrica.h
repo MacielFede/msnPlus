@@ -1,7 +1,7 @@
 #ifndef FABRICA_H
 #define FABRICA_H
 
-//#include "../controladores/CConversacion.h"
+#include "../controladores/CConversacion.h"
 //#include "../controladores/CContacto.h"
 //#include "../controladores/CAutenticacion.h"
 
@@ -15,13 +15,13 @@ private:
     // el constructor de copia sirve para que si alguien quiere crear otra instancia se cree una copia de la primera
     Fabrica &operator=(const Fabrica &);
     // el operator override lo uso para que no se pueda usar Fabrica = x y romper todo
-    //CConversacion * cconver;
-    //CContacto * ccontact;
-    //CAutorizacion * caut;
+    CConversacion & cconver = CConversacion::getCConversacion();
+    //CContacto & ccontact;
+    //CAutorizacion & caut;
 public:
   static Fabrica &getFabrica();
   // crea una instancia de Fabrica si es que no se creo y la retorna.
-  //CConversacion getCConversacion();
+  CConversacion getCConversacion();
   //CAutenticacion getCAutenticacion();
   //CContacto getCContacto();
   ~Fabrica();
