@@ -1,3 +1,5 @@
-class DtContacto
+//Lo hice por dependencias - Juan
+
+class DtContacto 
 {
 };

@@ -3,6 +3,7 @@
 
 #include <cstdlib>
 #include <list>
+#include <map>
 #include <string>
 #include "h/clases/Usuario.h"
 #include "h/clases/Mensaje.h"
@@ -19,10 +20,9 @@ class Conversacion
 private:
     bool activa;
     string idConversacion;
-
+    map<string, Mensaje> mensajes;
 public:
-
-    DtConversacion getDataConversacion();
+    virtual DtConversacion getDataConversacion() = 0;
 
     void setActivaFalse();
 
