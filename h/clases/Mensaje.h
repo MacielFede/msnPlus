@@ -1,24 +1,26 @@
 #ifndef MENSAJE_H
 #define MENSAJE_H
 
-#include <cstdlib>
-#include <list>
-#include <map>
-#include <string>
-#include "h/clases/Usuario.h"
-#include "h/dataTypes/DtContacto.h"
-#include "h/dataTypes/DtUsuario.h"
-#include "h/dataTypes/DtConversacion.h"
-#include "h/dataTypes/DtMensaje.h"
-#include "h/dataTypes/DtInfoMensaje.h"
-
 using namespace std;
 
 class Mensaje
 {
 private:
-
+  int id;
+  //DtRelojito fechaEnvio;
+  //Usuario * emisor;
+  map<string, Visto>* receptores;
 public:
+  //Mensaje(map<string, Usuario> &receptores, DtRelojito fechaSistema, Usuario &emisor);
+  ~Mensaje();
 
+  //map<string, Usuario> getReceptores();
+
+  // No tenemos setters porque no queremos cambiar nada del mensaje ya que estariamos alterando informacion fundamental del sistema.
+
+  //void eliminarReceptor(Usuario user);
+  //virtual DtMensaje getDataMensaje() = 0;
+  //virtual DtInfoMensaje crearInfoMsg() = 0;
 };
+
 #endif
