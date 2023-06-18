@@ -23,6 +23,9 @@ private:
     string imagenPerfil;
     string descripcion;
     // DtDateTime ultimaConexion;
+    map<string, Conversacion *> conversaciones;
+    map<string, Usuario *> contactos;
+
 public:
     Usuario(); // Constructor
     DtUsuario getDataUsuario();
