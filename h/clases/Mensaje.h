@@ -1,13 +1,6 @@
 #ifndef MENSAJE_H
 #define MENSAJE_H
 
-//#include "Usuario.h"
-//#include "DtMensaje"
-//#include "DtInfoMensaje"
-//#include "DtRelojito.h"
-#include "Visto.h"
-#include <map>
-#include <string>
 using namespace std;
 
 class Mensaje
