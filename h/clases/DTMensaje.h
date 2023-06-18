@@ -5,24 +5,24 @@
 #include <string>   
 #include "DTInfoMensaje.h"
 #include "DTVisto.h"
-#include "DTDateTime.h"
+#include "DTFecha.h"
 
 using namespace std;
 
 class DtMensaje
 {
     private:
-        string msgId;
-        DateTime sentDate;
-        DtInfoMensaje* msgInfo;
+        string idMensaje;
+        DtFecha fechaEnvio;
+        DtInfoMensaje* infoMensaje;
     public:
         // Constructor
-        DtMensaje(string msgId, DateTime sentDate);
+        DtMensaje(string idMensaje, DtFecha fechaEnvio);
 
         // Getters
-        string getId();
-        DateTime getSentDate();
-        DtInfoMensaje* getMsgInfo();
+        string getIdMensaje();
+        DtFecha getfechaEnvio();
+        DtInfoMensaje* getInfoMensaje();
  
         // Destructor
         ~DtMensaje();

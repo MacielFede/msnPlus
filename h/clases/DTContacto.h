@@ -9,17 +9,17 @@ using namespace std;
 class DtContacto
 {
     private:
-        string phoneNum;
-        string name;
-        string profileImg;
+        string numTel;
+        string nombre;
+        string imagenPerfil;
     public:
         // Constructor
-        DtContacto(string phoneNum, string name, string profileImg);
+        DtContacto(string numTel, string nombre, string imagenPerfil);
 
         // Getters
-        string getPhone();
-        string getName();
-        string getProfileImg();
+        string getNumTel();
+        string getNombre();
+        string getImagenPerfil();
         // Destructor
         ~DtContacto();
             

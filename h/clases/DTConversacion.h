@@ -12,17 +12,17 @@ using namespace std;
 class DtConversacion
 {
     private:
-        string convId;
-        bool active;
-        list<DtMensaje> msgs;  
+        string idConv;
+        bool activa;
+        list<DtMensaje> mensajes;  
     public:
         // Constructor
-        DtConversacion(string convId, bool active, list<DtMensaje> msgs);
+        DtConversacion(string idConv, bool activa, list<DtMensaje> mensajes);
 
         // Getters
-        bool getActive();
-        list<DtMensaje> getMsgs();
-        string getConvId();
+        bool getActiva();
+        list<DtMensaje> getMensajes();
+        string getIdConv();
  
         // Destructor
         ~DtConversacion();

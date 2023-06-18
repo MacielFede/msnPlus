@@ -5,24 +5,24 @@
 #include <cstdlib>
 #include <list>
 #include <string>   
-#include "DTDateTime.h"
+#include "DTFecha.h"
 
 using namespace std;
 
 class DtVisto
 {
     private:
-        string phoneNum;
-        string name;
-        DateTime seenDate;
+        string numTel;
+        string nombre;
+        DtFecha fechaVisto;
     public:
         // Constructor
-        DtVisto(string phoneNum, string name, DateTime seenDate);
+        DtVisto(string numTel, string nombre, DtFecha fechaVisto);
 
         // Getters
-        string getPhoneNum();
-        string getName();
-        DateTime getSeenDate();
+        string getNumTel();
+        string getNombre();
+        DtFecha getFchaVisto();
  
         // Destructor
         ~DtVisto();

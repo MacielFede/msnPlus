@@ -12,17 +12,17 @@ using namespace std;
 class DtInfoMensaje
 {
     private:
-        string phoneNum;
-        string name;
-        list<DtVisto> seenBy;
+        string numTel;
+        string nombre;
+        list<DtVisto> vistoPor;
     public:
         // Constructor
-        DtInfoMensaje(string phoneNum, string name, list<DtVisto> seenBy);
+        DtInfoMensaje(string numTel, string nombre, list<DtVisto> vistoPor);
 
         // Getters
-        string getPhoneNum();
-        string getName();
-        list<DtVisto> getSeenBy();
+        string getNumTel();
+        string getNombre();
+        list<DtVisto> getVistoPor();
  
         // Destructor
         ~DtInfoMensaje();

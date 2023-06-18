@@ -3,30 +3,29 @@
 
 #include <iostream>
 #include <string>
-#include "DTDate.h"
-#include "DTDateTime.h"
+#include "DTFecha.h"
 using namespace std;
 
 class DtUsuario
 {
     private:
-        string phoneNum;
-        string name;
-        DtDate regDate;
-        string profileImg;
-        string description;
-        DtDateTime lastConnection;
+        string numTel;
+        string nombre;
+        DtFecha fechaRegistro;
+        string imagenPerfil;
+        string descripcion;
+        DtFecha ultimaConexion;
     public:
         // Constructor
-        DtUsuario(string phoneNum, string name, DtDate regDate, string profileImg, string description, DtDateTime lastConnection);
+        DtUsuario(string numTel, string nombre, DtFecha fechaRegistro, string imagenPerfil, string descripcion, DtFecha ultimaConexion);
 
         // Getters
-        string getPhone();
-        string getName();
-        DtDate getRegDate();
-        string getProfileImg();
-        string getDescription();
-        DtDateTime getLastConnection();   
+        string getNumTel();
+        string getNombre();
+        DtFecha getFechaRegistro();
+        string getImagenPerfil();
+        string getDescripcion();
+        DtFecha getUltimaConexion();   
         // Destructor
         ~DtUsuario();
             
