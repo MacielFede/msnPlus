@@ -17,8 +17,8 @@ public:
   string getDescripcion();
 
 
-  //DtMensaje getDataMensaje();
-  //DtInfoMensaje crearInfoMsg();
+  DtMensaje getDataMensaje();
+  DtInfoMensaje crearInfoMsg();
 };
 
 #endif

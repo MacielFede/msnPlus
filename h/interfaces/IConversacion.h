@@ -4,12 +4,12 @@
 #include <cstdlib>
 #include <list>
 #include <string>
-#include "h/clases/Usuario.h"
-#include "h/dataTypes/DtContacto.h"
-#include "h/dataTypes/DtUsuario.h"
-#include "h/dataTypes/DtConversacion.h"
-#include "h/dataTypes/DtMensaje.h"
-#include "h/dataTypes/DtInfoMensaje.h"
+#include "../clases/Usuario.h"
+#include "../dataTypes/DtContacto.h"
+#include "../dataTypes/DtUsuario.h"
+#include "../dataTypes/DtConversacion.h"
+#include "../dataTypes/DtMensaje.h"
+#include "../dataTypes/DtInfoMensaje.h"
 
 using namespace std;
 

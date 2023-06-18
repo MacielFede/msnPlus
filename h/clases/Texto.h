@@ -2,6 +2,8 @@
 #define TEXTO_H
 
 #include "Mensaje.h"
+#include <string>
+using namespace std;
 
 class Texto : public Mensaje
 {
@@ -13,8 +15,8 @@ public:
 
   string getTexto();
 
-  //DtMensaje getDataMensaje();
-  //DtInfoMensaje crearInfoMsg();
+  DtMensaje getDataMensaje();
+  DtInfoMensaje crearInfoMsg();
 };
 
 

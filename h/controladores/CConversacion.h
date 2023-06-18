@@ -2,11 +2,11 @@
 #define CCONVERSACION_H
 
 #include <string>
-//#include "../clases/Conversacion"
-//#include "../clases/Mensaje"
-//#include "../clases/DtConversacion"
-//#include "../clases/DtContacto"
-//#include "../clases/DtInfoMensaje"
+#include "../clases/Conversacion.h"
+#include "../clases/Mensaje.h"
+#include "../dataTypes/DtConversacion.h"
+#include "../dataTypes/DtContacto.h"
+#include "../dataTypes/DtInfoMensaje.h"
 
 using namespace std;
 

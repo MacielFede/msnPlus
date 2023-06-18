@@ -1,7 +1,7 @@
 #ifndef VISTO_H
 #define VISTO_H
 
-//#include "Usuario.h"
+#include "Usuario.h"
 
 class Visto {
 private:
