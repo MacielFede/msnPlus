@@ -2,7 +2,7 @@
 #define RELOJITO_H
 
 #include <string>
-#include "DtFecha.h"
+#include "../dataTypes/DtFecha.h"
 
 using namespace std;
 
@@ -13,7 +13,7 @@ private:
     // Declaro la instancia CContacto que despues le damos valor en cpp (no le doy valor aqui porque lo haria constante)
     static Relojito* instance;
     // Hago el constructor privado para que ningún otro objeto pueda crear una instancia CContacto
-    Relojito();
+    Relojito(int d, int mes, int a, int h, int min);
     // El operator override lo uso para que no se pueda usar CContacto = x y romper todo
     Relojito& operator=(const Relojito&);
 public:

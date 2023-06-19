@@ -10,10 +10,10 @@
 
 using namespace std;
 
-class CConversacion {
+class CConversacion : public IConversacion {
 private:
-  // Conversacion *memConversacion;
-  // Mensaje *memMensaje
+  Conversacion* memConversacion;
+  Mensaje* memMensaje;
   static CConversacion* instancia;
   // Declaro la instancia CConversacion que despues le damos valor en cpp (no le doy valor aqui porque lo haria constante)
   CConversacion();

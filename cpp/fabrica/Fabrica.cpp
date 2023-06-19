@@ -31,3 +31,9 @@ Fabrica& Fabrica::operator=(const Fabrica&) {
 CConversacion Fabrica::getCConv() {
   return this->cconver.getCConversacion();
 }
+CContacto Fabrica::getCCont() {
+  return this->ccontact.getCContacto();
+}
+CAutenticacion Fabrica::getCAut() {
+  return this->caut.getCAutenticacion();
+}

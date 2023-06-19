@@ -10,7 +10,7 @@ class Texto : public Mensaje
 private:
   string texto;
 public:
-  //Texto(string text, map<string, Usuario> &receptores, DtRelojito fechaSistema, Usuario &emisor);
+  Texto(string text, map<string, Usuario*> receptores, DtFecha fechaEnv, Usuario* emisor, int ultimoId);
   ~Texto();
 
   string getTexto();

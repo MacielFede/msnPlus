@@ -8,7 +8,7 @@ class Imagen : public Mensaje
 private:
   string url, formatoImg, tamano, descripcion;
 public:
-  //Imagen(map<string, Usuario> &receptores, DtRelojito fechaSistema, Usuario &emisor, string URL, string formato, string tam, string desc);
+  Imagen(map<string, Usuario*> receptores, DtFecha fechaEnv, Usuario* emisor, int ultimoId, string URL, string formato, string tam, string desc);
   ~Imagen();
 
   string getUrl();

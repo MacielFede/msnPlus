@@ -8,7 +8,7 @@ class Video : public Mensaje
 private:
   string url, duracion;
 public:
-  //Video(map<string, Usuario> &receptores, DtFecha fechaSistema, Usuario &emisor, string URL, string dur);
+  Video(map<string, Usuario*> receptores, DtFecha fechaEnv, Usuario* emisor, string URL, string dur, int ultimoId);
   ~Video();
 
   string getUrl();
