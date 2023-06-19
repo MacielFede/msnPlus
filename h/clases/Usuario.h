@@ -11,7 +11,7 @@
 #include "../dataTypes/DtConversacion.h"
 #include "../dataTypes/DtContacto.h"
 // Classes
-#include "../clases/Conversacion.h"
+#include "Conversacion.h"
 using namespace std;
 
 class Usuario
@@ -23,8 +23,8 @@ private:
     string imagenPerfil;
     string descripcion;
     // DtDateTime ultimaConexion;
-    map<string, Conversacion *> conversaciones;
-    map<string, Usuario *> contactos;
+    map<string, Conversacion*> conversaciones;
+    map<string, Usuario*> contactos;
 
 public:
     Usuario(); // Constructor
@@ -32,9 +32,9 @@ public:
     void archivarConversacion(string idConversacion);
     map<string, DtConversacion> buscarConver();
     map<string, DtContacto> listarContactos();
-    Conversacion *crearConversacion(string cNumTel);
-    void sincronizarConversacion(Conversacion *conver);
-    Conversacion *getConversacion(string idConversacion);
+    Conversacion* crearConversacion(string cNumTel);
+    void sincronizarConversacion(Conversacion* conver);
+    Conversacion* getConversacion(string idConversacion);
 
     // destructor
     ~Usuario();
