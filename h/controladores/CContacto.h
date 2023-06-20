@@ -9,8 +9,7 @@
 
 using namespace std;
 
-class CContacto
-{
+class CContacto : public IContacto {
 private:
     Usuario* memContacto;
     // Declaro la instancia CContacto que despues le damos valor en cpp (no le doy valor aqui porque lo haria constante)

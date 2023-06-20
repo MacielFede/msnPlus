@@ -2,20 +2,20 @@
 #define CONTACTO_H
 
 #include "Mensaje.h"
-//#include "DtUsuario"
+#include "../dataTypes/DtContacto.h"
 
 class Contacto : public Mensaje
 {
 private:
-  //DtUsuario contacto
+  DtUsuario contacto;
 public:
-  //Contacto(map<string, Usuario> &receptores, DtRelojito fechaSistema, Usuario &emisor, DtUsuario contact);
+  Contacto(map<string, Usuario*> receptores, DtFecha fechaEnv, Usuario* emisor, int ultimoId, DtUsuario contact);
   ~Contacto();
 
-  //DtUsuario getContacto();
+  DtUsuario getContacto();
 
-  //DtMensaje getDataMensaje();
-  //DtInfoMensaje crearInfoMsg();
+  DtMensaje getDataMensaje();
+  DtInfoMensaje crearInfoMsg();
 };
 
 #endif

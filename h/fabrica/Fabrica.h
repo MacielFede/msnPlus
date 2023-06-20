@@ -15,9 +15,9 @@ private:
   // el constructor de copia sirve para que si alguien quiere crear otra instancia se cree una copia de la primera
   Fabrica& operator=(const Fabrica&);
   // el operator override lo uso para que no se pueda usar Fabrica = x y romper todo
-  CConversacion& cconver = CConversacion::getCConversacion();
-  CContacto& ccontact = CContacto::getCContacto();
-  CAutorizacion& caut = CAutenticacion::getCAutenticacion();
+  CConversacion cconver = CConversacion::getCConversacion();
+  CContacto ccontact = CContacto::getCContacto();
+  CAutenticacion caut = CAutenticacion::getCAutenticacion();
 public:
   static Fabrica& getFabrica();
   // crea una instancia de Fabrica si es que no se creo y la retorna.
