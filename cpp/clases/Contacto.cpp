@@ -2,3 +2,6 @@
 
 Contacto::~Contacto() {}
 
+DtMensaje Contacto::getDataMensaje() {}
+
+DtInfoMensaje Contacto::crearInfoMsg() {}

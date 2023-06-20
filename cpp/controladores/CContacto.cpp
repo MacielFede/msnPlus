@@ -19,9 +19,6 @@ CContacto::~CContacto() {
     delete instancia;
 }
 
-// Definicion del constructor de copia y del operator override para que no se copie la instancia
-CContacto::CContacto(const CContacto&) {}
-
 CContacto& CContacto::operator=(const CContacto&) {
     return *this;
 }

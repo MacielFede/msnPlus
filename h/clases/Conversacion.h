@@ -5,13 +5,15 @@
 #include <list>
 #include <map>
 #include <string>
-#include "h/clases/Usuario.h"
-#include "h/clases/Mensaje.h"
-#include "h/dataTypes/DtContacto.h"
-#include "h/dataTypes/DtUsuario.h"
-#include "h/dataTypes/DtConversacion.h"
-#include "h/dataTypes/DtMensaje.h"
-#include "h/dataTypes/DtInfoMensaje.h"
+#include "Usuario.h"
+// #include "Mensaje.h"
+#include "../dataTypes/DtContacto.h"
+#include "../dataTypes/DtUsuario.h"
+#include "../dataTypes/DtConversacion.h"
+#include "../dataTypes/DtMensaje.h"
+#include "../dataTypes/DtInfoMensaje.h"
+
+class Mensaje;
 
 using namespace std;
 
@@ -20,7 +22,7 @@ class Conversacion
 private:
     bool activa;
     string idConversacion;
-    map<string, Mensaje> mensajes;
+    map<string, Mensaje*> mensajes;
 public:
     virtual DtConversacion getDataConversacion() = 0;
 
@@ -32,6 +34,8 @@ public:
     
     DtInfoMensaje informacionMensaje(string idMensaje);
 
-    void asignarAConversacion(Mensaje m);
+    void asignarAConversacion(Mensaje* m);
+
+    ~Conversacion();
 };
 #endif

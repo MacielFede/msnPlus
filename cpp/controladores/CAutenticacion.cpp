@@ -20,9 +20,6 @@ CAutenticacion::~CAutenticacion()
     delete instancia;
 }
 
-// Definicion del constructor de copia y del operator override para que no se copie la instancia
-CAutenticacion::CAutenticacion(const CAutenticacion &) {}
-
 CAutenticacion &CAutenticacion::operator=(const CAutenticacion &)
 {
     return *this;
