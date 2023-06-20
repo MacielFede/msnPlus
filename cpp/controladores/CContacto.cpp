@@ -1,0 +1,24 @@
+#include "../../h/controladores/CContacto.h"
+
+CContacto* CContacto::instancia = nullptr;
+// Le doy valor a la instancia como null para que solo la primera vez creemos la instancia
+
+CContacto& CContacto::getCContacto()
+{
+    if (instancia == nullptr)
+    {
+        instancia = new CContacto();
+    }
+    // Si la instancia ya fue creada retorno una referencia a la misma instancia
+    return *instancia;
+}
+
+CContacto::CContacto() {}
+
+CContacto::~CContacto() {
+    delete instancia;
+}
+
+CContacto& CContacto::operator=(const CContacto&) {
+    return *this;
+}

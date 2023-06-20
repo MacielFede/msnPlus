@@ -11,21 +11,23 @@
 // Classes
 #include "../clases/Usuario.h"
 
+// Interfaces
+#include "../interfaces/IAutenticacion.h"
+
 using namespace std;
 
-class CAutenticacion
-{
+class CAutenticacion : public IAutenticacion {
 
 private:
     string numTel;
-    Usuario *memUsuario;                         // Usuario en memoria
-    map<string, Usuario *> memColeccionUsuarios; // Coleccion de usuarios del sistema
-    static CAutenticacion *instancia;            // Instancia del singleton
+    Usuario* memUsuario;                         // Usuario en memoria
+    map<string, Usuario*> memColeccionUsuarios; // Coleccion de usuarios del sistema
+    static CAutenticacion* instancia;            // Instancia del singleton
     CAutenticacion();                            // Constructor
-    CAutenticacion &operator=(const CAutenticacion &);
+    CAutenticacion& operator=(const CAutenticacion&);
 
 public:
-    static CAutenticacion &getCAutenticacion();
+    static CAutenticacion& getCAutenticacion();
     bool ingresarNumero(string numTel);
     void registrarUsuario(string nombre, string urlPerfil, string desc);
     DtUsuario obtenerSesionActiva();
