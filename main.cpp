@@ -7,12 +7,13 @@
 
 int main()
 {
+    // Problema de seg. fault al inicializar controladores (falta implementar, descomentar 1 por 1 al hacer)
     string comando;
-    Relojito& relojito = Relojito::getRelojito();
-    Fabrica& fabrica = Fabrica::getFabrica();
-    IConversacion Cconv = fabrica.getCConv();
-    IAutenticacion Caut = fabrica.getCAut();
-    IContacto Ccont = fabrica.getCCont();
+    // Relojito& relojito = Relojito::getRelojito();
+    // Fabrica& fabrica = Fabrica::getFabrica();
+    // IConversacion Cconv = fabrica.getCConv();
+    // IAutenticacion Caut = fabrica.getCAut();
+    // IContacto Ccont = fabrica.getCCont();
 
     cout << "\nBienvenido a su mejor chat. Recuerde, para ejecutar los comandos debe ingresar siempre el numero del mismo.\n\n";
 #pragma region AbrirApp

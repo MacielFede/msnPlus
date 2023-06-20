@@ -19,8 +19,6 @@ CConversacion::~CConversacion() {
     delete instancia;
 }
 
-// Definicion del constructor de copia y del operator override para que no se copie la instancia
-CConversacion::CConversacion(const CConversacion&) {}
 
 CConversacion& CConversacion::operator=(const CConversacion&) {
     return *this;

@@ -11,8 +11,10 @@
 #include "../dataTypes/DtConversacion.h"
 #include "../dataTypes/DtContacto.h"
 // Classes
-#include "Conversacion.h"
+// #include "Conversacion.h"
 using namespace std;
+
+class Conversacion;
 
 class Usuario
 {

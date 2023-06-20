@@ -11,6 +11,9 @@
 // Classes
 #include "../clases/Usuario.h"
 
+// Interfaces
+#include "../interfaces/IAutenticacion.h"
+
 using namespace std;
 
 class CAutenticacion : public IAutenticacion {
