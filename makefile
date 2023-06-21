@@ -1,8 +1,8 @@
 # Compilador
 CC = g++
 
-# Flags del compilador
-CFLAGS = -g -Wall -Werror -Wno-unknown-pragmas
+# Flags del compilador, se puede agregar -Werror si queremos que trate las warnings como errores
+CFLAGS = -g -Wall -Wno-unknown-pragmas
 
 # Ejecutable
 PRINCIPAL = main
@@ -13,40 +13,69 @@ CPPDIR = cpp
 ODIR = o
 
 # Clases
-CLASES = Socio Inscripcion Clase Entrenamiento Spinning Sistema DTSocio DTInscripcion DTClase DTEntrenamiento DTSpinning DTFecha Helpers
+CLASES_CLASSES = Contacto Conversacion Imagen Mensaje Relojito Texto Usuario Video Visto
+CLASES_CONTROLLERS = CAutenticacion CContacto CConversacion
+CLASES_FABRICA = Fabrica
+CLASES_DATATYPES = DtContacto DtConversacion DtFecha DtInfoMensaje DtMensaje DtUsuario DtVisto
+CLASES_INTERFACES = IAutenticacion IContacto IConversacion
+
+CLASES = $(CLASES_CLASSES) $(CLASES_CONTROLLERS) $(CLASES_FABRICA) $(CLASES_DATATYPES)
 
 # Archivos
-HS = $(CLASES:%=$(HDIR)/%.h)
-CPPS = $(CLASES:%=$(CPPDIR)/%.cpp)
+HS_CLASSES = $(CLASES_CLASSES:%=$(HDIR)/clases/%.h)
+CPPS_CLASSES = $(CLASES_CLASSES:%=$(CPPDIR)/clases/%.cpp)
+
+HS_CONTROLLERS = $(CLASES_CONTROLLERS:%=$(HDIR)/controladores/%.h)
+CPPS_CONTROLLERS = $(CLASES_CONTROLLERS:%=$(CPPDIR)/controladores/%.cpp)
+
+HS_FABRICA = $(CLASES_FABRICA:%=$(HDIR)/fabrica/%.h)
+CPPS_FABRICA = $(CLASES_FABRICA:%=$(CPPDIR)/fabrica/%.cpp)
+
+HS_DATATYPES = $(CLASES_DATATYPES:%=$(HDIR)/dataTypes/%.h)
+CPPS_DATATYPES = $(CLASES_DATATYPES:%=$(CPPDIR)/dataTypes/%.cpp) 
+
+HS_INTERFACES = $(CLASES_INTERFACES:%=$(HDIR)/interfaces/%.h)
+
+HS = $(HS_CLASSES) $(HS_CONTROLLERS) $(HS_FABRICA) $(HS_DATATYPES) $(HS_INTERFACES)
+CPPS = $(CPPS_CLASSES) $(CPPS_CONTROLLERS) $(CPPS_FABRICA) $(CPPS_DATATYPES)
+
 OS = $(CLASES:%=$(ODIR)/%.o)
 
 # Archivo main y los subdirectorios
-LAB1 = main.cpp $(HDIR) $(CPPDIR) $(ODIR)
+LAB5 = main.cpp $(HDIR) $(CPPDIR) $(ODIR)
 
 #La regla que se va a ejecutar por defecto (ya que es la primera)
 all: make
 
 #Compila los .o (del directorio o/*.o) a partir de los .cpp y los .h
-%.o: $(CPPDIR)/%.cpp $(HDIR)/%.h
-	$(CC) $(CFLAGS) -c $< -o o/$@
+$(ODIR)/%.o: $(CPPDIR)/clases/%.cpp $(HDIR)/clases/%.h
+	$(CC) $(CFLAGS) -c $< -o $@
+
+$(ODIR)/%.o: $(CPPDIR)/controladores/%.cpp $(HDIR)/controladores/%.h
+	$(CC) $(CFLAGS) -c $< -o $@
+
+$(ODIR)/%.o: $(CPPDIR)/fabrica/%.cpp $(HDIR)/fabrica/%.h
+	$(CC) $(CFLAGS) -c $< -o $@
+
+$(ODIR)/%.o: $(CPPDIR)/dataTypes/%.cpp $(HDIR)/dataTypes/%.h
+	$(CC) $(CFLAGS) -c $< -o $@
 
 #Compila el main.o a partir del main.cpp
 $(PRINCIPAL).o:$(PRINCIPAL).cpp
 	$(CC) $(CFLAGS) -c $< -o $@
 
 #Linkea todos los .o con el main.cpp y crea el ejecutable llamado main
-make: main.cpp Socio.o Inscripcion.o Clase.o Entrenamiento.o Spinning.o Sistema.o DTSocio.o DTInscripcion.o DTClase.o DTEntrenamiento.o DTSpinning.o DTFecha.o Helpers.o
-	$(CC) $(CFLAGS) -o main main.cpp o/*.o
-
+make: main.cpp $(OS)
+	$(CC) $(CFLAGS) -o main main.cpp $(OS)
 
 #Crea un zip (hay que tener zip instalado en linux) con todos los archivos pertinentes
-zip: $(LAB1) Makefile
-	rm -f Gr3_Lab1.zip
-	zip -r Gr3_Lab1.zip $(LAB1) integrantes.txt Makefile
+zip: $(LAB5) Makefile
+	rm -f Gr3_Lab5.zip
+	zip -r Gr3_Lab5.zip $(LAB5) integrantes.txt Makefile
 
 #Borra todo
 clean:
-	-rm -f o/*.o
+	-rm -f $(ODIR)/*.o
 	-rm -f main
 	-rm -f main.o
-	-rm -f Gr3_Lab1.zip
+	-rm -f Gr3_Lab5.zip

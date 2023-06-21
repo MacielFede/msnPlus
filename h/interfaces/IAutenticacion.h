@@ -3,8 +3,8 @@
 
 #include <cstdlib>
 #include <string>
-#include "h/clases/Usuario.h"
-#include "h/dataTypes/DtUsuario.h"
+#include "../clases/Usuario.h"
+#include "../dataTypes/DtUsuario.h"
 
 using namespace std;
 
