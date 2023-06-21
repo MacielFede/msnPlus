@@ -2,7 +2,7 @@
 #define DTMENSAJE_H
 
 #include <iostream>
-#include <string>   
+#include <string>
 #include "DtInfoMensaje.h"
 #include "DtVisto.h"
 #include "DtFecha.h"
@@ -14,20 +14,21 @@ class DtMensaje
 private:
     string idMensaje;
     DtFecha fechaEnvio;
-    DtInfoMensaje* infoMensaje;
+    DtInfoMensaje *infoMensaje;
+
 public:
     // Constructor
     DtMensaje(string idMensaje, DtFecha fechaEnvio);
 
     // Getters
     string getIdMensaje();
-    DtFecha getfechaEnvio();
-    DtInfoMensaje* getInfoMensaje();
+    DtFecha getFechaEnvio();
+    // DtInfoMensaje* getInfoMensaje();
 
     // Destructor
     ~DtMensaje();
 
-    //friend ostream &operator<<(ostream &o, DtMensaje &s);
+    // friend ostream &operator<<(ostream &o, DtMensaje &s);
 };
 
 #endif

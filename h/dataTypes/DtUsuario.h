@@ -15,6 +15,7 @@ private:
     string imagenPerfil;
     string descripcion;
     DtFecha ultimaConexion;
+
 public:
     // Constructor
     DtUsuario(string numTel, string nombre, DtFecha fechaRegistro, string imagenPerfil, string descripcion, DtFecha ultimaConexion);
@@ -29,7 +30,7 @@ public:
     // Destructor
     ~DtUsuario();
 
-    friend ostream& operator<<(ostream& o, DtUsuario& s);
+    // friend ostream &operator<<(ostream &o, DtUsuario &s);
 };
 
 #endif

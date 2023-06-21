@@ -21,10 +21,10 @@ class Usuario
 private:
     string telefono;
     string nombre;
-    // DtDateTime fechaRegistro;
+    DtFecha fechaRegistro;
     string imagenPerfil;
     string descripcion;
-    // DtDateTime ultimaConexion;
+    DtFecha ultimaConexion;
     map<string, Conversacion*> conversaciones;
     map<string, Usuario*> contactos;
 

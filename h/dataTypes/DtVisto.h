@@ -4,7 +4,7 @@
 #include <iostream>
 #include <cstdlib>
 #include <list>
-#include <string>   
+#include <string>
 #include "DtFecha.h"
 
 using namespace std;
@@ -15,6 +15,7 @@ private:
     string numTel;
     string nombre;
     DtFecha fechaVisto;
+
 public:
     // Constructor
     DtVisto(string numTel, string nombre, DtFecha fechaVisto);
@@ -22,12 +23,12 @@ public:
     // Getters
     string getNumTel();
     string getNombre();
-    DtFecha getFchaVisto();
+    DtFecha getFechaVisto();
 
     // Destructor
     ~DtVisto();
 
-    //friend ostream &operator<<(ostream &o, DtVisto &s);
+    // friend ostream &operator<<(ostream &o, DtVisto &s);
 };
 
 #endif
