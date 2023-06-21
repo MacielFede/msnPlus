@@ -8,7 +8,7 @@
 int main()
 {
     // Problema de seg. fault al inicializar controladores (falta implementar, descomentar 1 por 1 al hacer)
-    string comando;
+    string comando, idConver;
     // Relojito& relojito = Relojito::getRelojito();
     // Fabrica& fabrica = Fabrica::getFabrica();
     // IConversacion Cconv = fabrica.getCConv();
@@ -33,7 +33,7 @@ int main()
         cout << "6 - Ver fecha y hora actual.\n";
         cout << "7 - Actualizar fecha y hora actual.\n";
         cout << "8 - Cerrar app.\n\n";
-        cout << "Que desea hacer? ";
+        cout << "Que desea hacer? > ";
 
         fflush(stdin);
         // fflush() limpia el buffer del sistema, como estamos usando el buffer de la libreria std siempre puede quedarnos basura en el buffer
@@ -43,12 +43,94 @@ int main()
         switch (comando[0])
         {
         case '1':
+
 #pragma region MostrarConvers
-            //TODO: Mostrar conversaciones
-            //**** Habria que en vez de poner 2 opciones de ver mensaje y eliminar mensaje, poner 1 sola que diga Abrir conversacion,
-            //**** Ahi adentro estara despues de mostrar los mensajes de la conversacion, las opciones de mostrar mas info de un mensaje o eliminar un mensaje
-#pragma endregion
+            do {
+                //TODO: Imprimir conversaciones
+
+                cout << "\nComandos:\n";
+                cout << "1 - Abrir conversacion.\n";
+                //Esta opcion mostrara los mensajes de la conversacion y ahi el usuario eligira si ver mas info de un mensaje o eliminar un mensaje
+                cout << "2 - Archivar conversacion.\n";
+                cout << "3 - Agregar participantes a un grupo.\n";
+                cout << "4 - Ver fecha y hora actual.\n";
+                cout << "5 - Actualizar fecha y hora actual.\n";
+                cout << "6 - Volver al menu anterior.\n\n";
+                cout << "Que desea hacer? > ";
+                fflush(stdin);
+                getline(cin, comando);
+
+                switch (comando[0])
+                {
+                case '1':
+                    // TODO: do{ if(!Cconv.existeConver(idConver)) cout << "No existe esa conversacion."; }while(!Cconv.existeConver(idConver));
+                    //TODO: CConversacion -> existeConver(string idConver): true o false 
+                    cout << "Ingrese el id de la conversacion que quiere abrir, si es un grupo sera el nombre, si es privada sera el numero de telefono.\n> ";
+                    fflush(stdin);
+                    getline(cin, idConver);
+                    do {
+                        // TODO: Imprimir mensajes de la conversacion.
+                        cout << "\nComandos:\n";
+                        cout << "1 - Ver informacion de un mensaje.\n";
+                        cout << "2 - Eliminar mensaje.\n";
+                        cout << "3 - Ver fecha y hora actual.\n";
+                        cout << "4 - Actualizar fecha y hora actual.\n";
+                        cout << "5 - Volver al menu anterior.\n";
+                        cout << "6 - Volver al menu principal.\n\n";
+                        cout << "Que desea hacer? > ";
+
+                        fflush(stdin);
+                        getline(cin, comando);
+
+                        switch (comando[0])
+                        {
+                        case '1':
+                            break;
+                        case '2':
+                            break;
+                        case '3':
+                            break;
+                        case '4':
+                            break;
+
+                        case '5':
+                            cout << "Volviendo al menu de conversaciones.\n";
+                            break;
+
+                        case '6':
+                            cout << "Volviendo al menu principal.\n";
+                            //Cuando el comando es 6 siempre se volvera al menu principal
+                            break;
+
+                        default:
+                            cout << "Ingresaste un comando inexistente.\n";
+                            break;
+                        }
+                    } while (comando[0] != '6' && comando[0] != '5');
+                    break;
+                case '2':
+
+                    break;
+                case '3':
+
+                    break;
+                case '4':
+
+                    break;
+                case '5':
+
+                    break;
+                case '6':
+                    cout << "Volviendo al menu principal.\n";
+                    break;
+
+                default:
+                    cout << "Ingresaste un comando inexistente.\n";
+                    break;
+                }
+            } while (comando[0] != '6');
             break;
+#pragma endregion
 
         case '2':
 #pragma region Crear grupo
