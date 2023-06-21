@@ -24,3 +24,11 @@ CAutenticacion &CAutenticacion::operator=(const CAutenticacion &)
 {
     return *this;
 }
+
+bool CAutenticacion::ingresarNumero(string numTel) {}
+
+void CAutenticacion::registrarUsuario(string nombre, string urlPerfil, string desc) {}
+
+DtUsuario CAutenticacion::obtenerSesionActiva() {}
+
+Usuario CAutenticacion::infoUsuario(string cNumTel) {}

@@ -29,8 +29,8 @@ public:
     static CContacto &getCContacto();
 
     list<DtContacto> listarContactos();
-    Usuario ingresarNumeroContacto(string phoneNum);
-    void agregarContacto(string phoneNum);
+    Usuario ingresarNumeroContacto(string cNumTel);
+    void agregarContacto(string cNumTel);
 
     ~CContacto();
 };

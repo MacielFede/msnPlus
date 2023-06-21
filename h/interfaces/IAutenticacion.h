@@ -13,13 +13,13 @@ class IAutenticacion
 private:
 
 public:
-    bool ingresarNumero(string numTel);
+    virtual bool ingresarNumero(string numTel) = 0;
 
-    void registrarUsuario(string nombre, string urlPerfil, string desc);
+    virtual void registrarUsuario(string nombre, string urlPerfil, string desc) = 0;
 
-    DtUsuario obtenerSesionActiva();
+    virtual DtUsuario obtenerSesionActiva() = 0;
 
-    Usuario infoUsuario(string cNumTel);
+    virtual Usuario infoUsuario(string cNumTel) = 0;
 };
 
 #endif
