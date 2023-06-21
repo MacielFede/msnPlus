@@ -23,7 +23,7 @@ class DtContacto
         // Destructor
         ~DtContacto();
             
-        friend ostream &operator<<(ostream &o, DtContacto &s);
+        //friend ostream &operator<<(ostream &o, DtContacto &s);
 };
 
 #endif

@@ -11,7 +11,7 @@ class Relojito
     private:
         int dia, mes, anio, horas, minutos;
         // Declaro la instancia CContacto que despues le damos valor en cpp (no le doy valor aqui porque lo haria constante)
-        static Relojito* instance;
+        static Relojito* instancia;
         // Hago el constructor privado para que ningún otro objeto pueda crear una instancia CContacto
         Relojito();
         // El operator override lo uso para que no se pueda usar CContacto = x y romper todo
@@ -24,7 +24,8 @@ class Relojito
         DtFecha getFechaActual();
         
         // Establecer una nueva fecha y hora
-        void setTime(DtFecha fechaNueva);
+        void actualizarFecha(DtFecha fechaNueva);
+        void actualizarFecha();
     
         ~Relojito();
 };

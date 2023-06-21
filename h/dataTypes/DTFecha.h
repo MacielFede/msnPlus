@@ -18,14 +18,14 @@ class DtFecha
         int getAnio();
         int getHoras();
         int getMinutos();
-        
-        bool operator==(const DtFecha &fecha);
-        friend ostream &operator<<(ostream &o, DtFecha &f);
-        // Destructor
-        ~DtFecha();
 
         // Métodos
         bool esValida();
+        void imprimirFecha();
+        void imprimirFechayHora();
+
+        // Destructor
+        ~DtFecha();
 };
 
 #endif

@@ -21,8 +21,8 @@ class DtMensaje
 
         // Getters
         string getIdMensaje();
-        DtFecha getfechaEnvio();
-        DtInfoMensaje* getInfoMensaje();
+        DtFecha getFechaEnvio();
+        //DtInfoMensaje* getInfoMensaje();
  
         // Destructor
         ~DtMensaje();

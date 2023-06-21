@@ -29,7 +29,7 @@ class DtUsuario
         // Destructor
         ~DtUsuario();
             
-        friend ostream &operator<<(ostream &o, DtUsuario &s);
+        //friend ostream &operator<<(ostream &o, DtUsuario &s);
 };
 
 #endif

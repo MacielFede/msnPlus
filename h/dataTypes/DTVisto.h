@@ -22,7 +22,7 @@ class DtVisto
         // Getters
         string getNumTel();
         string getNombre();
-        DtFecha getFchaVisto();
+        DtFecha getFechaVisto();
  
         // Destructor
         ~DtVisto();
