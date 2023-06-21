@@ -1,9 +1,9 @@
 #include "../../h/controladores/CAutenticacion.h"
 
-CAutenticacion *CAutenticacion::instancia = nullptr;
+CAutenticacion* CAutenticacion::instancia = nullptr;
 // Le doy valor a la instancia como null para que solo la primera vez creemos la instancia
 
-CAutenticacion &CAutenticacion::getCAutenticacion()
+CAutenticacion& CAutenticacion::getCAutenticacion()
 {
     if (instancia == nullptr)
     {
@@ -28,7 +28,7 @@ void CAutenticacion::liberarInstancia()
     }
 }
 
-CAutenticacion &CAutenticacion::operator=(const CAutenticacion &)
+CAutenticacion& CAutenticacion::operator=(const CAutenticacion&)
 {
     return *this;
 }
@@ -40,3 +40,18 @@ void CAutenticacion::registrarUsuario(string nombre, string urlPerfil, string de
 DtUsuario CAutenticacion::obtenerSesionActiva() {}
 
 Usuario CAutenticacion::infoUsuario(string cNumTel) {}
+
+void CAutenticacion::cambiarDescripcion(string des) {
+    this->memUsuario->setDesc(des);
+    this->memUsuario->getDataUsuario();
+}
+
+void CAutenticacion::cambiarFoto(string url) {
+    this->memUsuario->setDesc(url);
+    this->memUsuario->getDataUsuario();
+}
+
+void CAutenticacion::cambiarNombre(string nom) {
+    this->memUsuario->setDesc(nom);
+    this->memUsuario->getDataUsuario();
+}
