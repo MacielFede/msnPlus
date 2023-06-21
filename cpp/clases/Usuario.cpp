@@ -2,19 +2,21 @@
 
 Usuario::~Usuario() {}
 
-void Usuario::setDesc(string desc) {
+DtUsuario Usuario::setDesc(string desc) {
   this->descripcion = desc;
+  return this->getDataUsuario();
 }
 
-void Usuario::setImagen(string url) {
+DtUsuario Usuario::setImagen(string url) {
   this->imagenPerfil = url;
+  return this->getDataUsuario();
 }
 
-void Usuario::setNombre(string nom) {
+DtUsuario Usuario::setNombre(string nom) {
   this->nombre = nom;
+  return this->getDataUsuario();
 }
 
 DtUsuario Usuario::getDataUsuario() {
-  // DtUsuario user = DtUsuario();
-  // return DtUsuario()
+  return DtUsuario(this->telefono, this->nombre, this->fechaRegistro, this->imagenPerfil, this->descripcion, this->ultimaConexion);
 }

@@ -4,6 +4,7 @@
 #include "h/interfaces/IConversacion.h"
 #include "h/interfaces/IContacto.h"
 #include "h/clases/Relojito.h"
+#include "h/dataTypes/DtUsuario.h"
 
 int main()
 {
@@ -159,13 +160,15 @@ int main()
             fflush(stdin);
             getline(cin, comando);
 
+            //DtUsuario usuarioCambiado;
+
             if (comando[0] == 'N' || comando[0] == 'n') {
                 cout << "Indique su nuevo nombre: ";
 
                 fflush(stdin);
                 getline(cin, modificacionPerfil);
 
-                //Caut.cambiarNombre(modificacionPerfil);
+                //usuarioCambiado = Caut.cambiarNombre(modificacionPerfil);
             }
             else if (comando[0] == 'F' || comando[0] == 'f') {
                 cout << "Indique el URL de su nueva foto de perfil: ";
@@ -173,7 +176,7 @@ int main()
                 fflush(stdin);
                 getline(cin, modificacionPerfil);
 
-                //Caut.cambiarFoto(modificacionPerfil);
+                //usuarioCambiado = Caut.cambiarFoto(modificacionPerfil);
             }
             else if (comando[0] == 'D' || comando[0] == 'd') {
                 cout << "Indique su nueva descripcion: ";
@@ -181,10 +184,14 @@ int main()
                 fflush(stdin);
                 getline(cin, modificacionPerfil);
 
-                //Caut.cambiarDescripcion(modificacionPerfil);
+                //usuarioCambiado = Caut.cambiarDescripcion(modificacionPerfil);
             }
 
-            // TODO: Devolver un dt con la nueva informacion del perfil??
+            //cout << "\nTu nueva informacion:\n";
+            //cout << "Tu numero de telefono: " << usuarioCambiado->getNumTel() <<endl;
+            //cout << "Tu imagen de perfil: " << usuarioCambiado->getImagenPerfil() <<endl;
+            //cout << "Tu descripcion: " << usuarioCambiado->getDescripcion() <<endl;
+
             break;
 #pragma endregion
 

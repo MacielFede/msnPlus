@@ -41,17 +41,17 @@ DtUsuario CAutenticacion::obtenerSesionActiva() {}
 
 Usuario CAutenticacion::infoUsuario(string cNumTel) {}
 
-void CAutenticacion::cambiarDescripcion(string des) {
+DtUsuario CAutenticacion::cambiarDescripcion(string des) {
     this->memUsuario->setDesc(des);
-    this->memUsuario->getDataUsuario();
+    return this->memUsuario->getDataUsuario();
 }
 
-void CAutenticacion::cambiarFoto(string url) {
+DtUsuario CAutenticacion::cambiarFoto(string url) {
     this->memUsuario->setDesc(url);
-    this->memUsuario->getDataUsuario();
+    return this->memUsuario->getDataUsuario();
 }
 
-void CAutenticacion::cambiarNombre(string nom) {
+DtUsuario CAutenticacion::cambiarNombre(string nom) {
     this->memUsuario->setDesc(nom);
-    this->memUsuario->getDataUsuario();
+    return this->memUsuario->getDataUsuario();
 }
