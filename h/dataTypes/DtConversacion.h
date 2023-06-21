@@ -15,6 +15,7 @@ private:
     string idConv;
     bool activa;
     list<DtMensaje> mensajes;
+
 public:
     // Constructor
     DtConversacion(string idConv, bool activa, list<DtMensaje> mensajes);
@@ -27,7 +28,7 @@ public:
     // Destructor
     ~DtConversacion();
 
-    //friend ostream &operator<<(ostream &o, DtConversacion &s);
+    // friend ostream &operator<<(ostream &o, DtConversacion &s);
 };
 
 #endif

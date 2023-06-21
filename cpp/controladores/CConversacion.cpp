@@ -1,9 +1,9 @@
 #include "../../h/controladores/CConversacion.h"
 
-CConversacion* CConversacion::instancia = nullptr;
+CConversacion *CConversacion::instancia = nullptr;
 // Le doy valor a la instancia como null para que solo la primera vez creemos la instancia
 
-CConversacion& CConversacion::getCConversacion()
+CConversacion &CConversacion::getCConversacion()
 {
     if (instancia == nullptr)
     {
@@ -15,12 +15,21 @@ CConversacion& CConversacion::getCConversacion()
 
 CConversacion::CConversacion() {}
 
-CConversacion::~CConversacion() {
-    delete instancia;
+CConversacion::~CConversacion()
+{
 }
 
+void CConversacion::liberarInstancia()
+{
+    if (instancia != nullptr)
+    {
+        delete instancia;
+        instancia = nullptr;
+    }
+}
 
-CConversacion& CConversacion::operator=(const CConversacion&) {
+CConversacion &CConversacion::operator=(const CConversacion &)
+{
     return *this;
 }
 

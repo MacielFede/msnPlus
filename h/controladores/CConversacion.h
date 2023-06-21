@@ -42,7 +42,10 @@ public:
   void enviarVideo(string url, string duracion);
   void enviarContacto(string cNumTel);
   void crearMensaje();
+
+  // Destructor
   ~CConversacion();
+  void liberarInstancia();
 };
 
 #endif

@@ -8,6 +8,7 @@ class DtFecha
 private:
     // No tiro enie aca porque sino puede colapsar todo
     int dia, mes, anio, horas, minutos;
+
 public:
     // Constructores
     DtFecha();
@@ -19,13 +20,13 @@ public:
     int getHoras();
     int getMinutos();
 
-    bool operator==(const DtFecha& fecha);
-    friend ostream& operator<<(ostream& o, DtFecha& f);
-    // Destructor
-    ~DtFecha();
-
     // Métodos
     bool esValida();
+    void imprimirFecha();
+    void imprimirFechayHora();
+
+    // Destructor
+    ~DtFecha();
 };
 
 #endif

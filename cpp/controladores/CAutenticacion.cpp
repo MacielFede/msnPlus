@@ -17,7 +17,15 @@ CAutenticacion::CAutenticacion() {}
 
 CAutenticacion::~CAutenticacion()
 {
-    delete instancia;
+}
+
+void CAutenticacion::liberarInstancia()
+{
+    if (instancia != nullptr)
+    {
+        delete instancia;
+        instancia = nullptr;
+    }
 }
 
 CAutenticacion &CAutenticacion::operator=(const CAutenticacion &)

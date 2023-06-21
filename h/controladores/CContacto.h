@@ -33,6 +33,7 @@ public:
     void agregarContacto(string cNumTel);
 
     ~CContacto();
+    void liberarInstancia();
 };
 
 #endif
