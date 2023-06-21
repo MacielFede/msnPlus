@@ -8,7 +8,7 @@
 int main()
 {
     // Problema de seg. fault al inicializar controladores (falta implementar, descomentar 1 por 1 al hacer)
-    string comando, idConver;
+    string comando, idConver, modificacionPerfil;
     // Relojito& relojito = Relojito::getRelojito();
     // Fabrica& fabrica = Fabrica::getFabrica();
     // IConversacion Cconv = fabrica.getCConv();
@@ -152,9 +152,41 @@ int main()
 
         case '5':
 #pragma region ModificarPerfil
-            //TODO: Modificar Perfil
-#pragma endregion
+            cout << "\nQue quiere modificar? Nombre (N/n), Foto (F/f), Descripcion (D/d).\n";
+            cout << "Si no indica nada o indica algo incorrecto se cancelara la operacion.\n";
+            cout << "> ";
+
+            fflush(stdin);
+            getline(cin, comando);
+
+            if (comando[0] == 'N' || comando[0] == 'n') {
+                cout << "Indique su nuevo nombre: ";
+
+                fflush(stdin);
+                getline(cin, modificacionPerfil);
+
+                //Caut.cambiarNombre(modificacionPerfil);
+            }
+            else if (comando[0] == 'F' || comando[0] == 'f') {
+                cout << "Indique el URL de su nueva foto de perfil: ";
+
+                fflush(stdin);
+                getline(cin, modificacionPerfil);
+
+                //Caut.cambiarFoto(modificacionPerfil);
+            }
+            else if (comando[0] == 'D' || comando[0] == 'd') {
+                cout << "Indique su nueva descripcion: ";
+
+                fflush(stdin);
+                getline(cin, modificacionPerfil);
+
+                //Caut.cambiarDescripcion(modificacionPerfil);
+            }
+
+            // TODO: Devolver un dt con la nueva informacion del perfil??
             break;
+#pragma endregion
 
         case '6':
 #pragma region VerReloj
