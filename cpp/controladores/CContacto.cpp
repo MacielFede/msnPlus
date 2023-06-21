@@ -1,9 +1,9 @@
 #include "../../h/controladores/CContacto.h"
 
-CContacto* CContacto::instancia = nullptr;
+CContacto *CContacto::instancia = nullptr;
 // Le doy valor a la instancia como null para que solo la primera vez creemos la instancia
 
-CContacto& CContacto::getCContacto()
+CContacto &CContacto::getCContacto()
 {
     if (instancia == nullptr)
     {
@@ -15,10 +15,20 @@ CContacto& CContacto::getCContacto()
 
 CContacto::CContacto() {}
 
-CContacto::~CContacto() {
-    delete instancia;
+CContacto::~CContacto()
+{
 }
 
-CContacto& CContacto::operator=(const CContacto&) {
+void CContacto::liberarInstancia()
+{
+    if (instancia != nullptr)
+    {
+        delete instancia;
+        instancia = nullptr;
+    }
+}
+
+CContacto &CContacto::operator=(const CContacto &)
+{
     return *this;
 }
