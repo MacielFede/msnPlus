@@ -4,7 +4,7 @@
 #include <string>
 #include <cstdlib>
 #include <list>
-#include "../dataTypes/DTContacto.h"
+#include "../dataTypes/DtContacto.h"
 #include "../clases/Usuario.h"
 
 using namespace std;

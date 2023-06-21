@@ -3,7 +3,7 @@
 
 #include <iostream>
 #include <string>
-#include "DTFecha.h"
+#include "DtFecha.h"
 using namespace std;
 
 class DtUsuario

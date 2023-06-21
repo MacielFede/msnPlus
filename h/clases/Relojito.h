@@ -2,7 +2,7 @@
 #define RELOJITO_H
 
 #include <string>
-#include "DTFecha.h"
+#include "DtFecha.h"
 
 using namespace std;
 

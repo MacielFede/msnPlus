@@ -3,9 +3,9 @@
 
 #include <iostream>
 #include <string>   
-#include "DTInfoMensaje.h"
-#include "DTVisto.h"
-#include "DTFecha.h"
+#include "DtInfoMensaje.h"
+#include "DtVisto.h"
+#include "DtFecha.h"
 
 using namespace std;
 
