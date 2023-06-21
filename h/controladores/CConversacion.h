@@ -30,13 +30,13 @@ public:
   static CConversacion &getCConversacion();
   // crea una instancia de CConversacion si es que no se creo y la retorna.
   void archivarConversacion(string idConversacion);
-  //   DtConversacion listarConversacionesActivas();
-  //  DtConversacion listarConvArch();
-  //  DtMensaje selConversacion(string idConversacion);
+  list<DtConversacion> listarConversacionesActivas();
+  list<DtConversacion> listarConvArch();
+  list<DtMensaje>  selConversacion(string idConversacion);
   void eliminarMensaje(string idMensaje);
-  //  DtContacto listarContactos();
+  list<DtContacto> listarContactos();
   void seleccionarContacto(string cNumTel);
-  //  DtInfoMensaje informacionMensaje(string idMensaje);
+  DtInfoMensaje informacionMensaje(string idMensaje);
   void enviarMensajeSimple(string msgTxt);
   void enviarImg(string url, string formato, string size, string desc);
   void enviarVideo(string url, string duracion);

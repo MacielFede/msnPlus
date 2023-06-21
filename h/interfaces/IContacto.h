@@ -14,11 +14,11 @@ class IContacto
 private:
 
 public:
-    list<DtContacto> listarContactos();
+    virtual list<DtContacto> listarContactos() = 0;
 
-    Usuario ingresarNumeroContacto(string cNumTel);
+    virtual Usuario ingresarNumeroContacto(string cNumTel) = 0;
 
-    void agregarContacto();
+    virtual void agregarContacto(string cNumTel) = 0;
 };
 
 #endif

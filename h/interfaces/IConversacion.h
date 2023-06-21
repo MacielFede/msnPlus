@@ -18,31 +18,31 @@ class IConversacion
 private:
 
 public:
-    void archivarConversacion(string idConversacion);
+    virtual void archivarConversacion(string idConversacion) = 0;
 
-    list<DtConversacion> listarConversacionesActivas();
+    virtual list<DtConversacion> listarConversacionesActivas() = 0;
 
-    list<DtConversacion> listarConvArch();
+    virtual list<DtConversacion> listarConvArch() = 0;
 
-    list<DtMensaje> selConversacion(string idConversacion);
+    virtual list<DtMensaje> selConversacion(string idConversacion) = 0;
 
-    void eliminarMensaje(string idMensaje);
+    virtual void eliminarMensaje(string idMensaje) = 0;
 
-    list<DtContacto> listarContactos();
+    virtual list<DtContacto> listarContactos() = 0;
 
-    void seleccionarContacto(string cNumTel);
+    virtual void seleccionarContacto(string cNumTel) = 0;
 
-    DtInfoMensaje informacionMensaje(string idMensaje);
+    virtual DtInfoMensaje informacionMensaje(string idMensaje) = 0;
 
-    void enviarMensajeSimple(string msgTxt);
+    virtual void enviarMensajeSimple(string msgTxt) = 0;
 
-    void enviarImg(string url, string formato, string size, string desc);
+    virtual void enviarImg(string url, string formato, string size, string desc) = 0;
 
-    void enviarVideo(string url, string duracion);
+    virtual void enviarVideo(string url, string duracion) = 0;
 
-    void enviarContacto(string cNumTel);
+    virtual void enviarContacto(string cNumTel) = 0;
 
-    void crearMensaje();
+    virtual void crearMensaje() = 0;
 };
 
 #endif

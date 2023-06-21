@@ -1,5 +1,7 @@
 #include "../../h/controladores/CContacto.h"
 
+using namespace std;
+
 CContacto* CContacto::instancia = nullptr;
 // Le doy valor a la instancia como null para que solo la primera vez creemos la instancia
 
@@ -22,3 +24,8 @@ CContacto::~CContacto() {
 CContacto& CContacto::operator=(const CContacto&) {
     return *this;
 }
+
+
+list<DtContacto> CContacto::listarContactos(){}
+Usuario CContacto::ingresarNumeroContacto(string cNumTel){}
+void CContacto::agregarContacto(string cNumTel){}
