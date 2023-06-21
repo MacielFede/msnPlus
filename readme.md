@@ -2,13 +2,6 @@
 
 ### Realidad
 
-### Se pide:
-
-### Notas
-## Laboratorio 6
-
-### Realidad
-
   Con el objetivo de mejorar la comunicación entre estudiantes, docentes y otros usuarios de una
 determinada institución educativa, se le ha encomendado la importante tarea de desarrollar una
 aplicación de mensajería instantánea. Esta aplicación debe manejar la información de usuarios y
