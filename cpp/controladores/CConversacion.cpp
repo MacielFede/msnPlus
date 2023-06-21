@@ -32,3 +32,29 @@ CConversacion &CConversacion::operator=(const CConversacion &)
 {
     return *this;
 }
+
+void CConversacion::archivarConversacion(string idConversacion) {}
+
+list<DtConversacion> CConversacion::listarConversacionesActivas() {}
+
+list<DtConversacion> CConversacion::listarConvArch() {}
+
+list<DtMensaje> CConversacion::selConversacion(string idConversacion) {}
+
+void CConversacion::eliminarMensaje(string idMensaje) {}
+
+list<DtContacto> CConversacion::listarContactos() {}
+
+void CConversacion::seleccionarContacto(string cNumTel) {}
+
+DtInfoMensaje CConversacion::informacionMensaje(string idMensaje) {}
+
+void CConversacion::enviarMensajeSimple(string msgTxt) {}
+
+void CConversacion::enviarImg(string url, string formato, string size, string desc) {}
+
+void CConversacion::enviarVideo(string url, string duracion) {}
+
+void CConversacion::enviarContacto(string cNumTel) {}
+
+void CConversacion::crearMensaje() {}
