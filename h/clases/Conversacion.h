@@ -26,15 +26,19 @@ private:
 public:
     virtual DtConversacion getDataConversacion() = 0;
 
+    virtual list<DtMensaje> buscarMensajes() = 0;
+
+    virtual DtInfoMensaje informacionMensaje(string idMensaje) = 0;
+
+    virtual void asignarAConversacion(Mensaje* m) = 0;
+    
     void setActivaFalse();
 
-    list<DtMensaje> buscarMensajes();
-
     void eliminarMensaje(string idMensaje);
-    
-    DtInfoMensaje informacionMensaje(string idMensaje);
 
-    void asignarAConversacion(Mensaje* m);
+    bool getActiva();
+
+    string getIdConversacion();
 
     ~Conversacion();
 };
