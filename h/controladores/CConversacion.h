@@ -5,6 +5,8 @@
 // Clases
 #include "../clases/Conversacion.h"
 #include "../clases/Mensaje.h"
+#include "../clases/Privada.h"
+#include "../clases/Grupo.h"
 // Datatypes
 #include "../dataTypes/DtConversacion.h"
 #include "../dataTypes/DtContacto.h"

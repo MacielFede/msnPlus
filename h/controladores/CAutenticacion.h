@@ -32,6 +32,9 @@ public:
     void registrarUsuario(string nombre, string urlPerfil, string desc);
     DtUsuario obtenerSesionActiva();
     Usuario infoUsuario(string cNumTel);
+    DtUsuario cambiarDescripcion(string des);
+    DtUsuario cambiarFoto(string url);
+    DtUsuario cambiarNombre(string nom);
 
     // Destructor
     ~CAutenticacion();
