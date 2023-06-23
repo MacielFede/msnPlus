@@ -38,6 +38,9 @@ public:
     Conversacion* crearConversacion(string cNumTel);
     void sincronizarConversacion(Conversacion* conver);
     Conversacion* getConversacion(string idConversacion);
+    DtUsuario setNombre(string nom);
+    DtUsuario setImagen(string url);
+    DtUsuario setDesc(string desc);
 
     // destructor
     ~Usuario();

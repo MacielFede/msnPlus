@@ -20,6 +20,12 @@ public:
     virtual DtUsuario obtenerSesionActiva() = 0;
 
     virtual Usuario infoUsuario(string cNumTel) = 0;
+
+    virtual DtUsuario cambiarDescripcion(string des) = 0;
+
+    virtual DtUsuario cambiarFoto(string url) = 0;
+
+    virtual DtUsuario cambiarNombre(string nom) = 0;
 };
 
 #endif
