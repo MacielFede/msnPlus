@@ -37,7 +37,33 @@ CContacto &CContacto::operator=(const CContacto &)
     return *this;
 }
 
+list<DtContacto> CContacto::listarContactos() {}
+Usuario CContacto::ingresarNumeroContacto(string cNumTel) {}
+void CContacto::agregarContacto(string cNumTel)
+{
+    if(esContacto(cNumTel)) return;
 
-list<DtContacto> CContacto::listarContactos(){}
-Usuario CContacto::ingresarNumeroContacto(string cNumTel){}
-void CContacto::agregarContacto(string cNumTel){}
+    //Fabrica& fabrica = Fabrica::getFabrica();
+    //CAutenticacion Caut = fabrica.getCAut();
+
+    CAutenticacion& Caut = CAutenticacion::getCAutenticacion();
+
+    Usuario u = Caut.infoUsuario(Caut.obtenerSesionActiva().getNumTel());
+    Usuario newContact = Caut.infoUsuario(cNumTel);
+
+    u.agregarContacto(&newContact);
+}
+bool CContacto::esContacto(string cNumTel)
+{
+    //Fabrica& fabrica = Fabrica::getFabrica();
+    CAutenticacion& Caut = CAutenticacion::getCAutenticacion();
+    Usuario u = Caut.infoUsuario(Caut.obtenerSesionActiva().getNumTel());
+    return true/*u.listarContactos().count(cNumTel)*/;
+}
+DtContacto CContacto::numToContacto(string cNumTel)
+{
+    //Usuario c;
+    DtContacto dtC("ab", "ab", "ab");
+
+    return dtC;
+}

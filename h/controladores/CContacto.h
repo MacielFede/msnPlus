@@ -4,12 +4,17 @@
 #include <string>
 #include <cstdlib>
 #include <list>
+#include <algorithm>
 // Datatypes
 #include "../dataTypes/DtUsuario.h"
+#include "../dataTypes/DtContacto.h"
 // Clases
 #include "../clases/Usuario.h"
+#include "../clases/Contacto.h"
 // Interfaces
 #include "../interfaces/IContacto.h"
+// Controladores
+#include "CAutenticacion.h"
 
 using namespace std;
 
@@ -31,7 +36,8 @@ public:
     list<DtContacto> listarContactos();
     Usuario ingresarNumeroContacto(string cNumTel);
     void agregarContacto(string cNumTel);
-
+    bool esContacto(string cNumTel);
+    DtContacto numToContacto(string cNumTel);
     ~CContacto();
     void liberarInstancia();
 };
