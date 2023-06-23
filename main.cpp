@@ -136,6 +136,7 @@ int main()
         case '2':
 #pragma region Crear grupo
             //TODO: Crear grupo
+            
 #pragma endregion
             break;
 
@@ -148,6 +149,60 @@ int main()
         case '4':
 #pragma region VerContactos
             //TODO: Ver contactos
+
+            /*
+            Mostrar contactos del usuario
+            */
+            do
+            {
+                cout << "\nComandos:\n";
+                cout << "1 - Agregar nuevo contacto.\n";
+                cout << "2 - Regresar.\n";
+
+                fflush(stdin);
+                getline(cin, comando);
+
+                if (comando[0] == '1')
+                {
+                    string newContactNum;
+                    cout << "Ingrese el número del nuevo contacto\n";
+
+                    fflush(stdin);
+                    getline(cin, newContactNum);
+
+                    if (true /*Existe el contacto en el sistema*/)
+                    {
+                        if (true /*!CContacto.esContacto(newContactNum)*/)
+                        {
+                            DtContacto newContactDt("a", "a", "a"); // CContacto getDt
+
+                            cout << "Información del contacto a agregar:\n";
+                            cout << "Nombre:" << newContactDt.getNombre() << "\n";
+                            cout << "Número:" << newContactDt.getNumTel() << "\n";
+                            cout << "Imagen de perfil:" << newContactDt.getImagenPerfil() << "\n\n";
+
+                            cout << "¿Desea agregarlo? S/N\n";
+                            fflush(stdin);
+                            getline(cin, newContactNum);
+
+                            if (comando[0] == 'S' || comando[0] == 's')
+                            {
+                                //CContacto.agregarContacto(newContactNum);
+                                cout << "Contacto agregado.\n";
+                            }
+                        }
+                        else
+                        {
+                            cout << "El usuario especificado ya es un contacto.\n";
+                        }
+                    }
+                    else
+                    {
+                        cout << "No existe un usuario con el número especificado.\n";
+                    }
+                }
+            } while (comando[0] != '2');
+
 #pragma endregion
             break;
 

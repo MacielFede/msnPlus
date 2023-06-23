@@ -34,6 +34,7 @@ public:
     void archivarConversacion(string idConversacion);
     map<string, DtConversacion> buscarConver();
     map<string, DtContacto> listarContactos();
+    void agregarContacto(Usuario* c);
     Conversacion* crearConversacion(string cNumTel);
     void sincronizarConversacion(Conversacion* conver);
     Conversacion* getConversacion(string idConversacion);

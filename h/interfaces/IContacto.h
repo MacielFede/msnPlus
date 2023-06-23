@@ -19,6 +19,10 @@ public:
     virtual Usuario ingresarNumeroContacto(string cNumTel) = 0;
 
     virtual void agregarContacto(string cNumTel) = 0;
+
+    virtual bool esContacto(string cNumTel) = 0;
+
+    virtual DtContacto numToContacto(string cNumTel) = 0;
 };
 
 #endif

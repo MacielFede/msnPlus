@@ -9,6 +9,7 @@ class Contacto : public Mensaje
 private:
   DtUsuario contacto;
 public:
+  Contacto();
   Contacto(map<string, Usuario*> receptores, DtFecha fechaEnv, Usuario* emisor, int ultimoId, DtUsuario contact);
   ~Contacto();
 

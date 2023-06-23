@@ -2,6 +2,11 @@
 
 Usuario::~Usuario() {}
 
+void Usuario::agregarContacto(Usuario* c)
+{
+    //contactos.insert({c->getDataUsuario().getNumTel(), c});
+}
+
 DtUsuario Usuario::setDesc(string desc) {
   this->descripcion = desc;
   return this->getDataUsuario();
