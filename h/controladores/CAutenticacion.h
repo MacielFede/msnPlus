@@ -30,7 +30,7 @@ public:
     static CAutenticacion& getCAutenticacion();
     bool ingresarNumero(string numTel);
     void registrarUsuario(string nombre, string urlPerfil, string desc);
-    DtUsuario obtenerSesionActiva();
+    Usuario* obtenerSesionActiva();
     Usuario infoUsuario(string cNumTel);
     DtUsuario cambiarDescripcion(string des);
     DtUsuario cambiarFoto(string url);
