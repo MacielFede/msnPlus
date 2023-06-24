@@ -15,11 +15,7 @@ Usuario::~Usuario() {}
 
 void Usuario::agregarContacto(Usuario *c)
 {
-<<<<<<< HEAD
   contactos.insert({c->getDataUsuario().getNumTel(), c});
-=======
-  //contactos.insert({c->getDataUsuario().getNumTel(), c});
->>>>>>> main
 }
 
 // Actualizo fecha de ultima conexion
