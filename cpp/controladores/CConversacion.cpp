@@ -1,9 +1,9 @@
 #include "../../h/controladores/CConversacion.h"
 
-CConversacion *CConversacion::instancia = nullptr;
+CConversacion* CConversacion::instancia = nullptr;
 // Le doy valor a la instancia como null para que solo la primera vez creemos la instancia
 
-CConversacion &CConversacion::getCConversacion()
+CConversacion& CConversacion::getCConversacion()
 {
     if (instancia == nullptr)
     {
@@ -28,12 +28,16 @@ void CConversacion::liberarInstancia()
     }
 }
 
-CConversacion &CConversacion::operator=(const CConversacion &)
+CConversacion& CConversacion::operator=(const CConversacion&)
 {
     return *this;
 }
 
-void CConversacion::archivarConversacion(string idConversacion) {}
+void CConversacion::archivarConversacion(string idConversacion) {
+    CAutenticacion& autenticador = CAutenticacion::getCAutenticacion();
+    Usuario* sesion = autenticador.obtenerSesionActiva();
+    sesion->archivarConversacion(idConversacion);
+}
 
 list<DtConversacion> CConversacion::listarConversacionesActivas() {}
 

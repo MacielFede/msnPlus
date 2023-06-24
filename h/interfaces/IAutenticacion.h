@@ -17,7 +17,7 @@ public:
 
     virtual void registrarUsuario(string nombre, string urlPerfil, string desc) = 0;
 
-    virtual DtUsuario obtenerSesionActiva() = 0;
+    virtual Usuario* obtenerSesionActiva() = 0;
 
     virtual Usuario infoUsuario(string cNumTel) = 0;
 
