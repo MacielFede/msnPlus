@@ -37,7 +37,9 @@ bool CAutenticacion::ingresarNumero(string numTel) {}
 
 void CAutenticacion::registrarUsuario(string nombre, string urlPerfil, string desc) {}
 
-DtUsuario CAutenticacion::obtenerSesionActiva() {}
+Usuario* CAutenticacion::obtenerSesionActiva() {
+    return this->memUsuario;
+}
 
 Usuario CAutenticacion::infoUsuario(string cNumTel) {}
 
