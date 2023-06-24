@@ -18,8 +18,9 @@ CLASES_CONTROLLERS = CAutenticacion CContacto CConversacion
 CLASES_FABRICA = Fabrica
 CLASES_DATATYPES = DtContacto DtConversacion DtFecha DtInfoMensaje DtMensaje DtUsuario DtVisto
 CLASES_INTERFACES = IAutenticacion IContacto IConversacion
+CLASES_UTILS = utils
 
-CLASES = $(CLASES_CLASSES) $(CLASES_CONTROLLERS) $(CLASES_FABRICA) $(CLASES_DATATYPES)
+CLASES = $(CLASES_CLASSES) $(CLASES_CONTROLLERS) $(CLASES_FABRICA) $(CLASES_DATATYPES) $(CLASES_UTILS)
 
 # Archivos
 HS_CLASSES = $(CLASES_CLASSES:%=$(HDIR)/clases/%.h)
@@ -36,8 +37,11 @@ CPPS_DATATYPES = $(CLASES_DATATYPES:%=$(CPPDIR)/dataTypes/%.cpp)
 
 HS_INTERFACES = $(CLASES_INTERFACES:%=$(HDIR)/interfaces/%.h)
 
-HS = $(HS_CLASSES) $(HS_CONTROLLERS) $(HS_FABRICA) $(HS_DATATYPES) $(HS_INTERFACES)
-CPPS = $(CPPS_CLASSES) $(CPPS_CONTROLLERS) $(CPPS_FABRICA) $(CPPS_DATATYPES)
+HS_UTILS = $(CLASES_UTILS:%=$(HDIR)/%.h)
+CPPS_UTILS = $(CLASES_UTILS:%=$(CPPDIR)/%.cpp)
+
+HS = $(HS_CLASSES) $(HS_CONTROLLERS) $(HS_FABRICA) $(HS_DATATYPES) $(HS_INTERFACES) $(HS_UTILS)
+CPPS = $(CPPS_CLASSES) $(CPPS_CONTROLLERS) $(CPPS_FABRICA) $(CPPS_DATATYPES) $(CPPS_UTILS)
 
 OS = $(CLASES:%=$(ODIR)/%.o)
 
@@ -58,6 +62,9 @@ $(ODIR)/%.o: $(CPPDIR)/fabrica/%.cpp $(HDIR)/fabrica/%.h
 	$(CC) $(CFLAGS) -c $< -o $@
 
 $(ODIR)/%.o: $(CPPDIR)/dataTypes/%.cpp $(HDIR)/dataTypes/%.h
+	$(CC) $(CFLAGS) -c $< -o $@
+
+$(ODIR)/%.o: $(CPPDIR)/%.cpp $(HDIR)/%.h
 	$(CC) $(CFLAGS) -c $< -o $@
 
 #Compila el main.o a partir del main.cpp
