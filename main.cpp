@@ -5,12 +5,15 @@
 #include "h/interfaces/IContacto.h"
 #include "h/clases/Relojito.h"
 #include "h/dataTypes/DtUsuario.h"
+#include "h/utils.h"
+
 using namespace std;
+
 int main()
 {
     // Problema de seg. fault al inicializar controladores (falta implementar, descomentar 1 por 1 al hacer)
     string comando, idConver, modificacionPerfil;
-    // Relojito& relojito = Relojito::getRelojito();
+    Relojito& relojito = Relojito::getRelojito();
     // Fabrica& fabrica = Fabrica::getFabrica();
     // IConversacion Cconv = fabrica.getCConv();
     // IAutenticacion Caut = fabrica.getCAut();
@@ -90,8 +93,10 @@ int main()
                         case '2':
                             break;
                         case '3':
+                            relojito.getFechaActual().imprimirFechayHora();
                             break;
                         case '4':
+                            menuFechayHora();
                             break;
 
                         case '5':
@@ -122,10 +127,10 @@ int main()
 
                     break;
                 case '4':
-
+                    relojito.getFechaActual().imprimirFechayHora();
                     break;
                 case '5':
-
+                    menuFechayHora();
                     break;
                 case '6':
 
@@ -262,12 +267,14 @@ int main()
         case '6':
 #pragma region VerReloj
             //TODO: Relojito
+            relojito.getFechaActual().imprimirFechayHora();
 #pragma endregion
             break;
 
         case '7':
 #pragma region ActualizarReloj
             //TODO: Relojito
+            menuFechayHora();
 #pragma endregion
             break;
 
