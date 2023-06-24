@@ -48,16 +48,16 @@ void CContacto::agregarContacto(string cNumTel)
 
     CAutenticacion& Caut = CAutenticacion::getCAutenticacion();
 
-    Usuario* u = Caut.obtenerSesionActiva();
-    Usuario newContact = Caut.infoUsuario(cNumTel);
+    Usuario* u = Caut.getSesionActiva();
+    Usuario* newContact = Caut.infoUsuario(cNumTel);
 
-    u->agregarContacto(&newContact);
+    u->agregarContacto(newContact);
 }
 bool CContacto::esContacto(string cNumTel)
 {
     //Fabrica& fabrica = Fabrica::getFabrica();
     CAutenticacion& Caut = CAutenticacion::getCAutenticacion();
-    Usuario* u = Caut.obtenerSesionActiva();
+    Usuario* u = Caut.getSesionActiva();
     return true/*u.listarContactos().count(cNumTel)*/;
 }
 DtContacto CContacto::numToContacto(string cNumTel)

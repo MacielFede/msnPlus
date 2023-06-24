@@ -16,25 +16,30 @@
 
 using namespace std;
 
-class CAutenticacion : public IAutenticacion {
+class CAutenticacion : public IAutenticacion
+{
 
 private:
     string numTel;
-    Usuario* memUsuario;                         // Usuario en memoria
-    map<string, Usuario*> memColeccionUsuarios; // Coleccion de usuarios del sistema
-    static CAutenticacion* instancia;            // Instancia del singleton
+    Usuario *memUsuario;                         // Usuario en memoria
+    map<string, Usuario *> memColeccionUsuarios; // Coleccion de usuarios del sistema
+    static CAutenticacion *instancia;            // Instancia del singleton
     CAutenticacion();                            // Constructor
-    CAutenticacion& operator=(const CAutenticacion&);
+    CAutenticacion &operator=(const CAutenticacion &);
 
 public:
-    static CAutenticacion& getCAutenticacion();
+    static CAutenticacion &getCAutenticacion();
     bool ingresarNumero(string numTel);
-    void registrarUsuario(string nombre, string urlPerfil, string desc);
-    Usuario* obtenerSesionActiva();
-    Usuario infoUsuario(string cNumTel);
+    void iniciarSesion(DtFecha nuevaFechaConexion);
+    void cerrarSesion(DtFecha nuevaFechaConexion);
+    void registrarUsuario(string nombre, string urlPerfil, string desc, DtFecha fechaActual);
+    Usuario *getSesionActiva();
+    DtUsuario getSesionActivaDt();
+    Usuario *infoUsuario(string cNumTel);
     DtUsuario cambiarDescripcion(string des);
     DtUsuario cambiarFoto(string url);
     DtUsuario cambiarNombre(string nom);
+    bool existeSesionActiva();
 
     // Destructor
     ~CAutenticacion();

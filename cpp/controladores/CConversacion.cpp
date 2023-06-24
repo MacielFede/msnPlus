@@ -35,7 +35,7 @@ CConversacion& CConversacion::operator=(const CConversacion&)
 
 void CConversacion::archivarConversacion(string idConversacion) {
     CAutenticacion& autenticador = CAutenticacion::getCAutenticacion();
-    Usuario* sesion = autenticador.obtenerSesionActiva();
+    Usuario* sesion = autenticador.getSesionActiva();
     sesion->archivarConversacion(idConversacion);
 }
 

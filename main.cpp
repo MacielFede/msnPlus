@@ -11,23 +11,78 @@ using namespace std;
 
 int main()
 {
-    // Problema de seg. fault al inicializar controladores (falta implementar, descomentar 1 por 1 al hacer)
-    string comando, idConver, modificacionPerfil;
-    Relojito& relojito = Relojito::getRelojito();
-    // Fabrica& fabrica = Fabrica::getFabrica();
+    string comando, idConver, numeroTelefono, modificacionPerfil;
+    Relojito &relojito = Relojito::getRelojito();
+    Fabrica &fabrica = Fabrica::getFabrica();
     // IConversacion Cconv = fabrica.getCConv();
-    // IAutenticacion Caut = fabrica.getCAut();
+    IAutenticacion &Caut = fabrica.getCAut();
     // IContacto Ccont = fabrica.getCCont();
 
     cout << "\nBienvenido a su mejor chat. Recuerde, para ejecutar los comandos debe ingresar siempre el numero del mismo.\n\n";
+
+    do
+    {
+        // Actualicen la fecha bo
+        relojito.actualizarFecha();
+
 #pragma region AbrirApp
-    // TODO: ACA HACER ABRIR APP
+        // Abrir app
+        while (!Caut.existeSesionActiva())
+        {
+            cout << "\n Ingrese su numero de telefono, ya sea para iniciar sesion o bien registrarse.\n";
+            fflush(stdin);
+            getline(cin, numeroTelefono);
+            bool existeUsuario = Caut.ingresarNumero(numeroTelefono);
+            if (existeUsuario)
+            {
+                cout << "\n El numero ingresado ya esta registrado. Desea iniciar sesion con este numero?\n";
+                cout << "\n Si[S] o No[N]\n";
+                fflush(stdin);
+                getline(cin, comando);
+                // Iniciar sesion con ese usuario
+                if (comando[0] == 'S' || comando[0] == 's')
+                {
+                    DtFecha fechaActual = relojito.getFechaActual();
+                    Caut.iniciarSesion(fechaActual);
+                    // Mostrar fecha y hora
+                    cout << "\nHora de ultima conexion: ";
+                    fechaActual.imprimirFechayHora();
+                }
+            } // No existe el usuario
+            else
+            {
+                cout << "\n El numero ingresado no esta registrado. Desea registrarse con este numero?\n";
+                cout << "\n Si[S] o No[N]\n";
+                fflush(stdin);
+                getline(cin, comando);
+                // registrar ese usuario
+                if (comando[0] == 'S' || comando[0] == 's')
+                {
+                    string nombre, urlPerfil, descripcion;
+                    DtFecha fechaActual = relojito.getFechaActual();
+                    cout << "\n Ingrese nombre: \n";
+                    fflush(stdin);
+                    getline(cin, nombre);
+
+                    cout << "\n Ingrese url de foto de perfil: \n";
+                    fflush(stdin);
+                    getline(cin, urlPerfil);
+
+                    cout << "\n Ingrese descripcion: \n";
+                    fflush(stdin);
+                    getline(cin, descripcion);
+                    Caut.registrarUsuario(nombre, urlPerfil, descripcion, fechaActual);
+                    // Mostrar fecha y hora
+                    cout << "\nHora de ultima conexion: ";
+                    fechaActual.imprimirFechayHora();
+                }
+            }
+        }
 
 #pragma endregion
 
 #pragma region MenuPrincipal
 
-    do {
         cout << "\nComandos:\n";
         cout << "1 - Mostrar Conversaciones.\n";
         cout << "2 - Crear grupo.\n";
@@ -36,7 +91,8 @@ int main()
         cout << "5 - Modificar perfil.\n";
         cout << "6 - Ver fecha y hora actual.\n";
         cout << "7 - Actualizar fecha y hora actual.\n";
-        cout << "8 - Cerrar app.\n\n";
+        cout << "8 - Cerrar sesion.\n";
+        cout << "9 - Cerrar app.\n\n";
         cout << "Que desea hacer? > ";
 
         fflush(stdin);
@@ -49,8 +105,9 @@ int main()
         case '1':
 
 #pragma region MostrarConvers
-            do {
-                //TODO: Imprimir conversaciones
+            do
+            {
+                // TODO: Imprimir conversaciones
 
                 cout << "\nComandos:\n";
                 cout << "1 - Abrir conversacion.\n";
@@ -68,11 +125,12 @@ int main()
                 {
                 case '1':
                     // TODO: do{ if(!Cconv.existeConver(idConver)) cout << "No existe esa conversacion."; }while(!Cconv.existeConver(idConver));
-                    //TODO: CConversacion -> existeConver(string idConver): true o false 
+                    // TODO: CConversacion -> existeConver(string idConver): true o false
                     cout << "Ingrese el id de la conversacion que quiere abrir, si es un grupo sera el nombre, si es privada sera el numero de telefono.\n> ";
                     fflush(stdin);
                     getline(cin, idConver);
-                    do {
+                    do
+                    {
                         // TODO: Imprimir mensajes de la conversacion.
                         cout << "\nComandos:\n";
                         cout << "1 - Ver informacion de un mensaje.\n";
@@ -105,7 +163,7 @@ int main()
 
                         case '6':
                             cout << "Volviendo al menu principal.\n";
-                            //Cambio comando[0] a 7 para que el while lo tome como que el usuario quiere ir al menu principal
+                            // Cambio comando[0] a 7 para que el while lo tome como que el usuario quiere ir al menu principal
                             comando[0] = '7';
                             break;
 
@@ -123,7 +181,7 @@ int main()
                     fflush(stdin);
                     getline(cin, idConver);
 
-                    //CConv.archivarConversacion(idConver);
+                    // CConv.archivarConversacion(idConver);
 
                     break;
                 case '4':
@@ -149,20 +207,20 @@ int main()
 
         case '2':
 #pragma region Crear grupo
-            //TODO: Crear grupo
+            // TODO: Crear grupo
 
 #pragma endregion
             break;
 
         case '3':
 #pragma region EnviarMensaje
-            //TODO: Enviar mensaje
+            // TODO: Enviar mensaje
 #pragma endregion
             break;
 
         case '4':
 #pragma region VerContactos
-            //TODO: Ver contactos
+            // TODO: Ver contactos
 
             /*
             Mostrar contactos del usuario
@@ -201,7 +259,7 @@ int main()
 
                             if (comando[0] == 'S' || comando[0] == 's')
                             {
-                                //CContacto.agregarContacto(newContactNum);
+                                // CContacto.agregarContacto(newContactNum);
                                 cout << "Contacto agregado.\n";
                             }
                         }
@@ -229,56 +287,82 @@ int main()
             fflush(stdin);
             getline(cin, comando);
 
-            //DtUsuario usuarioCambiado;
+            // DtUsuario usuarioCambiado;
 
-            if (comando[0] == 'N' || comando[0] == 'n') {
+            if (comando[0] == 'N' || comando[0] == 'n')
+            {
                 cout << "Indique su nuevo nombre: ";
 
                 fflush(stdin);
                 getline(cin, modificacionPerfil);
 
-                //usuarioCambiado = Caut.cambiarNombre(modificacionPerfil);
+                // usuarioCambiado = Caut.cambiarNombre(modificacionPerfil);
             }
-            else if (comando[0] == 'F' || comando[0] == 'f') {
+            else if (comando[0] == 'F' || comando[0] == 'f')
+            {
                 cout << "Indique el URL de su nueva foto de perfil: ";
 
                 fflush(stdin);
                 getline(cin, modificacionPerfil);
 
-                //usuarioCambiado = Caut.cambiarFoto(modificacionPerfil);
+                // usuarioCambiado = Caut.cambiarFoto(modificacionPerfil);
             }
-            else if (comando[0] == 'D' || comando[0] == 'd') {
+            else if (comando[0] == 'D' || comando[0] == 'd')
+            {
                 cout << "Indique su nueva descripcion: ";
 
                 fflush(stdin);
                 getline(cin, modificacionPerfil);
 
-                //usuarioCambiado = Caut.cambiarDescripcion(modificacionPerfil);
+                // usuarioCambiado = Caut.cambiarDescripcion(modificacionPerfil);
             }
 
-            //cout << "\nTu nueva informacion:\n";
-            //cout << "Numero de telefono: " << usuarioCambiado->getNumTel() <<endl;
-            //cout << "Imagen de perfil: " << usuarioCambiado->getImagenPerfil() <<endl;
-            //cout << "Descripcion: " << usuarioCambiado->getDescripcion() <<endl;
+            // cout << "\nTu nueva informacion:\n";
+            // cout << "Numero de telefono: " << usuarioCambiado->getNumTel() <<endl;
+            // cout << "Imagen de perfil: " << usuarioCambiado->getImagenPerfil() <<endl;
+            // cout << "Descripcion: " << usuarioCambiado->getDescripcion() <<endl;
 
             break;
 #pragma endregion
 
         case '6':
 #pragma region VerReloj
-            //TODO: Relojito
+            // TODO: Relojito
             relojito.getFechaActual().imprimirFechayHora();
 #pragma endregion
             break;
 
         case '7':
 #pragma region ActualizarReloj
-            //TODO: Relojito
+            // TODO: Relojito
             menuFechayHora();
 #pragma endregion
             break;
-
         case '8':
+#pragma region cerrarSesion
+            cout << "\nEsta seguro de que quiere cerrar sesion? [S] o [N]\n";
+            fflush(stdin);
+            getline(cin, comando);
+            if (comando[0] == 'S' || comando[0] == 's')
+            {
+                DtFecha fechaActual = relojito.getFechaActual();
+                DtUsuario mefui = Caut.getSesionActivaDt();
+                Caut.cerrarSesion(fechaActual);
+                // Para testear que el usuario esta bien
+                cout << "Nombre: " << mefui.getNombre() << "\nTelefono: " << mefui.getNumTel() << "\nUrlPerfil: " << mefui.getImagenPerfil() << "\nDescripcion: " << mefui.getDescripcion();
+                cout << "\nFechaRegistro: ";
+                mefui.getFechaRegistro().imprimirFechayHora();
+                cout << "Ultima conexion: ";
+                mefui.getUltimaConexion().imprimirFechayHora();
+            }
+            else
+            {
+                cout << "\nPerfecto, no cierres nada loco.\n";
+            }
+#pragma endergion
+            break;
+
+        case '9':
             cout << "\nNos vemos pronto!\n";
             break;
 
@@ -286,10 +370,10 @@ int main()
             cout << "Ingresaste un comando inexistente.\n";
             break;
         }
-    } while (comando[0] != '8');
+    } while (comando[0] != '9');
 
 #pragma endregion
 
-    //TODO: Eliminar todo
+    // TODO: Eliminar todo
     return 0;
 }

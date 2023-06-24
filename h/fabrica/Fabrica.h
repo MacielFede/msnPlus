@@ -23,9 +23,9 @@ private:
 public:
   static Fabrica &getFabrica();
   // crea una instancia de Fabrica si es que no se creo y la retorna.
-  CConversacion getCConv();
-  CAutenticacion getCAut();
-  CContacto getCCont();
+  CConversacion &getCConv();
+  CAutenticacion &getCAut();
+  CContacto &getCCont();
 
   // Destructor
   ~Fabrica();
