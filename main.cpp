@@ -5,6 +5,9 @@
 #include "h/interfaces/IContacto.h"
 #include "h/clases/Relojito.h"
 #include "h/dataTypes/DtUsuario.h"
+#include "h/utils.h"
+
+using namespace std;
 
 int main()
 {
@@ -103,12 +106,12 @@ int main()
 
                 cout << "\nComandos:\n";
                 cout << "1 - Abrir conversacion.\n";
-                // Esta opcion mostrara los mensajes de la conversacion y ahi el usuario eligira si ver mas info de un mensaje o eliminar un mensaje
-                cout << "2 - Archivar conversacion.\n";
-                cout << "3 - Agregar participantes a un grupo.\n";
-                cout << "4 - Ver fecha y hora actual.\n";
-                cout << "5 - Actualizar fecha y hora actual.\n";
-                cout << "6 - Volver al menu anterior.\n\n";
+                cout << "2 - Ver conversaciones archivadas.\n";
+                cout << "3 - Archivar conversacion.\n";
+                cout << "4 - Agregar participantes a un grupo.\n";
+                cout << "5 - Ver fecha y hora actual.\n";
+                cout << "6 - Actualizar fecha y hora actual.\n";
+                cout << "7 - Volver al menu anterior.\n\n";
                 cout << "Que desea hacer? > ";
                 fflush(stdin);
                 getline(cin, comando);
@@ -143,8 +146,10 @@ int main()
                         case '2':
                             break;
                         case '3':
+                            relojito.getFechaActual().imprimirFechayHora();
                             break;
                         case '4':
+                            menuFechayHora();
                             break;
 
                         case '5':
@@ -153,7 +158,8 @@ int main()
 
                         case '6':
                             cout << "Volviendo al menu principal.\n";
-                            // Cuando el comando es 6 siempre se volvera al menu principal
+                            //Cambio comando[0] a 7 para que el while lo tome como que el usuario quiere ir al menu principal
+                            comando[0] = '7';
                             break;
 
                         default:
@@ -163,32 +169,40 @@ int main()
                     } while (comando[0] != '6' && comando[0] != '5');
                     break;
                 case '2':
-
                     break;
                 case '3':
 
+                    cout << "Ingrese el nombre del grupo o el numero del contacto que quiere archivar\n> ";
+                    fflush(stdin);
+                    getline(cin, idConver);
+
+                    //CConv.archivarConversacion(idConver);
+
                     break;
                 case '4':
-
+                    relojito.getFechaActual().imprimirFechayHora();
                     break;
                 case '5':
-
+                    menuFechayHora();
                     break;
                 case '6':
-                    cout << "Volviendo al menu principal.\n";
+
                     break;
 
+                case '7':
+                    cout << "Volviendo al menu principal.\n";
+                    break;
                 default:
                     cout << "Ingresaste un comando inexistente.\n";
                     break;
                 }
-            } while (comando[0] != '6');
+            } while (comando[0] != '7');
             break;
 #pragma endregion
 
         case '2':
 #pragma region Crear grupo
-            // TODO: Crear grupo
+            //TODO: Crear grupo
 
 #pragma endregion
             break;
@@ -298,23 +312,25 @@ int main()
                 // usuarioCambiado = Caut.cambiarDescripcion(modificacionPerfil);
             }
 
-            // cout << "\nTu nueva informacion:\n";
-            // cout << "Tu numero de telefono: " << usuarioCambiado->getNumTel() <<endl;
-            // cout << "Tu imagen de perfil: " << usuarioCambiado->getImagenPerfil() <<endl;
-            // cout << "Tu descripcion: " << usuarioCambiado->getDescripcion() <<endl;
+            //cout << "\nTu nueva informacion:\n";
+            //cout << "Numero de telefono: " << usuarioCambiado->getNumTel() <<endl;
+            //cout << "Imagen de perfil: " << usuarioCambiado->getImagenPerfil() <<endl;
+            //cout << "Descripcion: " << usuarioCambiado->getDescripcion() <<endl;
 
             break;
 #pragma endregion
 
         case '6':
 #pragma region VerReloj
-            // TODO: Relojito
+            //TODO: Relojito
+            relojito.getFechaActual().imprimirFechayHora();
 #pragma endregion
             break;
 
         case '7':
 #pragma region ActualizarReloj
-            // TODO: Relojito
+            //TODO: Relojito
+            menuFechayHora();
 #pragma endregion
             break;
 

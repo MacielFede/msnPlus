@@ -7,7 +7,7 @@ CContacto* CContacto::instancia = nullptr;
 
 // Le doy valor a la instancia como null para que solo la primera vez creemos la instancia
 
-CContacto &CContacto::getCContacto()
+CContacto& CContacto::getCContacto()
 {
     if (instancia == nullptr)
     {
@@ -32,7 +32,7 @@ void CContacto::liberarInstancia()
     }
 }
 
-CContacto &CContacto::operator=(const CContacto &)
+CContacto& CContacto::operator=(const CContacto&)
 {
     return *this;
 }
@@ -41,15 +41,15 @@ list<DtContacto> CContacto::listarContactos() {}
 Usuario CContacto::ingresarNumeroContacto(string cNumTel) {}
 void CContacto::agregarContacto(string cNumTel)
 {
-    if(esContacto(cNumTel)) return;
+    if (esContacto(cNumTel)) return;
 
     //Fabrica& fabrica = Fabrica::getFabrica();
     //CAutenticacion Caut = fabrica.getCAut();
 
     CAutenticacion& Caut = CAutenticacion::getCAutenticacion();
 
-    Usuario* u = Caut.infoUsuario(Caut.getSesionActiva().getNumTel());
-    Usuario * newContact = Caut.infoUsuario(cNumTel);
+    Usuario* u = Caut.getSesionActiva();
+    Usuario* newContact = Caut.infoUsuario(cNumTel);
 
     u->agregarContacto(newContact);
 }
@@ -57,7 +57,7 @@ bool CContacto::esContacto(string cNumTel)
 {
     //Fabrica& fabrica = Fabrica::getFabrica();
     CAutenticacion& Caut = CAutenticacion::getCAutenticacion();
-    Usuario* u = Caut.infoUsuario(Caut.getSesionActiva().getNumTel());
+    Usuario* u = Caut.getSesionActiva();
     return true/*u.listarContactos().count(cNumTel)*/;
 }
 DtContacto CContacto::numToContacto(string cNumTel)

@@ -32,7 +32,8 @@ public:
     bool ingresarNumero(string numTel);
     void iniciarSesion(DtFecha nuevaFechaConexion);
     void registrarUsuario(string nombre, string urlPerfil, string desc, DtFecha fechaActual);
-    DtUsuario getSesionActiva();
+    Usuario *getSesionActiva();
+    DtUsuario getSesionActivaDt();
     Usuario *infoUsuario(string cNumTel);
     DtUsuario cambiarDescripcion(string des);
     DtUsuario cambiarFoto(string url);

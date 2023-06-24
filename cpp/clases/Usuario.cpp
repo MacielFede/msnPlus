@@ -1,4 +1,5 @@
 #include "../../h/clases/Usuario.h"
+#include "../../h/clases/Conversacion.h"
 
 Usuario::Usuario(string telefono, string nombre, string imagenPerfil, string descripcion, DtFecha fechaActual)
 {
@@ -14,7 +15,11 @@ Usuario::~Usuario() {}
 
 void Usuario::agregarContacto(Usuario *c)
 {
+<<<<<<< HEAD
   contactos.insert({c->getDataUsuario().getNumTel(), c});
+=======
+  //contactos.insert({c->getDataUsuario().getNumTel(), c});
+>>>>>>> main
 }
 
 // Actualizo fecha de ultima conexion
@@ -44,4 +49,10 @@ DtUsuario Usuario::setNombre(string nom)
 DtUsuario Usuario::getDataUsuario()
 {
   return DtUsuario(this->telefono, this->nombre, this->fechaRegistro, this->imagenPerfil, this->descripcion, this->ultimaConexion);
+}
+
+void Usuario::archivarConversacion(string idConversacion) {
+  if (this->conversaciones.find(idConversacion) != this->conversaciones.end()) { //Si no encuetra un objeto con esa clave, retorna un iterador del final del map
+    this->conversaciones[idConversacion]->setActivaFalse(); //Como lo encontro, seteo en falso activa
+  }
 }

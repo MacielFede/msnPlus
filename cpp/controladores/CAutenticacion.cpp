@@ -87,9 +87,13 @@ void CAutenticacion::registrarUsuario(string nombre, string urlPerfil, string de
 }
 
 // Devolvemos DtUsuario a capa-presentacion
-DtUsuario CAutenticacion::getSesionActiva()
+DtUsuario CAutenticacion::getSesionActivaDt()
 {
     return this->memUsuario->getDataUsuario();
+}
+
+Usuario * CAutenticacion::getSesionActiva() {
+    return this->memUsuario;
 }
 
 Usuario *CAutenticacion::infoUsuario(string cNumTel)
