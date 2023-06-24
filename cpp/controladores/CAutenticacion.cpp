@@ -8,6 +8,7 @@ CAutenticacion &CAutenticacion::getCAutenticacion()
     if (instancia == nullptr)
     {
         instancia = new CAutenticacion();
+        instancia->memUsuario = nullptr; // Cuando se instancia, le doy valor nulo al mamon del usuario de la memoria
     }
     // Si la instancia ya fue creada retorno una referencia a la misma instancia
     return *instancia;
@@ -69,6 +70,21 @@ void CAutenticacion::iniciarSesion(DtFecha nuevaFechaConexion)
     }
 }
 
+// Cierra sesion y actualiza fecha y hora de ultima conexion
+void CAutenticacion::cerrarSesion(DtFecha nuevaFechaConexion)
+{
+    try
+    {
+        this->memUsuario->setFechaConexion(nuevaFechaConexion);
+        this->memUsuario = nullptr;
+        cout << "\nHa cerrado sesion satisfactoriamente. Hasta luego!\n";
+    }
+    catch (const std::exception &e)
+    {
+        std::cerr << e.what() << '\n';
+    }
+}
+
 // Crea instancia usuario y lo mete a la coleccion
 // Pre: Usuario no existe todavia
 void CAutenticacion::registrarUsuario(string nombre, string urlPerfil, string desc, DtFecha fechaActual)
@@ -92,7 +108,8 @@ DtUsuario CAutenticacion::getSesionActivaDt()
     return this->memUsuario->getDataUsuario();
 }
 
-Usuario * CAutenticacion::getSesionActiva() {
+Usuario *CAutenticacion::getSesionActiva()
+{
     return this->memUsuario;
 }
 

@@ -19,6 +19,8 @@ public:
 
     virtual void iniciarSesion(DtFecha nuevaFechaConexion) = 0;
 
+    virtual void cerrarSesion(DtFecha nuevaFechaConexion) = 0;
+
     virtual Usuario * getSesionActiva() = 0;
 
     virtual DtUsuario getSesionActivaDt() = 0;

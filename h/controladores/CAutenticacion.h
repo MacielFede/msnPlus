@@ -31,6 +31,7 @@ public:
     static CAutenticacion &getCAutenticacion();
     bool ingresarNumero(string numTel);
     void iniciarSesion(DtFecha nuevaFechaConexion);
+    void cerrarSesion(DtFecha nuevaFechaConexion);
     void registrarUsuario(string nombre, string urlPerfil, string desc, DtFecha fechaActual);
     Usuario *getSesionActiva();
     DtUsuario getSesionActivaDt();
