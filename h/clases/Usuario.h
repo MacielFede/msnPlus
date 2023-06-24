@@ -29,7 +29,7 @@ private:
     map<string, Usuario*> contactos;
 
 public:
-    Usuario(); // Constructor
+    Usuario(string telefono, string nombre, string imagenPerfil, string descripcion, DtFecha fechaActual); // Constructor
     DtUsuario getDataUsuario();
     void archivarConversacion(string idConversacion);
     map<string, DtConversacion> buscarConver();
@@ -37,6 +37,7 @@ public:
     void agregarContacto(Usuario* c);
     Conversacion* crearConversacion(string cNumTel);
     void sincronizarConversacion(Conversacion* conver);
+    void setFechaConexion(DtFecha nuevaFechaConexion);
     Conversacion* getConversacion(string idConversacion);
     DtUsuario setNombre(string nom);
     DtUsuario setImagen(string url);

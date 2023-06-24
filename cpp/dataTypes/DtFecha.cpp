@@ -22,6 +22,8 @@ DtFecha::DtFecha(int dia, int mes, int anio, int horas, int minutos)
         this->dia = dia;
         this->mes = mes;
         this->anio = anio;
+        this->horas = horas;
+        this->minutos = minutos;
     }
     catch (invalid_argument &i)
     {

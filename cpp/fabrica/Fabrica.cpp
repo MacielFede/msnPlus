@@ -39,15 +39,15 @@ Fabrica &Fabrica::operator=(const Fabrica &)
   return *this;
 }
 
-CConversacion Fabrica::getCConv()
+CConversacion &Fabrica::getCConv()
 {
   return this->cconver.getCConversacion();
 }
-CContacto Fabrica::getCCont()
+CContacto &Fabrica::getCCont()
 {
   return this->ccontact.getCContacto();
 }
-CAutenticacion Fabrica::getCAut()
+CAutenticacion &Fabrica::getCAut()
 {
   return this->caut.getCAutenticacion();
 }
