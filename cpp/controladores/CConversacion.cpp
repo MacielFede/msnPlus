@@ -39,9 +39,12 @@ void CConversacion::archivarConversacion(string idConversacion) {
     sesion->archivarConversacion(idConversacion);
 }
 
-list<DtConversacion> CConversacion::listarConversacionesActivas() {}
+list<DtConversacion> CConversacion::listarConversaciones() {
+    CAutenticacion autenticador = CAutenticacion::getCAutenticacion();
+    Usuario* sesion = autenticador.getSesionActiva();
+    return sesion->buscarConver();
+}
 
-list<DtConversacion> CConversacion::listarConvArch() {}
 
 list<DtMensaje> CConversacion::selConversacion(string idConversacion) {}
 

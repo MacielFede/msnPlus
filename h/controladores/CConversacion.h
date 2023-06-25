@@ -33,8 +33,7 @@ public:
   static CConversacion& getCConversacion();
   // crea una instancia de CConversacion si es que no se creo y la retorna.
   void archivarConversacion(string idConversacion);
-  list<DtConversacion> listarConversacionesActivas();
-  list<DtConversacion> listarConvArch();
+  list<DtConversacion> listarConversaciones();
   list<DtMensaje>  selConversacion(string idConversacion);
   void eliminarMensaje(string idMensaje);
   list<DtContacto> listarContactos();

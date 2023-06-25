@@ -9,14 +9,14 @@ class Privada : public Conversacion
 private:
     map<string, Usuario*> participantes;
 public:
-    DtConversacion getDataConversacion();
-
+    DtConversacion getDataConversacion(string telSesionAct);
+    string getNomUsuario(string usuarioActivo);
     list<DtMensaje> buscarMensajes();
 
     DtInfoMensaje informacionMensaje(string idMensaje);
 
     void asignarAConversacion(Mensaje* m);
-    
+
     Privada(); //No me acuerdo el caso de uso de crear una nueva conversacion
     ~Privada();
 };

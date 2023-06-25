@@ -61,3 +61,31 @@ void menuFechayHora() {
         }
     } while (comando[0] != '3');
 }
+
+
+void imprimirConversaciones(bool activas) {
+    IConversacion& Cconv = Fabrica::getFabrica().getCConv();
+    list<DtConversacion> convers = Cconv.listarConversaciones();
+    list<DtConversacion>::iterator iter;
+    cout << "\tId de conversacion\tNombre de contacto\n";
+    if (activas) {
+        int cantArchiv = 0;
+        for (iter = convers.begin(); iter != convers.end(); ++iter) {
+            if (iter->getActiva())
+                cout << "\t" << iter->getIdConv() << "\t" << iter->getNomUsuario() << "\n";
+            else
+                cantArchiv++;
+        }
+        cout << "Archivadas: " << cantArchiv << endl;
+    }
+    else {
+        int cantActivas = 0;
+        for (iter = convers.begin(); iter != convers.end(); ++iter) {
+            if (!iter->getActiva())
+                cout << "\t" << iter->getIdConv() << "\t" << iter->getNomUsuario() << "\n";
+            else
+                cantActivas++;
+        }
+        cout << "Activas: " << cantActivas << endl;
+    }
+}

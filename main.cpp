@@ -1,4 +1,5 @@
 #include <string>
+#include <list>
 #include "h/fabrica/Fabrica.h"
 #include "h/interfaces/IAutenticacion.h"
 #include "h/interfaces/IConversacion.h"
@@ -12,11 +13,11 @@ using namespace std;
 int main()
 {
     string comando, idConver, numeroTelefono, modificacionPerfil;
-    Relojito &relojito = Relojito::getRelojito();
-    Fabrica &fabrica = Fabrica::getFabrica();
-    // IConversacion Cconv = fabrica.getCConv();
-    IAutenticacion &Caut = fabrica.getCAut();
-    // IContacto Ccont = fabrica.getCCont();
+    Relojito& relojito = Relojito::getRelojito();
+    Fabrica& fabrica = Fabrica::getFabrica();
+    IConversacion& Cconv = fabrica.getCConv();
+    IAutenticacion& Caut = fabrica.getCAut();
+    //IContacto& Ccont = fabrica.getCCont();
 
     cout << "\nBienvenido a su mejor chat. Recuerde, para ejecutar los comandos debe ingresar siempre el numero del mismo.\n\n";
 
@@ -107,7 +108,10 @@ int main()
 #pragma region MostrarConvers
             do
             {
-                // TODO: Imprimir conversaciones
+                if (comando[0] != '2') {
+                    //Si el usuario selecciono imprimir las conversaciones archivadas anteriormente (osea ya estan impresas todas las conversaciones) no imprimo de nuevo
+                    imprimirConversaciones(true);
+                }
 
                 cout << "\nComandos:\n";
                 cout << "1 - Abrir conversacion.\n";
@@ -173,15 +177,17 @@ int main()
                         }
                     } while (comando[0] != '6' && comando[0] != '5');
                     break;
-                case '2':
+                case '2': { // Pongo llaves porque me tira error el switch si no
+                    imprimirConversaciones(false);
                     break;
+                }
                 case '3':
 
                     cout << "Ingrese el nombre del grupo o el numero del contacto que quiere archivar\n> ";
                     fflush(stdin);
                     getline(cin, idConver);
 
-                    // CConv.archivarConversacion(idConver);
+                    Cconv.archivarConversacion(idConver);
 
                     break;
                 case '4':

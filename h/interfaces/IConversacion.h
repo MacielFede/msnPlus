@@ -20,9 +20,7 @@ private:
 public:
     virtual void archivarConversacion(string idConversacion) = 0;
 
-    virtual list<DtConversacion> listarConversacionesActivas() = 0;
-
-    virtual list<DtConversacion> listarConvArch() = 0;
+    virtual list<DtConversacion> listarConversaciones() = 0;
 
     virtual list<DtMensaje> selConversacion(string idConversacion) = 0;
 

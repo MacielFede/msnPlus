@@ -1,13 +1,23 @@
 #include "../../h/clases/Privada.h"
 
-Privada::Privada(){}
+Privada::Privada() {}
 
-Privada::~Privada(){}
+Privada::~Privada() {}
 
-DtConversacion Privada::getDataConversacion(){}
+DtConversacion Privada::getDataConversacion(string telSesionAct) {
+  return DtConversacion(this->getIdConversacion(), this->getActiva(), this->getNomUsuario(telSesionAct));
+}
 
-list<DtMensaje> Privada::buscarMensajes(){}
+string Privada::getNomUsuario(string usuarioActivo) {
+  //Necesito retornar el nombre del otro participante de la conversacion privada
+  map<string, Usuario*>::iterator iter = this->participantes.begin();
+  if (iter->first == usuarioActivo)
+    ++iter;
+  return iter->second->getNombre();
+}
 
-DtInfoMensaje Privada::informacionMensaje(string idMensaje){}
+list<DtMensaje> Privada::buscarMensajes() {}
 
-void Privada::asignarAConversacion(Mensaje* m){}
+DtInfoMensaje Privada::informacionMensaje(string idMensaje) {}
+
+void Privada::asignarAConversacion(Mensaje* m) {}
