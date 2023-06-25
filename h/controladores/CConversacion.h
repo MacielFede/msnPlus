@@ -44,6 +44,7 @@ public:
   void enviarVideo(string url, string duracion);
   void enviarContacto(string cNumTel);
   void crearMensaje();
+  bool existeConver(string idConver);
 
   // Destructor
   ~CConversacion();

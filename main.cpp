@@ -13,6 +13,7 @@ using namespace std;
 int main()
 {
     string comando, idConver, numeroTelefono, modificacionPerfil;
+    int idMensaje;
     Relojito& relojito = Relojito::getRelojito();
     Fabrica& fabrica = Fabrica::getFabrica();
     IConversacion& Cconv = fabrica.getCConv();
@@ -128,7 +129,7 @@ int main()
                 switch (comando[0])
                 {
                 case '1':
-                    // TODO: do{ if(!Cconv.existeConver(idConver)) cout << "No existe esa conversacion."; }while(!Cconv.existeConver(idConver));
+                    // TODO: if(!Cconv.existeConver(idConver)) cout << "No existe esa conversacion.";
                     // TODO: CConversacion -> existeConver(string idConver): true o false
                     cout << "Ingrese el id de la conversacion que quiere abrir, si es un grupo sera el nombre, si es privada sera el numero de telefono.\n> ";
                     fflush(stdin);
@@ -151,6 +152,10 @@ int main()
                         switch (comando[0])
                         {
                         case '1':
+                            getInt("Ingrese el numero identificador del mensaje.\n> ", idMensaje);
+                            // TODO: if(!Cconv.existeMensaje(idMensaje)) cout << "No existe ese mensaje.";
+                            // TODO: CConversacion -> existeMensaje(int idMensaje): true o false
+
                             break;
                         case '2':
                             break;
@@ -177,10 +182,10 @@ int main()
                         }
                     } while (comando[0] != '6' && comando[0] != '5');
                     break;
-                case '2': { // Pongo llaves porque me tira error el switch si no
+                case '2':
                     imprimirConversaciones(false);
                     break;
-                }
+
                 case '3':
 
                     cout << "Ingrese el nombre del grupo o el numero del contacto que quiere archivar\n> ";

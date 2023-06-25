@@ -65,3 +65,7 @@ void CConversacion::enviarVideo(string url, string duracion) {}
 void CConversacion::enviarContacto(string cNumTel) {}
 
 void CConversacion::crearMensaje() {}
+
+bool CConversacion::existeConver(string idConver) {
+
+}

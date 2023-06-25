@@ -8,4 +8,6 @@ void menuFechayHora();
 
 void imprimirConversaciones(bool activas);
 
+void getInt(string mensaje, int& numero);
+
 #endif

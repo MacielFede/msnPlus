@@ -41,6 +41,8 @@ public:
     virtual void enviarContacto(string cNumTel) = 0;
 
     virtual void crearMensaje() = 0;
+
+    virtual bool existeConver(string idConver) = 0;
 };
 
 #endif
