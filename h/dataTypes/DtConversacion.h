@@ -3,32 +3,30 @@
 
 #include <iostream>
 #include <cstdlib>
-#include <list>
 #include <string>
-#include "DtMensaje.h"
 
 using namespace std;
 
 class DtConversacion
 {
-private:
-    string idConv;
+protected:
+    string idConv, nomUsuario;
+    // Si la conversacion es un grupo nomUsuario = "-". No creo otro DT porque no puedo usar Dynamic_cast para saber el tipo de la conversacion
     bool activa;
-    list<DtMensaje> mensajes;
 
 public:
     // Constructor
-    DtConversacion(string idConv, bool activa, list<DtMensaje> mensajes);
+    DtConversacion();
+    DtConversacion(string idConv, bool activa, string nomUser);
 
     // Getters
-    bool getActiva();
-    list<DtMensaje> getMensajes();
     string getIdConv();
+    string getNomUsuario();
+    bool getActiva();
 
     // Destructor
     ~DtConversacion();
 
-    // friend ostream &operator<<(ostream &o, DtConversacion &s);
 };
 
 #endif

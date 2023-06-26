@@ -2,7 +2,7 @@
 #define CONTACTO_H
 
 #include "Mensaje.h"
-#include "../dataTypes/DtContacto.h"
+#include "../dataTypes/DtContactoMsj.h"
 
 class Contacto : public Mensaje
 {
@@ -15,8 +15,7 @@ public:
 
   DtUsuario getContacto();
 
-  DtMensaje getDataMensaje();
-  DtInfoMensaje crearInfoMsg();
+  DtMensaje* getDataMensaje();
 };
 
 #endif

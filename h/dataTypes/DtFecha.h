@@ -24,6 +24,7 @@ public:
     bool esValida();
     void imprimirFecha();
     void imprimirFechayHora();
+    bool esMayor(DtFecha fecha);
 
     // Destructor
     ~DtFecha();

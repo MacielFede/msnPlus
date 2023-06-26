@@ -9,9 +9,9 @@ class Participante
 private:
     DtFecha fechaIngreso;
     bool administrador;
-    Usuario * usuario;
+    Usuario* usuario;
 public:
-    Participante(Usuario * soy, DtFecha fecha, bool soyAdmin);
+    Participante(Usuario* soy, DtFecha fecha, bool soyAdmin);
     ~Participante();
 
     void setAdmin(bool admin);
@@ -20,7 +20,7 @@ public:
 
     bool getAdminStatus();
 
-    Usuario getUsuario();  
+    Usuario* getUsuario();
 };
 
 #endif
