@@ -37,7 +37,23 @@ CContacto& CContacto::operator=(const CContacto&)
     return *this;
 }
 
-list<DtContacto> CContacto::listarContactos() {}
+list<DtContacto> CContacto::listarContactos()
+{
+    CAutenticacion &Caut = CAutenticacion::getCAutenticacion();
+
+    Usuario *u = Caut.getSesionActiva();
+    map<string, DtContacto> uContacts = u->listarContactos();
+
+    list<DtContacto> dtContacts;
+
+    for (const auto &[key, value] : uContacts)
+    {
+        dtContacts.push_back(value);
+    }
+
+    return dtContacts;
+}
+
 Usuario CContacto::ingresarNumeroContacto(string cNumTel) {}
 void CContacto::agregarContacto(string cNumTel)
 {
@@ -58,7 +74,7 @@ bool CContacto::esContacto(string cNumTel)
     //Fabrica& fabrica = Fabrica::getFabrica();
     CAutenticacion& Caut = CAutenticacion::getCAutenticacion();
     Usuario* u = Caut.getSesionActiva();
-    return true/*u.listarContactos().count(cNumTel)*/;
+    return u->listarContactos().count(cNumTel);
 }
 DtContacto CContacto::numToContacto(string cNumTel)
 {

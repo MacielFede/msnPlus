@@ -7,3 +7,8 @@ Participante::Participante(Usuario * soy, DtFecha fecha, bool soyAdmin){
 }
 
 Participante::~Participante(){}
+
+Usuario* Participante::getUsuario()
+{
+    return this->usuario;
+}

@@ -61,3 +61,13 @@ void menuFechayHora() {
         }
     } while (comando[0] != '3');
 }
+
+string numFormat(string val)
+{
+    val.erase(remove(val.begin(),
+                          val.end(),
+                          ' '),
+              val.end());
+
+    return val;
+}

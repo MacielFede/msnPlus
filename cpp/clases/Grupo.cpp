@@ -1,6 +1,12 @@
 #include "../../h/clases/Grupo.h"
 
 Grupo::Grupo(){}
+Grupo::Grupo(map<string, Participante *> participantes, string nombre, string imagen)
+{
+    this->participantes = participantes;
+    this->nombre = nombre;
+    this->imagen = imagen;
+}
 
 Grupo::~Grupo(){}
 
