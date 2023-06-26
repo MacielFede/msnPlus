@@ -13,8 +13,6 @@ public:
     string getNomUsuario(string usuarioActivo);
     list<DtMensaje*> buscarMensajes(string telSesion);
 
-    list<DtVisto> informacionMensaje(string idMensaje);
-
     void asignarAConversacion(Mensaje* m);
 
     Privada(); //No me acuerdo el caso de uso de crear una nueva conversacion

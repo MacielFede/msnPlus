@@ -5,6 +5,7 @@
 #include <string>
 #include "DtVisto.h"
 #include "DtFecha.h"
+#include "DtUsuario.h"
 
 using namespace std;
 
@@ -14,10 +15,11 @@ protected:
     int idMensaje;
     DtFecha fechaEnvio;
     list<DtVisto> infoMensaje;
+    DtUsuario emisor;
 
 public:
     // Constructor
-    DtMensaje(int idMensaje, DtFecha fechaEnvio, list<DtVisto> receptores);
+    DtMensaje(int idMensaje, DtFecha fechaEnvio, list<DtVisto> receptores, DtUsuario emisor);
     DtMensaje();
 
     // Getters
@@ -26,6 +28,7 @@ public:
     DtFecha getFechaEnvio();
     list<DtVisto> getInfoMensaje();
     virtual void imprimir() = 0;
+    bool usuarioEsEmisor(string telefonoSesion);
 
     // Destructor
     ~DtMensaje();

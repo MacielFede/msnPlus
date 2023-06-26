@@ -1,10 +1,11 @@
 #include "../../h/dataTypes/DtTexto.h"
 
-DtTexto::DtTexto(string texto, int idMen, DtFecha fechaEnv, list<DtVisto> infoMens) {
+DtTexto::DtTexto(string texto, int idMen, DtFecha fechaEnv, list<DtVisto> infoMens, DtUsuario emisor) {
   this->texto = texto;
   this->idMensaje = idMen;
   this->fechaEnvio = fechaEnv;
   this->infoMensaje = infoMens;
+  this->emisor = emisor;
 }
 
 

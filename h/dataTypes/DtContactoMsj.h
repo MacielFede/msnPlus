@@ -14,7 +14,7 @@ private:
   string nombre;
 public:
   // Constructor
-  DtContactoMsj(string numTel, string nombre, int idMen, DtFecha fechaEnv, list<DtVisto> infoMens);
+  DtContactoMsj(string numTel, string nombre, int idMen, DtFecha fechaEnv, list<DtVisto> infoMens, DtUsuario emisor);
 
   // Getters
   string getNumTel();

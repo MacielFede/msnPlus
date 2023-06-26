@@ -25,5 +25,9 @@ DtFecha DtVisto::getFechaVisto()
     return this->fechaVisto;
 }
 
+bool DtVisto::getVisto() {
+    return this->visto;
+}
+
 // Destructor
 DtVisto::~DtVisto() {}

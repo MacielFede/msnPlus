@@ -14,7 +14,7 @@ private:
 public:
   // Constructor
   DtImagen();
-  DtImagen(string formatoImg, string descripcion, string tamano, int idMen, DtFecha fechaEnv, list<DtVisto> infoMens);
+  DtImagen(string formatoImg, string descripcion, string tamano, int idMen, DtFecha fechaEnv, list<DtVisto> infoMens, DtUsuario emisor);
 
   // Destructor
   ~DtImagen();

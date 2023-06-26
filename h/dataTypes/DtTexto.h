@@ -13,7 +13,7 @@ private:
   string texto;
 public:
   // Constructor
-  DtTexto(string texto, int idMen, DtFecha fechaEnv, list<DtVisto> infoMens);
+  DtTexto(string texto, int idMen, DtFecha fechaEnv, list<DtVisto> infoMens, DtUsuario emisor);
 
   // Destructor
   ~DtTexto();

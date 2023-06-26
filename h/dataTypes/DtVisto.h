@@ -25,6 +25,7 @@ public:
     string getNumTel();
     string getNombre();
     DtFecha getFechaVisto();
+    bool getVisto();
 
     // Destructor
     ~DtVisto();

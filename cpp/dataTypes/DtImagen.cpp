@@ -1,13 +1,14 @@
 #include "../../h/dataTypes/DtImagen.h"
 
 
-DtImagen::DtImagen(string formatoImg, string descripcion, string tamano, int idMen, DtFecha fechaEnv, list<DtVisto> infoMens) {
+DtImagen::DtImagen(string formatoImg, string descripcion, string tamano, int idMen, DtFecha fechaEnv, list<DtVisto> infoMens, DtUsuario emisor) {
   this->formatoImg = formatoImg;
   this->descripcion = descripcion;
   this->tamano = tamano;
   this->idMensaje = idMen;
   this->fechaEnvio = fechaEnv;
   this->infoMensaje = infoMens;
+  this->emisor = emisor;
 }
 
 DtImagen::~DtImagen() {}

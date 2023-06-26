@@ -32,6 +32,4 @@ list<DtMensaje*> Privada::buscarMensajes(string telSesion) {
   return msj;
 }
 
-list<DtVisto> Privada::informacionMensaje(string idMensaje) {}
-
 void Privada::asignarAConversacion(Mensaje* m) {}

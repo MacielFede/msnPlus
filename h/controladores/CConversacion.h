@@ -37,13 +37,14 @@ public:
   void eliminarMensaje(string idMensaje);
   list<DtContacto> listarContactos();
   void seleccionarContacto(string cNumTel);
-  list<DtVisto> informacionMensaje(string idMensaje);
+  list<DtVisto> informacionMensaje(int idMensaje);
   void enviarMensajeSimple(string msgTxt);
   void enviarImg(string url, string formato, string size, string desc);
   void enviarVideo(string url, string duracion);
   void enviarContacto(string cNumTel);
   void crearMensaje();
   bool existeConver(string idConver);
+  bool existeMensajeYEsEmisor(int idMensaje);
 
   // Destructor
   ~CConversacion();

@@ -28,7 +28,7 @@ public:
 
     virtual list<DtMensaje*> buscarMensajes(string telSesion) = 0;
 
-    virtual list<DtVisto> informacionMensaje(string idMensaje) = 0;
+    list<DtVisto> informacionMensaje(int idMensaje);
 
     virtual void asignarAConversacion(Mensaje* m) = 0;
 

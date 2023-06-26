@@ -140,10 +140,10 @@ int main()
 
                             list<DtMensaje*> mensajes = Cconv.selConversacion(idConver);
                             list<DtMensaje*>::iterator iter;
-                            cout << "\nLos mensajes enviados comienzan con \'>\' y los recibidos comienzan con \'<\'.\n";
+                            cout << "\nLos mensajes enviados comienzan con \'<\' y los recibidos comienzan con \'>\'.\n";
                             for (iter = mensajes.begin(); iter != mensajes.end(); ++iter) {
                                 //(* ) esto se usa para desreferenciar, iter es un iterador a un puntero.
-                                if ((*iter)->usuarioEsReceptor(Caut.getSesionActivaDt().getNumTel())) {
+                                if ((*iter)->usuarioEsEmisor(Caut.getSesionActivaDt().getNumTel())) {
                                     cout << "< ";
                                     (*iter)->imprimir();
                                 }
@@ -169,9 +169,20 @@ int main()
                             {
                             case '1':
                                 getInt("Ingrese el numero identificador del mensaje enviado que quiere ver.\n> ", idMensaje);
-                                // TODO: if(!Cconv.existeMensaje(idMensaje)) cout << "No existe ese mensaje.";
-                                // TODO: CConversacion -> existeMensaje(int idMensaje): true o false
-
+                                if (!Cconv.existeMensajeYEsEmisor(idMensaje))
+                                    cout << "No existe el mensaje indicado o tu no eres el emisor.\n";
+                                else {
+                                    list<DtVisto> infoMensaje = Cconv.informacionMensaje(idMensaje);
+                                    list<DtVisto>::iterator iter;
+                                    cout << "\tVisto por\tEl dia\n";
+                                    for (iter = infoMensaje.begin(); iter != infoMensaje.end(); ++iter) {
+                                        if (iter->getVisto()) {
+                                            cout << "\t" << iter->getNombre() << " - " << iter->getNumTel() << "\t";
+                                            iter->getFechaVisto().imprimirFechayHora();
+                                            cout << endl;
+                                        }
+                                    }
+                                }
                                 break;
                             case '2':
                                 break;

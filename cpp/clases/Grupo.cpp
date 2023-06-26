@@ -24,6 +24,5 @@ list<DtMensaje*> Grupo::buscarMensajes(string telSesion) {
   return msj;
 }
 
-list<DtVisto> Grupo::informacionMensaje(string idMensaje) {}
 
 void Grupo::asignarAConversacion(Mensaje* m) {}

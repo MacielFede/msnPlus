@@ -13,7 +13,7 @@ private:
   string duracion;
 public:
   // Constructor
-  DtVideo(string duracion, int idMen, DtFecha fechaEnv, list<DtVisto> infoMens);
+  DtVideo(string duracion, int idMen, DtFecha fechaEnv, list<DtVisto> infoMens, DtUsuario emisor);
 
   // Getters
   string getNumTel();

@@ -2,11 +2,12 @@
 
 // Constructor
 DtMensaje::DtMensaje() {}
-DtMensaje::DtMensaje(int idMensaje, DtFecha fechaEnvio, list<DtVisto> receptores)
+DtMensaje::DtMensaje(int idMensaje, DtFecha fechaEnvio, list<DtVisto> receptores, DtUsuario emisor)
 {
     this->idMensaje = idMensaje;
     this->fechaEnvio = fechaEnvio;
     this->infoMensaje = receptores;
+    this->emisor = emisor;
 }
 
 // Getters
@@ -33,3 +34,7 @@ bool DtMensaje::usuarioEsReceptor(string telefonoSesion) {
 }
 
 void imprimir() {}
+
+bool DtMensaje::usuarioEsEmisor(string telefonoSesion) {
+    return this->emisor.getNumTel() == telefonoSesion;
+}

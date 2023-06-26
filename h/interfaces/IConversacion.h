@@ -30,7 +30,7 @@ public:
 
     virtual void seleccionarContacto(string cNumTel) = 0;
 
-    virtual list<DtVisto> informacionMensaje(string idMensaje) = 0;
+    virtual list<DtVisto> informacionMensaje(int idMensaje) = 0;
 
     virtual void enviarMensajeSimple(string msgTxt) = 0;
 
@@ -43,6 +43,9 @@ public:
     virtual void crearMensaje() = 0;
 
     virtual bool existeConver(string idConver) = 0;
+
+    virtual bool existeMensajeYEsEmisor(int idMensaje) = 0;
+
 };
 
 #endif

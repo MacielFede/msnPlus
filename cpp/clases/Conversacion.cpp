@@ -1,4 +1,5 @@
 #include "../../h/clases/Conversacion.h"
+#include "../../h/clases/Mensaje.h"
 
 Conversacion::~Conversacion() {}
 
@@ -13,4 +14,12 @@ string Conversacion::getIdConversacion() {
 
 bool Conversacion::getActiva() {
   return this->activa;
+}
+
+list<DtVisto> Conversacion::informacionMensaje(int idMensaje) {
+  //Asumo que el mensaje existe y que el usuario es emisor
+  Mensaje* mens = this->mensajes.find(idMensaje)->second;
+  cout << "< ";
+  mens->getDataMensaje()->imprimir();
+  return mens->crearInfoMsg();
 }

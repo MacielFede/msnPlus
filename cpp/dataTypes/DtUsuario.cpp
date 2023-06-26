@@ -1,6 +1,7 @@
 #include "../../h/dataTypes/DtUsuario.h"
 
 // Constructor
+DtUsuario::DtUsuario() {}
 DtUsuario::DtUsuario(string numTel, string nombre, DtFecha fechaRegistro, string imagenPerfil, string descripcion, DtFecha ultimaConexion)
 {
     this->numTel = numTel;

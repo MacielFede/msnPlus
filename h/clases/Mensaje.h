@@ -22,12 +22,13 @@ public:
   ~Mensaje();
   // No tenemos setters porque no queremos cambiar nada del mensaje ya que estariamos alterando informacion fundamental del sistema.
 
+  bool esEmisor(string telefonoSesion);
   bool esReceptor(string telefonoSesion);
   bool fueVisto(string telefonoSesion);
   void setVisto(string telefonoSesion);
   DtFecha getFechaEnvio();
   void eliminarReceptor(Usuario user);
-  virtual DtMensaje*getDataMensaje() = 0;
+  virtual DtMensaje* getDataMensaje() = 0;
   list<DtVisto> crearInfoMsg();
 };
 

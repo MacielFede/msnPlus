@@ -18,6 +18,7 @@ private:
 
 public:
     // Constructor
+    DtUsuario();
     DtUsuario(string numTel, string nombre, DtFecha fechaRegistro, string imagenPerfil, string descripcion, DtFecha ultimaConexion);
 
     // Getters

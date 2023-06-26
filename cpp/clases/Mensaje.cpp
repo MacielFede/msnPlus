@@ -26,3 +26,7 @@ bool Mensaje::fueVisto(string telefonoSesion) {
 void Mensaje::setVisto(string telefonoSesion) {
   this->receptores.find(telefonoSesion)->second->setVisto();
 }
+
+bool Mensaje::esEmisor(string telefonoSesion) {
+  return this->emisor->getTelefono() == telefonoSesion;
+}
