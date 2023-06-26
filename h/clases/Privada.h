@@ -11,9 +11,9 @@ private:
 public:
     DtConversacion getDataConversacion(string telSesionAct);
     string getNomUsuario(string usuarioActivo);
-    list<DtMensaje> buscarMensajes();
+    list<DtMensaje*> buscarMensajes(string telSesion);
 
-    DtInfoMensaje informacionMensaje(string idMensaje);
+    list<DtVisto> informacionMensaje(string idMensaje);
 
     void asignarAConversacion(Mensaje* m);
 

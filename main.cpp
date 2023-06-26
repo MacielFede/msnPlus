@@ -6,6 +6,7 @@
 #include "h/interfaces/IContacto.h"
 #include "h/clases/Relojito.h"
 #include "h/dataTypes/DtUsuario.h"
+#include "h/dataTypes/DtMensaje.h"
 #include "h/utils.h"
 
 using namespace std;
@@ -129,58 +130,74 @@ int main()
                 switch (comando[0])
                 {
                 case '1':
-                    // TODO: if(!Cconv.existeConver(idConver)) cout << "No existe esa conversacion.";
-                    // TODO: CConversacion -> existeConver(string idConver): true o false
                     cout << "Ingrese el id de la conversacion que quiere abrir, si es un grupo sera el nombre, si es privada sera el numero de telefono.\n> ";
                     fflush(stdin);
                     getline(cin, idConver);
-                    do
-                    {
-                        // TODO: Imprimir mensajes de la conversacion.
-                        cout << "\nComandos:\n";
-                        cout << "1 - Ver informacion de un mensaje.\n";
-                        cout << "2 - Eliminar mensaje.\n";
-                        cout << "3 - Ver fecha y hora actual.\n";
-                        cout << "4 - Actualizar fecha y hora actual.\n";
-                        cout << "5 - Volver al menu anterior.\n";
-                        cout << "6 - Volver al menu principal.\n\n";
-                        cout << "Que desea hacer? > ";
+                    if (!Cconv.existeConver(idConver))
+                        cout << "No existe la conversacion indicada.\n";
+                    else {
+                        do {
 
-                        fflush(stdin);
-                        getline(cin, comando);
+                            list<DtMensaje*> mensajes = Cconv.selConversacion(idConver);
+                            list<DtMensaje*>::iterator iter;
+                            cout << "\nLos mensajes enviados comienzan con \'>\' y los recibidos comienzan con \'<\'.\n";
+                            for (iter = mensajes.begin(); iter != mensajes.end(); ++iter) {
+                                //(* ) esto se usa para desreferenciar, iter es un iterador a un puntero.
+                                if ((*iter)->usuarioEsReceptor(Caut.getSesionActivaDt().getNumTel())) {
+                                    cout << "< ";
+                                    (*iter)->imprimir();
+                                }
+                                else {
+                                    cout << "> ";
+                                    (*iter)->imprimir();
+                                }
+                            }
 
-                        switch (comando[0])
-                        {
-                        case '1':
-                            getInt("Ingrese el numero identificador del mensaje.\n> ", idMensaje);
-                            // TODO: if(!Cconv.existeMensaje(idMensaje)) cout << "No existe ese mensaje.";
-                            // TODO: CConversacion -> existeMensaje(int idMensaje): true o false
+                            cout << "\nComandos:\n";
+                            cout << "1 - Ver informacion de un mensaje enviado.\n";
+                            cout << "2 - Eliminar mensaje.\n";
+                            cout << "3 - Ver fecha y hora actual.\n";
+                            cout << "4 - Actualizar fecha y hora actual.\n";
+                            cout << "5 - Volver al menu anterior.\n";
+                            cout << "6 - Volver al menu principal.\n\n";
+                            cout << "Que desea hacer? > ";
 
-                            break;
-                        case '2':
-                            break;
-                        case '3':
-                            relojito.getFechaActual().imprimirFechayHora();
-                            break;
-                        case '4':
-                            menuFechayHora();
-                            break;
+                            fflush(stdin);
+                            getline(cin, comando);
 
-                        case '5':
-                            cout << "Volviendo al menu de conversaciones.\n";
-                            break;
+                            switch (comando[0])
+                            {
+                            case '1':
+                                getInt("Ingrese el numero identificador del mensaje enviado que quiere ver.\n> ", idMensaje);
+                                // TODO: if(!Cconv.existeMensaje(idMensaje)) cout << "No existe ese mensaje.";
+                                // TODO: CConversacion -> existeMensaje(int idMensaje): true o false
 
-                        case '6':
-                            cout << "Volviendo al menu principal.\n";
-                            // Cambio comando[0] a 7 para que el while lo tome como que el usuario quiere ir al menu principal
-                            comando[0] = '7';
-                            break;
+                                break;
+                            case '2':
+                                break;
+                            case '3':
+                                relojito.getFechaActual().imprimirFechayHora();
+                                break;
+                            case '4':
+                                menuFechayHora();
+                                break;
 
-                        default:
-                            cout << "Ingresaste un comando inexistente.\n";
-                            break;
-                        }
-                    } while (comando[0] != '6' && comando[0] != '5');
+                            case '5':
+                                cout << "Volviendo al menu de conversaciones.\n";
+                                break;
+
+                            case '6':
+                                cout << "Volviendo al menu principal.\n";
+                                // Cambio comando[0] a 7 para que el while lo tome como que el usuario quiere ir al menu principal
+                                comando[0] = '7';
+                                break;
+
+                            default:
+                                cout << "Ingresaste un comando inexistente.\n";
+                                break;
+                            }
+                        } while (comando[0] != '6' && comando[0] != '5');
+                    }
                     break;
                 case '2':
                     imprimirConversaciones(false);

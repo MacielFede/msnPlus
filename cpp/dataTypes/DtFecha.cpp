@@ -19,11 +19,11 @@ DtFecha::DtFecha(int dia, int mes, int anio, int horas, int minutos)
         {
             throw invalid_argument("\nFecha inválida.");
         }*/
-        this->dia = dia;
-        this->mes = mes;
-        this->anio = anio;
-        this->horas = horas;
-        this->minutos = minutos;
+    this->dia = dia;
+    this->mes = mes;
+    this->anio = anio;
+    this->horas = horas;
+    this->minutos = minutos;
     /*}
     catch (invalid_argument &i)
     {
@@ -64,7 +64,7 @@ bool DtFecha::esValida()
 }
 
 string imprNum(int num) {
-    return (num < 10) ? ("0" +  to_string(num)) : to_string(num);
+    return (num < 10) ? ("0" + to_string(num)) : to_string(num);
 }
 
 void DtFecha::imprimirFecha()
@@ -72,10 +72,24 @@ void DtFecha::imprimirFecha()
     cout << "[" << imprNum(this->dia) << "/" << imprNum(this->mes) << "/" << this->anio << "]" << endl;
 }
 
-void DtFecha::imprimirFechayHora() 
+void DtFecha::imprimirFechayHora()
 {
     cout << "[" << imprNum(this->dia) << "/" << imprNum(this->mes) << "/" << this->anio << " " << imprNum(this->horas) << ":" << imprNum(this->minutos) << "]" << endl;
 }
 
 // Destructor
 DtFecha::~DtFecha() {}
+
+bool DtFecha::esMayor(DtFecha fecha) {
+    if (this->anio > fecha.getAnio()) return true; //Me fijo si el anio es mas grande o mas chico
+    else if (this->anio < fecha.getAnio()) return false;
+    if (this->mes > fecha.getMes()) return true; //El anio es igual, voy por el mes
+    else if (this->mes < fecha.getMes()) return false;
+    if (this->dia > fecha.getDia()) return true; // Mes y anio son iguales, voy por el dia
+    else if (this->dia < fecha.getDia()) return false;
+    if (this->horas > fecha.getHoras()) return true; //Mes, anio y dias son iguales, voy por las hora
+    else if (this->horas < fecha.getHoras()) return false;
+    if (this->minutos > fecha.getMinutos()) return true; //Mes, anio, dias y horas son iguales, voy por los minutos
+    else if (this->minutos > fecha.getMinutos()) return false;
+    return true; //Las fechas son iguales
+}

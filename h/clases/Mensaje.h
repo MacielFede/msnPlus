@@ -4,14 +4,13 @@
 #include "Visto.h"
 #include "Usuario.h"
 #include "../dataTypes/DtMensaje.h"
-#include "../dataTypes/DtInfoMensaje.h"
 #include "../dataTypes/DtFecha.h"
 #include <string>
 using namespace std;
 
 class Mensaje
 {
-private:
+protected:
   int id; //Es autogenerado y depende de la conversacion, osea que debemos saber cual fue el ultimo id agregado en la conversacion.
   DtFecha fechaEnvio;
   Usuario* emisor;
@@ -23,9 +22,13 @@ public:
   ~Mensaje();
   // No tenemos setters porque no queremos cambiar nada del mensaje ya que estariamos alterando informacion fundamental del sistema.
 
+  bool esReceptor(string telefonoSesion);
+  bool fueVisto(string telefonoSesion);
+  void setVisto(string telefonoSesion);
+  DtFecha getFechaEnvio();
   void eliminarReceptor(Usuario user);
-  virtual DtMensaje getDataMensaje() = 0;
-  virtual DtInfoMensaje crearInfoMsg() = 0;
+  virtual DtMensaje*getDataMensaje() = 0;
+  list<DtVisto> crearInfoMsg();
 };
 
 #endif

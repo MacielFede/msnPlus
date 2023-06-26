@@ -46,7 +46,11 @@ list<DtConversacion> CConversacion::listarConversaciones() {
 }
 
 
-list<DtMensaje> CConversacion::selConversacion(string idConversacion) {}
+list<DtMensaje*> CConversacion::selConversacion(string idConversacion) {
+    Usuario* sesion = CAutenticacion::getCAutenticacion().getSesionActiva();
+    this->memConversacion = sesion->getConversacion(idConversacion);
+    return memConversacion->buscarMensajes(sesion->getTelefono());
+}
 
 void CConversacion::eliminarMensaje(string idMensaje) {}
 
@@ -54,7 +58,7 @@ list<DtContacto> CConversacion::listarContactos() {}
 
 void CConversacion::seleccionarContacto(string cNumTel) {}
 
-DtInfoMensaje CConversacion::informacionMensaje(string idMensaje) {}
+list<DtVisto> CConversacion::informacionMensaje(string idMensaje) {}
 
 void CConversacion::enviarMensajeSimple(string msgTxt) {}
 
@@ -67,5 +71,6 @@ void CConversacion::enviarContacto(string cNumTel) {}
 void CConversacion::crearMensaje() {}
 
 bool CConversacion::existeConver(string idConver) {
-
+    Usuario* sesion = CAutenticacion::getCAutenticacion().getSesionActiva();
+    return sesion->existeConver(idConver);
 }

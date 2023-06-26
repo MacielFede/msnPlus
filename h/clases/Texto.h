@@ -2,6 +2,7 @@
 #define TEXTO_H
 
 #include "Mensaje.h"
+#include "../../h/dataTypes/DtTexto.h"
 #include <string>
 using namespace std;
 
@@ -15,8 +16,7 @@ public:
 
   string getTexto();
 
-  DtMensaje getDataMensaje();
-  DtInfoMensaje crearInfoMsg();
+  DtMensaje* getDataMensaje();
 };
 
 

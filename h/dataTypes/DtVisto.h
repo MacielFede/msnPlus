@@ -14,11 +14,12 @@ class DtVisto
 private:
     string numTel;
     string nombre;
+    bool visto;
     DtFecha fechaVisto;
 
 public:
     // Constructor
-    DtVisto(string numTel, string nombre, DtFecha fechaVisto);
+    DtVisto(string numTel, string nombre, DtFecha fechaVisto, bool visto);
 
     // Getters
     string getNumTel();

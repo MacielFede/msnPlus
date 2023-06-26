@@ -9,7 +9,7 @@
 #include "../dataTypes/DtUsuario.h"
 #include "../dataTypes/DtConversacion.h"
 #include "../dataTypes/DtMensaje.h"
-#include "../dataTypes/DtInfoMensaje.h"
+#include "../dataTypes/DtVisto.h"
 
 using namespace std;
 
@@ -22,7 +22,7 @@ public:
 
     virtual list<DtConversacion> listarConversaciones() = 0;
 
-    virtual list<DtMensaje> selConversacion(string idConversacion) = 0;
+    virtual list<DtMensaje*> selConversacion(string idConversacion) = 0;
 
     virtual void eliminarMensaje(string idMensaje) = 0;
 
@@ -30,7 +30,7 @@ public:
 
     virtual void seleccionarContacto(string cNumTel) = 0;
 
-    virtual DtInfoMensaje informacionMensaje(string idMensaje) = 0;
+    virtual list<DtVisto> informacionMensaje(string idMensaje) = 0;
 
     virtual void enviarMensajeSimple(string msgTxt) = 0;
 

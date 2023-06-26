@@ -1,4 +1,5 @@
 #include "../../h/clases/Privada.h"
+#include "../../h/clases/Mensaje.h"
 
 Privada::Privada() {}
 
@@ -16,8 +17,21 @@ string Privada::getNomUsuario(string usuarioActivo) {
   return iter->second->getNombre();
 }
 
-list<DtMensaje> Privada::buscarMensajes() {}
+list<DtMensaje*> Privada::buscarMensajes(string telSesion) {
+  list<DtMensaje*> msj;
+  map<int, Mensaje*>::iterator iter;
+  for (iter = this->mensajes.begin(); iter != this->mensajes.end(); ++iter) {
+    //Si el usuario no esta entre los receptores no mando el Dt
+    if (iter->second->esReceptor(telSesion)) {
+      //Seteo el visto si es que nu fue visto
+      if (!iter->second->fueVisto(telSesion))
+        iter->second->setVisto(telSesion);
+      msj.push_back(iter->second->getDataMensaje());
+    }
+  }
+  return msj;
+}
 
-DtInfoMensaje Privada::informacionMensaje(string idMensaje) {}
+list<DtVisto> Privada::informacionMensaje(string idMensaje) {}
 
 void Privada::asignarAConversacion(Mensaje* m) {}

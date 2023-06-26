@@ -11,11 +11,11 @@ private:
   bool visto;
   DtFecha fechaV;
 public:
-  Visto(Usuario* recep, DtFecha fecha);
+  Visto(Usuario* recep);
   ~Visto();
 
   void setVisto();
-  // Pre: Visto debe ser false. Post: Visto cambia a true
+  // Pre: Visto debe ser false. Post: Visto cambia a true y se le agrega una fecha
   bool getVisto();
   Usuario getReceptor();
   DtVisto getDataVisto();

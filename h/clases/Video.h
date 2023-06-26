@@ -2,6 +2,7 @@
 #define VIDEO_H
 
 #include "Mensaje.h"
+#include "../dataTypes/DtVideo.h"
 
 class Video : public Mensaje
 {
@@ -14,8 +15,7 @@ public:
   string getUrl();
   string getDuracion();
 
-  DtMensaje getDataMensaje();
-  DtInfoMensaje crearInfoMsg();
+  DtMensaje*getDataMensaje();
 };
 
 #endif

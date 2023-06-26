@@ -44,6 +44,8 @@ public:
     DtUsuario setImagen(string url);
     DtUsuario setDesc(string desc);
     string getNombre();
+    bool existeConver(string idConver);
+    string getTelefono();
 
     // destructor
     ~Usuario();

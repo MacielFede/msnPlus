@@ -11,7 +11,6 @@
 #include "../dataTypes/DtUsuario.h"
 #include "../dataTypes/DtConversacion.h"
 #include "../dataTypes/DtMensaje.h"
-#include "../dataTypes/DtInfoMensaje.h"
 
 class Mensaje;
 
@@ -19,17 +18,17 @@ using namespace std;
 
 class Conversacion
 {
-private:
+protected:
     bool activa;
     string idConversacion;
-    map<string, Mensaje*> mensajes;
+    map<int, Mensaje*> mensajes;
 public:
     virtual DtConversacion getDataConversacion() = 0;
     virtual DtConversacion getDataConversacion(string telSesionAct) = 0;
 
-    virtual list<DtMensaje> buscarMensajes() = 0;
+    virtual list<DtMensaje*> buscarMensajes(string telSesion) = 0;
 
-    virtual DtInfoMensaje informacionMensaje(string idMensaje) = 0;
+    virtual list<DtVisto> informacionMensaje(string idMensaje) = 0;
 
     virtual void asignarAConversacion(Mensaje* m) = 0;
 

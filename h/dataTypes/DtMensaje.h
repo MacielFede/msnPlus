@@ -3,7 +3,6 @@
 
 #include <iostream>
 #include <string>
-#include "DtInfoMensaje.h"
 #include "DtVisto.h"
 #include "DtFecha.h"
 
@@ -11,24 +10,26 @@ using namespace std;
 
 class DtMensaje
 {
-private:
-    string idMensaje;
+protected:
+    int idMensaje;
     DtFecha fechaEnvio;
-    DtInfoMensaje *infoMensaje;
+    list<DtVisto> infoMensaje;
 
 public:
     // Constructor
-    DtMensaje(string idMensaje, DtFecha fechaEnvio);
+    DtMensaje(int idMensaje, DtFecha fechaEnvio, list<DtVisto> receptores);
+    DtMensaje();
 
     // Getters
-    string getIdMensaje();
+    bool usuarioEsReceptor(string telefonoSesion);
+    int getIdMensaje();
     DtFecha getFechaEnvio();
-    // DtInfoMensaje* getInfoMensaje();
+    list<DtVisto> getInfoMensaje();
+    virtual void imprimir() = 0;
 
     // Destructor
     ~DtMensaje();
 
-    // friend ostream &operator<<(ostream &o, DtMensaje &s);
 };
 
 #endif

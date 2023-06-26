@@ -70,3 +70,15 @@ void Usuario::archivarConversacion(string idConversacion) {
     this->conversaciones[idConversacion]->setActivaFalse(); //Como lo encontro, seteo en falso activa
   }
 }
+
+bool Usuario::existeConver(string idConver) {
+  return conversaciones.find(idConver) != conversaciones.end();
+}
+
+Conversacion* Usuario::getConversacion(string idConversacion) {
+  return conversaciones.find(idConversacion)->second;
+}
+
+string Usuario::getTelefono() {
+  return this->telefono;
+}

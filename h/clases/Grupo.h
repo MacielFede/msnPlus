@@ -9,16 +9,16 @@ class Grupo : public Conversacion
 private:
     string imagen;
     DtFecha fechaCreacion;
-    map<string, Participante *> Participantes;
+    map<string, Participante*> participantes;
 public:
     DtConversacion getDataConversacion();
 
-    list<DtMensaje> buscarMensajes();
+    list<DtMensaje*> buscarMensajes(string telSesion);
 
-    DtInfoMensaje informacionMensaje(string idMensaje);
+    list<DtVisto> informacionMensaje(string idMensaje);
 
     void asignarAConversacion(Mensaje* m);
-    
+
     Grupo(); // Lo dejo vacio porque no se bien como seria el caso de uso de crear un grupo y como se le irian pasando los parametros
 
     //No creo setters porque no deberiamos querer cambiar nada de los grupos
