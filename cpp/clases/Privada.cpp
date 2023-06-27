@@ -1,7 +1,11 @@
 #include "../../h/clases/Privada.h"
 #include "../../h/clases/Mensaje.h"
 
-Privada::Privada() {}
+Privada::Privada(Usuario * yo, Usuario * otro) {
+  // Inserto ambos participantes y listo
+  this->participantes.insert({yo->getTelefono(),yo});
+  this->participantes.insert({otro->getTelefono(),otro});
+}
 
 Privada::~Privada() {}
 

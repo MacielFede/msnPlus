@@ -5,7 +5,7 @@ Grupo::Grupo() {}
 
 Grupo::~Grupo() {}
 
-DtConversacion Grupo::getDataConversacion() {
+DtConversacion Grupo::getDataConversacion(string telSesionAct) {
   return DtConversacion(this->getIdConversacion(), this->getActiva(), "-");
 }
 

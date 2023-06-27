@@ -23,7 +23,6 @@ protected:
     string idConversacion;
     map<int, Mensaje*> mensajes;
 public:
-    virtual DtConversacion getDataConversacion() = 0;
     virtual DtConversacion getDataConversacion(string telSesionAct) = 0;
 
     virtual list<DtMensaje*> buscarMensajes(string telSesion) = 0;

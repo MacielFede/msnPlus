@@ -7,16 +7,16 @@
 class Privada : public Conversacion
 {
 private:
-    map<string, Usuario*> participantes;
+    map<string, Usuario *> participantes;
+
 public:
+    Privada(Usuario *yo, Usuario *otro); // Creo conversacion privada con los dos integrantes
     DtConversacion getDataConversacion(string telSesionAct);
     string getNomUsuario(string usuarioActivo);
-    list<DtMensaje*> buscarMensajes(string telSesion);
+    list<DtMensaje *> buscarMensajes(string telSesion);
+    void asignarAConversacion(Mensaje *m);
 
-    void asignarAConversacion(Mensaje* m);
-
-    Privada(); //No me acuerdo el caso de uso de crear una nueva conversacion
     ~Privada();
 };
 
-#endif 
+#endif
