@@ -121,8 +121,7 @@ int main()
                 cout << "3 - Archivar conversacion.\n";
                 cout << "4 - Agregar participantes a un grupo.\n";
                 cout << "5 - Ver fecha y hora actual.\n";
-                cout << "6 - Actualizar fecha y hora actual.\n";
-                cout << "7 - Volver al menu anterior.\n\n";
+                cout << "6 - Volver al menu anterior.\n\n";
                 cout << "Que desea hacer? > ";
                 fflush(stdin);
                 getline(cin, comando);
@@ -230,17 +229,13 @@ int main()
                     menuFechayHora();
                     break;
                 case '6':
-
-                    break;
-
-                case '7':
                     cout << "Volviendo al menu principal.\n";
                     break;
                 default:
                     cout << "Ingresaste un comando inexistente.\n";
                     break;
                 }
-            } while (comando[0] != '7');
+            } while (comando[0] != '6');
             break;
 #pragma endregion
 

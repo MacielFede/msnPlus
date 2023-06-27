@@ -11,7 +11,7 @@ private:
     DtFecha fechaCreacion;
     map<string, Participante*> participantes;
 public:
-    DtConversacion getDataConversacion();
+    DtConversacion getDataConversacion(string telSesionAct);
 
     list<DtMensaje*> buscarMensajes(string telSesion);
 
