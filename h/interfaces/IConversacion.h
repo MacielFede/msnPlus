@@ -20,6 +20,8 @@ private:
 public:
     virtual void archivarConversacion(string idConversacion) = 0;
 
+    virtual void imprimirConversaciones(bool activas) = 0;
+
     virtual list<DtConversacion> listarConversaciones() = 0;
 
     virtual list<DtMensaje*> selConversacion(string idConversacion) = 0;

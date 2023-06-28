@@ -45,6 +45,7 @@ public:
   void crearMensaje();
   bool existeConver(string idConver);
   bool existeMensajeYEsEmisor(int idMensaje);
+  void imprimirConversaciones(bool activas);
 
   // Destructor
   ~CConversacion();

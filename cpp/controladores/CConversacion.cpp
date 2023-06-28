@@ -33,6 +33,32 @@ CConversacion& CConversacion::operator=(const CConversacion&)
     return *this;
 }
 
+void CConversacion::imprimirConversaciones(bool activas) {
+    list<DtConversacion> convers = this->listarConversaciones();
+    list<DtConversacion>::iterator iter;
+    cout << "\tId de conversacion\tNombre de contacto\n";
+    if (activas) {
+        int cantArchiv = 0;
+        for (iter = convers.begin(); iter != convers.end(); ++iter) {
+            if (iter->getActiva())
+                cout << "\t" << iter->getIdConv() << "\t" << iter->getNomUsuario() << "\n";
+            else
+                cantArchiv++;
+        }
+        cout << "Archivadas: " << cantArchiv << endl;
+    }
+    else {
+        int cantActivas = 0;
+        for (iter = convers.begin(); iter != convers.end(); ++iter) {
+            if (!iter->getActiva())
+                cout << "\t" << iter->getIdConv() << "\t" << iter->getNomUsuario() << "\n";
+            else
+                cantActivas++;
+        }
+        cout << "Activas: " << cantActivas << endl;
+    }
+}
+
 void CConversacion::archivarConversacion(string idConversacion) {
     CAutenticacion& autenticador = CAutenticacion::getCAutenticacion();
     Usuario* sesion = autenticador.getSesionActiva();

@@ -141,7 +141,7 @@ int main()
                 if (comando[0] != '2')
                 {
                     // Si el usuario selecciono imprimir las conversaciones archivadas anteriormente (osea ya estan impresas todas las conversaciones) no imprimo de nuevo
-                    imprimirConversaciones(true);
+                    Cconv.imprimirConversaciones(true);
                 }
 
                 cout << "\nComandos:\n";
@@ -247,7 +247,7 @@ int main()
                     }
                     break;
                 case '2':
-                    imprimirConversaciones(false);
+                    Cconv.imprimirConversaciones(false);
                     break;
 
                 case '3':
@@ -388,7 +388,7 @@ int main()
         case '3':
 #pragma region EnviarMensaje
             // Muestro las conversaciones del usuario una vez sola
-            imprimirConversaciones(true);
+            Cconv.imprimirConversaciones(true);
 
             do
             {
@@ -417,7 +417,7 @@ int main()
                     }
                     break;
                 case '2':
-                    imprimirConversaciones(false); // Imprimo conversaciones archivadas
+                    Cconv.imprimirConversaciones(false); // Imprimo conversaciones archivadas
                     break;
                 case '3':
 
