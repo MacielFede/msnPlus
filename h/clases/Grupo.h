@@ -10,6 +10,7 @@ private:
     string imagen;
     DtFecha fechaCreacion;
     map<string, Participante*> participantes;
+    map<int, Mensaje*> mensajes;
 public:
     DtConversacion getDataConversacion(string telSesionAct);
 

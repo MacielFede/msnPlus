@@ -8,6 +8,7 @@ class Privada : public Conversacion
 {
 private:
     map<string, Usuario *> participantes;
+    map<int, Mensaje *> mensajes;
 
 public:
     Privada(Usuario *yo, Usuario *otro); // Creo conversacion privada con los dos integrantes
