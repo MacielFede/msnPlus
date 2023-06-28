@@ -59,7 +59,7 @@ void CAutenticacion::iniciarSesion(DtFecha nuevaFechaConexion)
 {
     try
     {
-        Usuario *nuevaSesionActiva = this->infoUsuario(this->numTel); // Busco usuario y lo traigo
+        Usuario *nuevaSesionActiva = this->infoUsuario(numFormat(this->numTel)); // Busco usuario y lo traigo
         nuevaSesionActiva->setFechaConexion(nuevaFechaConexion);      // Seteo nueva fecha
         this->memUsuario = nuevaSesionActiva;                         // Seteo sesion
         cout << "\n Sesion iniciada correctamente!";
@@ -91,10 +91,28 @@ void CAutenticacion::registrarUsuario(string nombre, string urlPerfil, string de
 {
     try
     {
-        Usuario *nuevoUsuario = new Usuario(this->numTel, nombre, urlPerfil, desc, fechaActual); // creo usuario
-        this->memColeccionUsuarios.insert({this->numTel, nuevoUsuario});                         // Inserto usuario
+        Usuario *nuevoUsuario = new Usuario(numFormat(this->numTel), nombre, urlPerfil, desc, fechaActual); // creo usuario
+        this->memColeccionUsuarios.insert({numFormat(this->numTel), nuevoUsuario});                         // Inserto usuario
         this->memUsuario = nuevoUsuario;                                                         // seteo sesion
         cout << "\n Usuario creado y sesion iniciada correctamente.\n";
+    }
+    catch (const std::exception &e)
+    {
+        std::cerr << e.what() << '\n';
+    }
+}
+
+Usuario* CAutenticacion::registrarJuegoDatosUsuario(string numero, string nombre, string urlPerfil, string desc, DtFecha fechaActual)
+{
+    numero = numFormat(numero);
+
+    try
+    {
+        Usuario *nuevoUsuario = new Usuario(numero, nombre, urlPerfil, desc, fechaActual); // creo usuario
+        this->memColeccionUsuarios.insert({numero, nuevoUsuario});                         // Inserto usuario
+        cout << "\n Usuario "<< nombre  <<" creado.\n";
+
+        return nuevoUsuario;
     }
     catch (const std::exception &e)
     {
@@ -147,4 +165,9 @@ DtUsuario CAutenticacion::cambiarNombre(string nom)
 {
     this->memUsuario->setDesc(nom);
     return this->memUsuario->getDataUsuario();
+}
+
+bool CAutenticacion::esUsuario(string cNumTel)
+{
+    return this->memColeccionUsuarios.count(cNumTel);
 }

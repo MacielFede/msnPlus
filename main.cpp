@@ -15,11 +15,38 @@ int main()
 {
     string comando, idConver, numeroTelefono, modificacionPerfil;
     int idMensaje;
-    Relojito& relojito = Relojito::getRelojito();
-    Fabrica& fabrica = Fabrica::getFabrica();
-    IConversacion& Cconv = fabrica.getCConv();
-    IAutenticacion& Caut = fabrica.getCAut();
-    //IContacto& Ccont = fabrica.getCCont();
+    map<string, Participante *> participantesNewGrupo;
+    Relojito &relojito = Relojito::getRelojito();
+    Fabrica &fabrica = Fabrica::getFabrica();
+    IConversacion &Cconv = fabrica.getCConv();
+    IAutenticacion &Caut = fabrica.getCAut();
+    IContacto &Ccont = fabrica.getCCont();
+
+#pragma region JuegoDeDatos
+
+    Usuario* u1 = Caut.registrarJuegoDatosUsuario("080 12 36 54", "Juan Pérez", "home/img/perfil/juan.png", "Amo usar esta app", relojito.getFechaActual());
+    Usuario* u2 = Caut.registrarJuegoDatosUsuario("080 76 54 32", "María Fernández", "home/img/perfil/maria.png", "Me encanta Prog. Avanzada", relojito.getFechaActual());
+    Usuario* u3 = Caut.registrarJuegoDatosUsuario("080 24 68 10", "Pablo Iglesias", "home/img/perfil/pablo.png", "Hola! Estoy aquí", relojito.getFechaActual());
+    Usuario* u4 = Caut.registrarJuegoDatosUsuario("080 66 67 77", "Sara Ruiz", "home/img/perfil/sara.png", "¡Estoy feliz!", relojito.getFechaActual());
+
+    u1 -> agregarContacto(u2);
+    u1 -> agregarContacto(u3);
+    u1 -> agregarContacto(u4);
+
+    u2 -> agregarContacto(u1);
+    u2 -> agregarContacto(u3);
+
+    u3 -> agregarContacto(u1);
+    u3 -> agregarContacto(u2);
+    u3 -> agregarContacto(u4);
+
+    u4 -> agregarContacto(u1);
+    u4 -> agregarContacto(u3);
+
+    /*
+        Faltan covers y mensajes
+    */
+#pragma endregion
 
     cout << "\nBienvenido a su mejor chat. Recuerde, para ejecutar los comandos debe ingresar siempre el numero del mismo.\n\n";
 
@@ -35,6 +62,7 @@ int main()
             cout << "\n Ingrese su numero de telefono, ya sea para iniciar sesion o bien registrarse.\n";
             fflush(stdin);
             getline(cin, numeroTelefono);
+            numeroTelefono = numFormat(numeroTelefono);
             bool existeUsuario = Caut.ingresarNumero(numeroTelefono);
             if (existeUsuario)
             {
@@ -242,7 +270,109 @@ int main()
         case '2':
 #pragma region Crear grupo
             // TODO: Crear grupo
+            /*
+            Mostrar contactos del usuario
+            */
+            
+            participantesNewGrupo.clear();
+            do
+            {
+                cout << "\nContactos del usuario no inculidos en el grupo:\n\n";
+                for (list<DtContacto>::iterator it = Ccont.listarContactos().begin(); it != Ccont.listarContactos().end(); ++it)
+                {
+                    if (!participantesNewGrupo.count(it->getNumTel()))
+                        cout << it->getNumTel() << " - " << it->getNombre() << "\n";
+                }
 
+                /*for (const auto &kv : participantesNewGrupo)
+                {
+                    std::cout << kv.first << " has value " << kv.second << std::endl;
+                }*/
+
+                for (const auto &[key, value] : participantesNewGrupo)
+                {
+                    cout << key << " - " << value->getUsuario()->getDataUsuario().getNombre() << "\n";
+                }
+
+                cout << "\nComandos:\n";
+                cout << "(Numero de contacto sin espacios) - Agrega o elimina el contacto del grupo.\n";
+                cout << "1 - Confirmar participantes.\n";
+                cout << "2 - Cancelar.\n";
+
+                fflush(stdin);
+                getline(cin, comando);
+
+                if (comando[0] == '1' && comando.length() == 1)
+                {//Confirmar
+                    if(participantesNewGrupo.size() > 0)
+                    {
+                    string nombreNewGrupo;
+                    string urlNewGrupo;
+
+                    cout << "Ingrese el nombre del nuevo grupo.\n";
+                    fflush(stdin);
+                    getline(cin, comando);
+
+                    nombreNewGrupo = comando;
+
+                    cout << "Ingrese la URL de la imagen del nuevo grupo.\n";
+                    fflush(stdin);
+                    getline(cin, comando);
+
+                    urlNewGrupo = comando;
+
+                    Grupo newGroup = {participantesNewGrupo, nombreNewGrupo, urlNewGrupo};
+                    
+                    for (const auto &[key, value] : participantesNewGrupo)
+                    {
+                        value->getUsuario()->agregarGrupo(&newGroup);
+                    }
+
+                    }
+                    else
+                    {
+                        cout << "Error, debe seleccionar al menos 1 partcipante en el grupo.\n";
+                        cout << "1 - Agregar mas participantes.\n";
+                        cout << "2 - Cancelar.\n";
+
+                        fflush(stdin);
+                        getline(cin, comando);
+                    }
+                }
+                else
+                {
+                    if (comando.length() == 9)
+                    {
+                        if (Caut.esUsuario(comando))
+                        {
+                            if (Ccont.esContacto(comando))
+                            {
+                                if (!participantesNewGrupo.count(comando))
+                                { // Agrega
+                                    Participante p = {Caut.infoUsuario(comando), relojito.getFechaActual(), false};
+                                    participantesNewGrupo.insert({comando, &p});
+                                }
+                                else
+                                { // Elimina
+                                    participantesNewGrupo.erase(comando);
+                                }
+                            }
+                            else
+                            {
+                                cout << "Error, no existe un contacto con el numero" << comando << ".\n";
+                            }
+                        }
+                        else
+                        {
+                            cout << "Error, no existe un usuario con el numero" << comando << ".\n";
+                        }
+                    }
+                    else
+                    {
+                        cout << "Error, el formato del numero ingresado no es valido.\n";
+                    }
+                }
+            } while (comando[0] != '2' && comando.length() == 1);
 #pragma endregion
             break;
 
@@ -253,12 +383,16 @@ int main()
             break;
 
         case '4':
+        {
 #pragma region VerContactos
             // TODO: Ver contactos
-
-            /*
-            Mostrar contactos del usuario
-            */
+                list<DtContacto> contacts = Ccont.listarContactos();
+                int contactsSize = contacts.size();
+                cout << "Contactos del usuario: (" << contactsSize << ")\n-------------------------------\n";
+                for (list<DtContacto>::iterator it = contacts.begin(); it != contacts.end(); ++it)
+                {
+                    cout << it->getNumTel() << " - " << it->getNombre() << "\n";
+                }
             do
             {
                 cout << "\nComandos:\n";
@@ -275,42 +409,43 @@ int main()
 
                     fflush(stdin);
                     getline(cin, newContactNum);
+                    newContactNum = numFormat(newContactNum);
 
-                    if (true /*Existe el contacto en el sistema*/)
+                    if (Caut.esUsuario(newContactNum))
                     {
-                        if (true /*!CContacto.esContacto(newContactNum)*/)
+                        if (!Ccont.esContacto(newContactNum))
                         {
-                            DtContacto newContactDt("a", "a", "a"); // CContacto getDt
+                            DtUsuario contactUDt = Caut.infoUsuario(newContactNum)->getDataUsuario();
 
                             cout << "Información del contacto a agregar:\n";
-                            cout << "Nombre:" << newContactDt.getNombre() << "\n";
-                            cout << "Número:" << newContactDt.getNumTel() << "\n";
-                            cout << "Imagen de perfil:" << newContactDt.getImagenPerfil() << "\n\n";
+                            cout << "Nombre:" << contactUDt.getNombre() << "\n";
+                            cout << "Número:" << contactUDt.getNumTel() << "\n";
+                            cout << "Imagen de perfil:" << contactUDt.getImagenPerfil() << "\n\n";
 
                             cout << "¿Desea agregarlo? S/N\n";
                             fflush(stdin);
-                            getline(cin, newContactNum);
+                            getline(cin, comando);
 
                             if (comando[0] == 'S' || comando[0] == 's')
                             {
-                                // CContacto.agregarContacto(newContactNum);
+                                Ccont.agregarContacto(newContactNum);
                                 cout << "Contacto agregado.\n";
                             }
                         }
                         else
                         {
-                            cout << "El usuario especificado ya es un contacto.\n";
+                            cout << "Error, el usuario especificado ya es un contacto.\n";
                         }
                     }
                     else
                     {
-                        cout << "No existe un usuario con el número especificado.\n";
+                        cout << "Error, no existe un usuario con el número especificado.\n";
                     }
                 }
             } while (comando[0] != '2');
-
+        }
 #pragma endregion
-            break;
+        break;
 
         case '5':
 #pragma region ModificarPerfil
