@@ -24,24 +24,24 @@ int main()
 
 #pragma region JuegoDeDatos
 
-    Usuario* u1 = Caut.registrarJuegoDatosUsuario("080 12 36 54", "Juan Pérez", "home/img/perfil/juan.png", "Amo usar esta app", relojito.getFechaActual());
-    Usuario* u2 = Caut.registrarJuegoDatosUsuario("080 76 54 32", "María Fernández", "home/img/perfil/maria.png", "Me encanta Prog. Avanzada", relojito.getFechaActual());
-    Usuario* u3 = Caut.registrarJuegoDatosUsuario("080 24 68 10", "Pablo Iglesias", "home/img/perfil/pablo.png", "Hola! Estoy aquí", relojito.getFechaActual());
-    Usuario* u4 = Caut.registrarJuegoDatosUsuario("080 66 67 77", "Sara Ruiz", "home/img/perfil/sara.png", "¡Estoy feliz!", relojito.getFechaActual());
+    Usuario *u1 = Caut.registrarJuegoDatosUsuario("080 12 36 54", "Juan Pérez", "home/img/perfil/juan.png", "Amo usar esta app", relojito.getFechaActual());
+    Usuario *u2 = Caut.registrarJuegoDatosUsuario("080 76 54 32", "María Fernández", "home/img/perfil/maria.png", "Me encanta Prog. Avanzada", relojito.getFechaActual());
+    Usuario *u3 = Caut.registrarJuegoDatosUsuario("080 24 68 10", "Pablo Iglesias", "home/img/perfil/pablo.png", "Hola! Estoy aquí", relojito.getFechaActual());
+    Usuario *u4 = Caut.registrarJuegoDatosUsuario("080 66 67 77", "Sara Ruiz", "home/img/perfil/sara.png", "¡Estoy feliz!", relojito.getFechaActual());
 
-    u1 -> agregarContacto(u2);
-    u1 -> agregarContacto(u3);
-    u1 -> agregarContacto(u4);
+    u1->agregarContacto(u2);
+    u1->agregarContacto(u3);
+    u1->agregarContacto(u4);
 
-    u2 -> agregarContacto(u1);
-    u2 -> agregarContacto(u3);
+    u2->agregarContacto(u1);
+    u2->agregarContacto(u3);
 
-    u3 -> agregarContacto(u1);
-    u3 -> agregarContacto(u2);
-    u3 -> agregarContacto(u4);
+    u3->agregarContacto(u1);
+    u3->agregarContacto(u2);
+    u3->agregarContacto(u4);
 
-    u4 -> agregarContacto(u1);
-    u4 -> agregarContacto(u3);
+    u4->agregarContacto(u1);
+    u4->agregarContacto(u3);
 
     /*
         Faltan covers y mensajes
@@ -282,7 +282,7 @@ int main()
             /*
             Mostrar contactos del usuario
             */
-            
+
             participantesNewGrupo.clear();
             do
             {
@@ -312,31 +312,30 @@ int main()
                 getline(cin, comando);
 
                 if (comando[0] == '1' && comando.length() == 1)
-                {//Confirmar
-                    if(participantesNewGrupo.size() > 0)
+                { // Confirmar
+                    if (participantesNewGrupo.size() > 0)
                     {
-                    string nombreNewGrupo;
-                    string urlNewGrupo;
+                        string nombreNewGrupo;
+                        string urlNewGrupo;
 
-                    cout << "Ingrese el nombre del nuevo grupo.\n";
-                    fflush(stdin);
-                    getline(cin, comando);
+                        cout << "Ingrese el nombre del nuevo grupo.\n";
+                        fflush(stdin);
+                        getline(cin, comando);
 
-                    nombreNewGrupo = comando;
+                        nombreNewGrupo = comando;
 
-                    cout << "Ingrese la URL de la imagen del nuevo grupo.\n";
-                    fflush(stdin);
-                    getline(cin, comando);
+                        cout << "Ingrese la URL de la imagen del nuevo grupo.\n";
+                        fflush(stdin);
+                        getline(cin, comando);
 
-                    urlNewGrupo = comando;
+                        urlNewGrupo = comando;
 
-                    Grupo newGroup = {participantesNewGrupo, nombreNewGrupo, urlNewGrupo};
-                    
-                    for (const auto &[key, value] : participantesNewGrupo)
-                    {
-                        value->getUsuario()->agregarGrupo(&newGroup);
-                    }
+                        Grupo newGroup = {participantesNewGrupo, nombreNewGrupo, urlNewGrupo};
 
+                        for (const auto &[key, value] : participantesNewGrupo)
+                        {
+                            value->getUsuario()->agregarGrupo(&newGroup);
+                        }
                     }
                     else
                     {
@@ -398,7 +397,7 @@ int main()
                 cout << "3 - Crear nueva conversacion (privada).\n";
                 cout << "4 - Enviar mensaje a la conversacion seleccionada.\n";
                 cout << "5 - Volver al menu principal.\n\n";
-                cout << "Que desea hacer? > ";
+                cout << "Que desea hacer? >";
                 fflush(stdin);
                 getline(cin, comando);
 
@@ -413,27 +412,45 @@ int main()
                     else
                     {
                         // Selecciono conversacion
-                        list<DtMensaje *> mensajes = Cconv.selConversacion(idConver);
+                        Cconv.selConversacion(idConver);
+                        cout << "\n Se ha seleccionado dicha conversacion\n";
                     }
                     break;
                 case '2':
                     Cconv.imprimirConversaciones(false); // Imprimo conversaciones archivadas
                     break;
                 case '3':
-
+                {
                     // Mostrar todos los contactos
+                    list<DtContacto> contacts = Ccont.listarContactos();
+                    int contactsSize = contacts.size();
+                    cout << "\nContactos del usuario: (" << contactsSize << ")\n-------------------------------\n";
+                    for (list<DtContacto>::iterator it = contacts.begin(); it != contacts.end(); ++it)
+                    {
+                        cout << it->getNumTel() << " - " << it->getNombre() << "\n";
+                    }
 
-
-                    cout << "Ingrese el numero de telefono del usuario con el que quiere iniciar una conversacion.\n> ";
-                    cout << "De lo contrario si no desea iniciar una conversacion, no ingrese nada.\n";
+                    cout << "\nIngrese el numero de telefono del usuario con el que quiere iniciar una conversacion.\n> ";
+                    cout << "\nDe lo contrario si no desea iniciar una conversacion, no ingrese nada.\n";
                     fflush(stdin);
                     getline(cin, numeroTelefono);
 
-                    if (!numeroTelefono.empty())
+                    if (!numeroTelefono.empty() && Ccont.esContacto(numeroTelefono) && !Cconv.existeConver(numeroTelefono))
                     {
-                        // Crear conversacion con este salame y dejarla como seleccionada en el controller
+                        Caut.getSesionActiva()->crearConversacion(numeroTelefono); // Crear conversacion con este salame
+                        Cconv.selConversacion(numeroTelefono);                     // y dejarla como seleccionada en el controller
+                        cout << "\nSe ha creado una conversacion con el contacto con numero de telefono " << numeroTelefono << " y se marco como seleccionada."  << endl;
                     }
-                    break;
+                    else if (!Ccont.esContacto(numeroTelefono))
+                    {
+                        cout << "\nEl numero de contacto ingresado no existe. Volviendo al menu...\n";
+                    }
+                    else if (Cconv.existeConver(numeroTelefono))
+                    {
+                        cout << "\n Ya tiene una conversacion con este usuario. Volviendo al menu...\n";
+                    }
+                }
+                break;
 
                 case '4':
                     // Enviar mensaje ctm
@@ -454,13 +471,13 @@ int main()
         {
 #pragma region VerContactos
             // TODO: Ver contactos
-                list<DtContacto> contacts = Ccont.listarContactos();
-                int contactsSize = contacts.size();
-                cout << "Contactos del usuario: (" << contactsSize << ")\n-------------------------------\n";
-                for (list<DtContacto>::iterator it = contacts.begin(); it != contacts.end(); ++it)
-                {
-                    cout << it->getNumTel() << " - " << it->getNombre() << "\n";
-                }
+            list<DtContacto> contacts = Ccont.listarContactos();
+            int contactsSize = contacts.size();
+            cout << "Contactos del usuario: (" << contactsSize << ")\n-------------------------------\n";
+            for (list<DtContacto>::iterator it = contacts.begin(); it != contacts.end(); ++it)
+            {
+                cout << it->getNumTel() << " - " << it->getNombre() << "\n";
+            }
             do
             {
                 cout << "\nComandos:\n";

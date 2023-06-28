@@ -10,6 +10,10 @@ Grupo::Grupo(map<string, Participante *> participantes, string nombre, string im
 }
 Grupo::~Grupo() {}
 
+bool Grupo::getActiva() {
+  return this->activa;
+}
+
 DtConversacion Grupo::getDataConversacion(string telSesionAct) {
   return DtConversacion(this->getIdConversacion(), this->getActiva(), "-");
 }

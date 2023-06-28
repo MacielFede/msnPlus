@@ -33,9 +33,10 @@ Conversacion *Usuario::crearConversacion(string cNumTel)
     // Verificar si se encontró el contacto
     if (it != contactos.end())
     {
-      contacto = it->second;                                         // Almacenar el puntero al contacto encontrado
-      Conversacion *nuevaConver = new Privada(contacto, yo);         // Crear conversacion
-      conversaciones.insert({contacto->getTelefono(), nuevaConver}); // Agregarla al map de conversaciones
+      contacto = it->second;                                               // Almacenar el puntero al contacto encontrado
+      Conversacion *nuevaConver = new Privada(contacto, yo);               // Crear conversacion
+      this->conversaciones.insert({contacto->getTelefono(), nuevaConver}); // Agregarla al map de conversaciones
+      contacto->conversaciones.insert({this->getTelefono(), nuevaConver}); // Agregarla al map del contacto
       cout << "Conversacion con " << contacto->getNombre() << " creada satisfactoriamente." << endl;
       return nuevaConver;
     }
@@ -78,7 +79,7 @@ void Usuario::setFechaConexion(DtFecha nuevaFechaConexion)
 
 void Usuario::agregarGrupo(Conversacion *grupo)
 { // Falta generador de ids de conversaciones
-    conversaciones.insert({"sdaasdasid", grupo});
+  conversaciones.insert({"sdaasdasid", grupo});
 }
 
 DtUsuario Usuario::setDesc(string desc)
@@ -87,7 +88,7 @@ DtUsuario Usuario::setDesc(string desc)
   return this->getDataUsuario();
 }
 
-DtUsuario Usuario::setImagen(string url) 
+DtUsuario Usuario::setImagen(string url)
 {
   this->imagenPerfil = url;
   return this->getDataUsuario();
@@ -105,7 +106,7 @@ map<string, DtContacto> Usuario::listarContactos()
 
   for (const auto &[key, value] : contactos)
   {
-    //cout << key << " - " << value->getUsuario()->getDataUsuario().getNombre() << "\n";
+    // cout << key << " - " << value->getUsuario()->getDataUsuario().getNombre() << "\n";
     DtUsuario u = value->getDataUsuario();
     DtContacto c = {u.getNumTel(), u.getNombre(), u.getImagenPerfil()};
     dtContacts.insert({key, c});

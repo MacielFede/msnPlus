@@ -10,6 +10,7 @@ private:
     string nombre;
     string imagen;
     DtFecha fechaCreacion;
+    bool activa;
 
     map<string, Participante*> participantes;
     map<int, Mensaje*> mensajes;
@@ -19,6 +20,8 @@ public:
     list<DtMensaje*> buscarMensajes(string telSesion);
 
     void asignarAConversacion(Mensaje* m);
+
+    bool getActiva();
 
     Grupo(); // Lo dejo vacio porque no se bien como seria el caso de uso de crear un grupo y como se le irian pasando los parametros
     Grupo(map<string, Participante *> participantes, string nombre, string imagen);

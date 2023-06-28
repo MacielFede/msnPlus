@@ -5,6 +5,11 @@ Privada::Privada(Usuario * yo, Usuario * otro) {
   // Inserto ambos participantes y listo
   this->participantes.insert({yo->getTelefono(),yo});
   this->participantes.insert({otro->getTelefono(),otro});
+  this->activa = true;
+}
+
+bool Privada::getActiva() {
+  return this->activa;
 }
 
 Privada::~Privada() {}
