@@ -23,3 +23,19 @@ list<DtVisto> Conversacion::informacionMensaje(int idMensaje) {
   mens->getDataMensaje()->imprimir();
   return mens->crearInfoMsg();
 }
+
+void Conversacion::eliminarMensaje(int idMensaje, string telSesion) {
+  map<int, Mensaje*>::iterator iterMsj = mensajes.find(idMensaje);
+  if (iterMsj != mensajes.end()) {
+    if (iterMsj->second->esReceptor(telSesion))
+      iterMsj->second->eliminarReceptor(telSesion);
+    else if (iterMsj->second->esReceptor(telSesion) && iterMsj->second->esEmisor(telSesion)) {
+      delete iterMsj->second;
+      mensajes.erase(idMensaje);
+    }
+    else
+      cout << "Ya eliminaste el mensaje indicado.\n";
+  }
+  else
+    cout << "El mensaje indicado no existe.\n";
+}

@@ -16,17 +16,17 @@ public:
     virtual bool ingresarNumero(string numTel) = 0;
 
     virtual void registrarUsuario(string nombre, string urlPerfil, string desc, DtFecha fechaActual) = 0;
-    virtual Usuario * registrarJuegoDatosUsuario(string numero, string nombre, string urlPerfil, string desc, DtFecha fechaActual) = 0;
+    virtual Usuario* registrarJuegoDatosUsuario(string numero, string nombre, string urlPerfil, string desc, DtFecha fechaActual) = 0;
 
     virtual void iniciarSesion(DtFecha nuevaFechaConexion) = 0;
 
     virtual void cerrarSesion(DtFecha nuevaFechaConexion) = 0;
 
-    virtual Usuario * getSesionActiva() = 0;
+    virtual Usuario* getSesionActiva() = 0;
 
     virtual DtUsuario getSesionActivaDt() = 0;
 
-    virtual Usuario * infoUsuario(string cNumTel) = 0;
+    virtual Usuario* infoUsuario(string cNumTel) = 0;
 
     virtual bool esUsuario(string cNumTel) = 0;
 
@@ -37,6 +37,8 @@ public:
     virtual DtUsuario cambiarNombre(string nom) = 0;
 
     virtual bool existeSesionActiva() = 0;
+
+    virtual ~IAutenticacion() = default;
 };
 
 #endif
