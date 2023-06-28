@@ -71,3 +71,52 @@ string numFormat(string val)
 
     return val;
 }
+
+void imprimirConversaciones(bool activas) {
+    IConversacion& Cconv = Fabrica::getFabrica().getCConv();
+    list<DtConversacion> convers = Cconv.listarConversaciones();
+    list<DtConversacion>::iterator iter;
+    cout << "\tId de conversacion\tNombre de contacto\n";
+    if (activas) {
+        int cantArchiv = 0;
+        for (iter = convers.begin(); iter != convers.end(); ++iter) {
+            if (iter->getActiva())
+                cout << "\t" << iter->getIdConv() << "\t" << iter->getNomUsuario() << "\n";
+            else
+                cantArchiv++;
+        }
+        cout << "Archivadas: " << cantArchiv << endl;
+    }
+    else {
+        int cantActivas = 0;
+        for (iter = convers.begin(); iter != convers.end(); ++iter) {
+            if (!iter->getActiva())
+                cout << "\t" << iter->getIdConv() << "\t" << iter->getNomUsuario() << "\n";
+            else
+                cantActivas++;
+        }
+        cout << "Activas: " << cantActivas << endl;
+    }
+}
+
+void getInt(string mensaje, int& numero) {
+    string input;
+    bool numConvertido = false;
+    cout << mensaje;
+    do {
+        try {
+            getline(cin, input);
+            stoi(input);
+            numero = stoi(input);
+            //stoi() agarra el string pasado y lo intenta convertir en un int. Si hay un error corta la funcion, 
+            // al estar dentro de un try-catch una vez lanzado el error se corta la ejecucion
+            if (numero < 1) { cout << "-Debes ingresar un numero valido-\n"; }
+            else { numConvertido = true; }
+        }
+        catch (const exception& error) {
+            cout << "\n-Debes ingresar un numero valido-\n";
+        }
+    } while (!numConvertido);
+    fflush(stdin);
+    numero = stoi(input);
+}

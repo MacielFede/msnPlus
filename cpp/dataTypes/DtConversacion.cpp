@@ -1,25 +1,25 @@
 #include "../../h/dataTypes/DtConversacion.h"
 
 // Constructor
-DtConversacion::DtConversacion(string idConv, bool activa, list<DtMensaje> mensajes) 
+DtConversacion::DtConversacion(string idConv, bool activa, string nomUser)
 {
     this->idConv = idConv;
     this->activa = activa;
-    this->mensajes = mensajes;
+    this->nomUsuario = nomUser;
 }
 
 // Getters
-bool DtConversacion::getActiva() 
+string DtConversacion::getNomUsuario()
+{
+    return this->nomUsuario;
+}
+
+bool DtConversacion::getActiva()
 {
     return this->activa;
 }
 
-list<DtMensaje> DtConversacion::getMensajes() 
-{
-    return this->mensajes;
-}
-
-string DtConversacion::getIdConv() 
+string DtConversacion::getIdConv()
 {
     return this->idConv;
 }

@@ -10,16 +10,16 @@ private:
     string nombre;
     string imagen;
     DtFecha fechaCreacion;
-    map<string, Participante *> participantes;
+
+    map<string, Participante*> participantes;
+
 public:
-    DtConversacion getDataConversacion();
+    DtConversacion getDataConversacion(string telSesionAct);
 
-    list<DtMensaje> buscarMensajes();
-
-    DtInfoMensaje informacionMensaje(string idMensaje);
+    list<DtMensaje*> buscarMensajes(string telSesion);
 
     void asignarAConversacion(Mensaje* m);
-    
+
     Grupo(); // Lo dejo vacio porque no se bien como seria el caso de uso de crear un grupo y como se le irian pasando los parametros
     Grupo(map<string, Participante *> participantes, string nombre, string imagen);
     //No creo setters porque no deberiamos querer cambiar nada de los grupos

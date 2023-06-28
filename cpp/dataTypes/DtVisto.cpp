@@ -1,11 +1,12 @@
 #include "../../h/dataTypes/DtVisto.h"
 
 // Constructor
-DtVisto::DtVisto(string numTel, string nombre, DtFecha fechaVisto)
+DtVisto::DtVisto(string numTel, string nombre, DtFecha fechaVisto, bool visto)
 {
     this->numTel = numTel;
     this->nombre = nombre;
     this->fechaVisto = fechaVisto;
+    this->visto = visto;
 }
 
 // Getters
@@ -22,6 +23,10 @@ string DtVisto::getNombre()
 DtFecha DtVisto::getFechaVisto()
 {
     return this->fechaVisto;
+}
+
+bool DtVisto::getVisto() {
+    return this->visto;
 }
 
 // Destructor

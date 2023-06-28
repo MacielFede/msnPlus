@@ -20,7 +20,7 @@ public:
 
     bool getAdminStatus();
 
-    Usuario* getUsuario();  
+    Usuario* getUsuario();
 };
 
 #endif

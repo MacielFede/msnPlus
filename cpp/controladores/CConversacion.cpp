@@ -39,11 +39,18 @@ void CConversacion::archivarConversacion(string idConversacion) {
     sesion->archivarConversacion(idConversacion);
 }
 
-list<DtConversacion> CConversacion::listarConversacionesActivas() {}
+list<DtConversacion> CConversacion::listarConversaciones() {
+    CAutenticacion autenticador = CAutenticacion::getCAutenticacion();
+    Usuario* sesion = autenticador.getSesionActiva();
+    return sesion->buscarConver();
+}
 
-list<DtConversacion> CConversacion::listarConvArch() {}
 
-list<DtMensaje> CConversacion::selConversacion(string idConversacion) {}
+list<DtMensaje*> CConversacion::selConversacion(string idConversacion) {
+    Usuario* sesion = CAutenticacion::getCAutenticacion().getSesionActiva();
+    this->memConversacion = sesion->getConversacion(idConversacion);
+    return memConversacion->buscarMensajes(sesion->getTelefono());
+}
 
 void CConversacion::eliminarMensaje(string idMensaje) {}
 
@@ -51,7 +58,10 @@ list<DtContacto> CConversacion::listarContactos() {}
 
 void CConversacion::seleccionarContacto(string cNumTel) {}
 
-DtInfoMensaje CConversacion::informacionMensaje(string idMensaje) {}
+list<DtVisto> CConversacion::informacionMensaje(int idMensaje) {
+    //Devuelve el info mensaje e imprime el mensaje (asume que el mensaje existe).
+    return memConversacion->informacionMensaje(idMensaje);
+}
 
 void CConversacion::enviarMensajeSimple(string msgTxt) {}
 
@@ -62,3 +72,22 @@ void CConversacion::enviarVideo(string url, string duracion) {}
 void CConversacion::enviarContacto(string cNumTel) {}
 
 void CConversacion::crearMensaje() {}
+
+bool CConversacion::existeConver(string idConver) {
+    Usuario* sesion = CAutenticacion::getCAutenticacion().getSesionActiva();
+    return sesion->existeConver(idConver);
+}
+
+bool CConversacion::existeMensajeYEsEmisor(int idMensaje) {
+    string telSesion = CAutenticacion::getCAutenticacion().getSesionActiva()->getTelefono();
+    list<DtMensaje*> mensajes = memConversacion->buscarMensajes(telSesion);
+    list<DtMensaje*>::iterator iter;
+    for (iter = mensajes.begin(); iter != mensajes.end(); ++iter) {
+        //(* ) esto se usa para desreferenciar, iter es un iterador a un puntero.
+        if ((*iter)->getIdMensaje() == idMensaje && (*iter)->usuarioEsEmisor(telSesion)) //Si estoy en el mensaje y el usuario es emisor -> true
+            return true;
+        else if ((*iter)->getIdMensaje() == idMensaje) //Si estoy en el mensaje pero el usuario no es emisor -> false
+            return false;
+    }
+    return false; //No existe el mensaje
+}

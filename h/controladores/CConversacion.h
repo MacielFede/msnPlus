@@ -10,7 +10,6 @@
 // Datatypes
 #include "../dataTypes/DtConversacion.h"
 #include "../dataTypes/DtContacto.h"
-#include "../dataTypes/DtInfoMensaje.h"
 
 // Interfaces
 #include "../interfaces/IConversacion.h"
@@ -33,18 +32,19 @@ public:
   static CConversacion& getCConversacion();
   // crea una instancia de CConversacion si es que no se creo y la retorna.
   void archivarConversacion(string idConversacion);
-  list<DtConversacion> listarConversacionesActivas();
-  list<DtConversacion> listarConvArch();
-  list<DtMensaje>  selConversacion(string idConversacion);
+  list<DtConversacion> listarConversaciones();
+  list<DtMensaje*>  selConversacion(string idConversacion);
   void eliminarMensaje(string idMensaje);
   list<DtContacto> listarContactos();
   void seleccionarContacto(string cNumTel);
-  DtInfoMensaje informacionMensaje(string idMensaje);
+  list<DtVisto> informacionMensaje(int idMensaje);
   void enviarMensajeSimple(string msgTxt);
   void enviarImg(string url, string formato, string size, string desc);
   void enviarVideo(string url, string duracion);
   void enviarContacto(string cNumTel);
   void crearMensaje();
+  bool existeConver(string idConver);
+  bool existeMensajeYEsEmisor(int idMensaje);
 
   // Destructor
   ~CConversacion();

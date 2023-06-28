@@ -4,6 +4,7 @@
 // C++ macros
 #include <string>
 #include <map>
+#include <list>
 
 /******** Dependencies **********/
 //  Datatypes
@@ -33,7 +34,7 @@ public:
     Usuario(string telefono, string nombre, string imagenPerfil, string descripcion, DtFecha fechaActual); // Constructor
     DtUsuario getDataUsuario();
     void archivarConversacion(string idConversacion);
-    map<string, DtConversacion> buscarConver();
+    list<DtConversacion> buscarConver();
     map<string, DtContacto> listarContactos();
     void agregarContacto(Usuario* c);
     Conversacion* crearConversacion(string cNumTel);
@@ -44,6 +45,9 @@ public:
     DtUsuario setNombre(string nom);
     DtUsuario setImagen(string url);
     DtUsuario setDesc(string desc);
+    string getNombre();
+    bool existeConver(string idConver);
+    string getTelefono();
 
     // destructor
     ~Usuario();

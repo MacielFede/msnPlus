@@ -16,7 +16,7 @@ ODIR = o
 CLASES_CLASSES = Contacto Conversacion Imagen Mensaje Relojito Texto Usuario Video Visto Grupo Privada Participante
 CLASES_CONTROLLERS = CAutenticacion CContacto CConversacion
 CLASES_FABRICA = Fabrica
-CLASES_DATATYPES = DtContacto DtConversacion DtFecha DtInfoMensaje DtMensaje DtUsuario DtVisto
+CLASES_DATATYPES = DtContacto DtConversacion DtFecha DtMensaje DtUsuario DtVisto DtVideo DtImagen DtTexto DtContactoMsj
 CLASES_INTERFACES = IAutenticacion IContacto IConversacion
 CLASES_UTILS = utils
 
