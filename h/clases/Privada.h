@@ -14,7 +14,7 @@ private:
 public:
     Privada(Usuario *yo, Usuario *otro); // Creo conversacion privada con los dos integrantes
     DtConversacion getDataConversacion(string telSesionAct);
-    string getNomUsuario(string usuarioActivo);
+    string getNomUsuario(string otroUsuario);
     list<DtMensaje *> buscarMensajes(string telSesion);
     void asignarAConversacion(Mensaje *m);
     bool getActiva();

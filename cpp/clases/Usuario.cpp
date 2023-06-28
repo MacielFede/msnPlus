@@ -61,7 +61,7 @@ list<DtConversacion> Usuario::buscarConver()
     if (Grupo *grupo = dynamic_cast<Grupo *>(iter->second))
       convers.push_back(iter->second->getDataConversacion("-"));
     else if (Privada *privada = dynamic_cast<Privada *>(iter->second))
-      convers.push_back(iter->second->getDataConversacion(this->getNombre()));
+      convers.push_back(iter->second->getDataConversacion(iter->first));
   }
   return convers;
 }

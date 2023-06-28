@@ -439,7 +439,7 @@ int main()
                     {
                         Caut.getSesionActiva()->crearConversacion(numeroTelefono); // Crear conversacion con este salame
                         Cconv.selConversacion(numeroTelefono);                     // y dejarla como seleccionada en el controller
-                        cout << "\nSe ha creado una conversacion con el contacto con numero de telefono " << numeroTelefono << " y se marco como seleccionada."  << endl;
+                        cout << "\nSe ha creado una conversacion con el contacto con numero de telefono " << numeroTelefono << " y se marco como seleccionada." << endl;
                     }
                     else if (!Ccont.esContacto(numeroTelefono))
                     {
@@ -454,7 +454,34 @@ int main()
 
                 case '4':
                     // Enviar mensaje ctm
+                    cout << "\nComandos:\n";
+                    cout << "1 - Enviar mensaje de texto.\n";
+                    cout << "2 - Enviar mensaje con imagen.\n";
+                    cout << "3 - Enviar mensaje con video.\n";
+                    cout << "4 - Enviar mensaje con contacto.\n";
+                    cout << "5 - Volver al menu anterior.\n\n";
+                    cout << "Que desea hacer? >";
+                    fflush(stdin);
+                    getline(cin, comando);
 
+                    switch (comando[0])
+                    {
+                    case '1': // Texto
+                        break;
+                    case '2': // Imagen
+                        break;
+                    case '3': // Video
+                        break;
+                    case '4': // Contacto
+                        break;
+                    case '5':
+                        cout << "\nVolviendo al menu anterior.\n";
+                        break;
+                    default:
+                        cout << "Ingresaste un comando inexistente.\n";
+                        break;
+                    }
+                    break;
                 case '5':
                     cout << "Volviendo al menu principal.\n";
                     break;
