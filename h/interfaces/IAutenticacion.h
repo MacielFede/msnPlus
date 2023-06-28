@@ -16,6 +16,7 @@ public:
     virtual bool ingresarNumero(string numTel) = 0;
 
     virtual void registrarUsuario(string nombre, string urlPerfil, string desc, DtFecha fechaActual) = 0;
+    virtual Usuario * registrarJuegoDatosUsuario(string numero, string nombre, string urlPerfil, string desc, DtFecha fechaActual) = 0;
 
     virtual void iniciarSesion(DtFecha nuevaFechaConexion) = 0;
 
@@ -26,6 +27,8 @@ public:
     virtual DtUsuario getSesionActivaDt() = 0;
 
     virtual Usuario * infoUsuario(string cNumTel) = 0;
+
+    virtual bool esUsuario(string cNumTel) = 0;
 
     virtual DtUsuario cambiarDescripcion(string des) = 0;
 

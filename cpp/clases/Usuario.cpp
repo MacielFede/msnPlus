@@ -76,13 +76,18 @@ void Usuario::setFechaConexion(DtFecha nuevaFechaConexion)
   this->ultimaConexion = nuevaFechaConexion;
 }
 
+void Usuario::agregarGrupo(Conversacion *grupo)
+{ // Falta generador de ids de conversaciones
+    conversaciones.insert({"sdaasdasid", grupo});
+}
+
 DtUsuario Usuario::setDesc(string desc)
 {
   this->descripcion = desc;
   return this->getDataUsuario();
 }
 
-DtUsuario Usuario::setImagen(string url)
+DtUsuario Usuario::setImagen(string url) 
 {
   this->imagenPerfil = url;
   return this->getDataUsuario();
@@ -92,6 +97,21 @@ DtUsuario Usuario::setNombre(string nom)
 {
   this->nombre = nom;
   return this->getDataUsuario();
+}
+
+map<string, DtContacto> Usuario::listarContactos()
+{
+  map<string, DtContacto> dtContacts;
+
+  for (const auto &[key, value] : contactos)
+  {
+    //cout << key << " - " << value->getUsuario()->getDataUsuario().getNombre() << "\n";
+    DtUsuario u = value->getDataUsuario();
+    DtContacto c = {u.getNumTel(), u.getNombre(), u.getImagenPerfil()};
+    dtContacts.insert({key, c});
+  }
+
+  return dtContacts;
 }
 
 DtUsuario Usuario::getDataUsuario()

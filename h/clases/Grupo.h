@@ -7,8 +7,10 @@
 class Grupo : public Conversacion
 {
 private:
+    string nombre;
     string imagen;
     DtFecha fechaCreacion;
+
     map<string, Participante*> participantes;
     map<int, Mensaje*> mensajes;
 public:
@@ -19,7 +21,7 @@ public:
     void asignarAConversacion(Mensaje* m);
 
     Grupo(); // Lo dejo vacio porque no se bien como seria el caso de uso de crear un grupo y como se le irian pasando los parametros
-
+    Grupo(map<string, Participante *> participantes, string nombre, string imagen);
     //No creo setters porque no deberiamos querer cambiar nada de los grupos
 
     string getImagen();

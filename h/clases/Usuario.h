@@ -12,10 +12,11 @@
 #include "../dataTypes/DtConversacion.h"
 #include "../dataTypes/DtContacto.h"
 // Classes
-// #include "Conversacion.h"
+#include "Conversacion.h"
+//#include "Grupo.h"
 using namespace std;
 
-class Conversacion;
+class Conversacion;//??
 
 class Usuario
 {
@@ -37,6 +38,7 @@ public:
     map<string, DtContacto> listarContactos();
     void agregarContacto(Usuario* c);
     Conversacion* crearConversacion(string cNumTel);
+    void agregarGrupo(Conversacion* grupo);
     void sincronizarConversacion(Conversacion* conver);
     void setFechaConexion(DtFecha nuevaFechaConexion);
     Conversacion* getConversacion(string idConversacion);

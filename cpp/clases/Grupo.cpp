@@ -1,8 +1,13 @@
 #include "../../h/clases/Grupo.h"
 #include "../../h/clases/Mensaje.h"
 
-Grupo::Grupo() {}
-
+Grupo::Grupo(){}
+Grupo::Grupo(map<string, Participante *> participantes, string nombre, string imagen)
+{
+    this->participantes = participantes;
+    this->nombre = nombre;
+    this->imagen = imagen;
+}
 Grupo::~Grupo() {}
 
 DtConversacion Grupo::getDataConversacion(string telSesionAct) {
