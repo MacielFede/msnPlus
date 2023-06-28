@@ -46,6 +46,7 @@ public:
 
     virtual bool existeMensajeYEsEmisor(int idMensaje) = 0;
 
+    virtual void imprimirConversaciones(bool activas) = 0;
 };
 
 #endif
