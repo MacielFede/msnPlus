@@ -52,7 +52,9 @@ list<DtMensaje*> CConversacion::selConversacion(string idConversacion) {
     return memConversacion->buscarMensajes(sesion->getTelefono());
 }
 
-void CConversacion::eliminarMensaje(string idMensaje) {}
+void CConversacion::eliminarMensaje(int idMensaje) {
+    this->memConversacion->eliminarMensaje(idMensaje, CAutenticacion::getCAutenticacion().getSesionActivaDt().getNumTel());
+}
 
 list<DtContacto> CConversacion::listarContactos() {}
 
@@ -78,15 +80,15 @@ bool CConversacion::existeConver(string idConver) {
     return sesion->existeConver(idConver);
 }
 
-bool CConversacion::existeMensajeYEsEmisor(int idMensaje) {
+bool CConversacion::existeMensajeYEsER(int idMensaje) {
     string telSesion = CAutenticacion::getCAutenticacion().getSesionActiva()->getTelefono();
     list<DtMensaje*> mensajes = memConversacion->buscarMensajes(telSesion);
     list<DtMensaje*>::iterator iter;
     for (iter = mensajes.begin(); iter != mensajes.end(); ++iter) {
         //(* ) esto se usa para desreferenciar, iter es un iterador a un puntero.
-        if ((*iter)->getIdMensaje() == idMensaje && (*iter)->usuarioEsEmisor(telSesion)) //Si estoy en el mensaje y el usuario es emisor -> true
+        if ((*iter)->getIdMensaje() == idMensaje && (*iter)->usuarioEsReceptor(telSesion) && (*iter)->usuarioEsEmisor(telSesion)) //Si estoy en el mensaje y el usuario es emisor -> true
             return true;
-        else if ((*iter)->getIdMensaje() == idMensaje) //Si estoy en el mensaje pero el usuario no es emisor -> false
+        else if ((*iter)->getIdMensaje() == idMensaje) //Si estoy en el mensaje pero el usuario no es emisor u receptor -> false 
             return false;
     }
     return false; //No existe el mensaje
