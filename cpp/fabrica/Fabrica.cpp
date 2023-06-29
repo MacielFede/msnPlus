@@ -51,3 +51,4 @@ CAutenticacion &Fabrica::getCAut()
 {
   return this->caut.getCAutenticacion();
 }
+string Fabrica::getUniqueId () { return ("unique_" + to_string(_id++)); };

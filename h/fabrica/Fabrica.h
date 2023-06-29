@@ -19,6 +19,7 @@ private:
   CConversacion cconver = CConversacion::getCConversacion();
   CContacto ccontact = CContacto::getCContacto();
   CAutenticacion caut = CAutenticacion::getCAutenticacion();
+  uint32_t _id;
 
 public:
   static Fabrica &getFabrica();
@@ -26,7 +27,7 @@ public:
   CConversacion &getCConv();
   CAutenticacion &getCAut();
   CContacto &getCCont();
-
+  string getUniqueId ();
   // Destructor
   ~Fabrica();
   void liberarInstancia();
