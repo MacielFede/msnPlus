@@ -39,14 +39,18 @@ public:
   list<DtConversacion> listarConversaciones();
   list<DtConversacion> listarGrupos();
   list<DtMensaje*>  selConversacion(string idConversacion);
+  list<DtMensaje *> selConversacion(string idConversacion, Usuario* from);
   void eliminarMensaje(int idMensaje);
   list<DtContacto> listarContactos();
   void seleccionarContacto(string cNumTel);
   list<DtVisto> informacionMensaje(int idMensaje);
   void enviarMensajeSimple(string msgTxt);
+  void enviarMensajeSimple(string msgTxt, Usuario* emisor);
   void enviarImg(string url, string formato, string size, string desc);
   void enviarVideo(string url, string duracion);
+  void enviarVideo(string url, string duracion, Usuario* emisor);
   void enviarContacto(string cNumTel);
+  void enviarContacto(string cNumTel, Usuario* emisor);
   void crearMensaje();
   bool existeConver(string idConver);
   bool existeMensajeYEsER(int idMensaje);

@@ -55,6 +55,51 @@ int main()
     Conversacion* CS2 = u1->crearConversacion(u2->getTelefono());
     Conversacion* CS3 = u3->crearConversacion(u4->getTelefono());
 
+    //m1
+    Cconv.selConversacion("Amigos", u4);
+    relojito.actualizarFecha(DtFecha(22,5,2023,18,04));
+    Cconv.enviarMensajeSimple("¡Miren que bueno este video!", u4);
+    Cconv.crearMensaje();
+
+    //m2
+    Cconv.selConversacion("Amigos", u4);
+    relojito.actualizarFecha(DtFecha(22,5,2023,18,05));
+    Cconv.enviarVideo("urlvid", "05 min", u4);
+    Cconv.crearMensaje();
+
+    //m3
+    Cconv.selConversacion("Amigos", u1);
+    relojito.actualizarFecha(DtFecha(22,5,2023,18,12));
+    Cconv.enviarMensajeSimple("¡Muy gracioso!", u1);
+    Cconv.crearMensaje();
+
+    //m4
+    Cconv.selConversacion("Amigos", u3);
+    relojito.actualizarFecha(DtFecha(22,5,2023,18,13));
+    Cconv.enviarMensajeSimple("¡Excelente!", u3);
+    Cconv.crearMensaje();
+
+    //m5
+    Cconv.selConversacion(u1->getTelefono(), u2);
+    relojito.actualizarFecha(DtFecha(23,5,2023,12,23));
+    Cconv.enviarMensajeSimple("Hola, me pasas el contacto de Sara que no lo tengo", u2);
+    Cconv.crearMensaje();
+    //m6
+    Cconv.selConversacion(u2->getTelefono(), u1);
+    relojito.actualizarFecha(DtFecha(23,5,2023,12,25));
+    Cconv.enviarContacto(numFormat("080 66 67 77"), u1);
+    Cconv.crearMensaje();
+    //m7
+    Cconv.selConversacion(u1->getTelefono(), u2);
+    relojito.actualizarFecha(DtFecha(23,5,2023,12,27));
+    Cconv.enviarMensajeSimple("Gracias", u2);
+    Cconv.crearMensaje();
+    //m8
+    Cconv.selConversacion(u3->getTelefono(), u4);
+    relojito.actualizarFecha(DtFecha(23,5,2023,18,30));
+    Cconv.enviarMensajeSimple(" Hola Pablo, cómo estas?", u4);
+    Cconv.crearMensaje();
+
 #pragma endregion
 
     cout << "\nBienvenido a su mejor chat. Recuerde, para ejecutar los comandos debe ingresar siempre el numero del mismo.\n\n";
