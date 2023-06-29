@@ -30,6 +30,8 @@ public:
 
     virtual list<DtMensaje*> selConversacion(string idConversacion) = 0;
 
+    virtual list<DtMensaje*> selConversacion(string idConversacion, Usuario* from) = 0;
+
     virtual void eliminarMensaje(int idMensaje) = 0;
 
     virtual list<DtContacto> listarContactos() = 0;
@@ -40,11 +42,17 @@ public:
 
     virtual void enviarMensajeSimple(string msgTxt) = 0;
 
+    virtual void enviarMensajeSimple(string msgTxt, Usuario* emisor) = 0;
+
     virtual void enviarImg(string url, string formato, string size, string desc) = 0;
 
     virtual void enviarVideo(string url, string duracion) = 0;
 
+    virtual void enviarVideo(string url, string duracion, Usuario* emisor) = 0;
+
     virtual void enviarContacto(string cNumTel) = 0;
+
+    virtual void enviarContacto(string cNumTel, Usuario* emisor) = 0;
 
     virtual void crearMensaje() = 0;
 
