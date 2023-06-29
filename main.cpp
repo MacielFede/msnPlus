@@ -52,7 +52,7 @@ int main()
 
     do
     {
-        // Actualicen la fecha bo
+        // Actualicen la fecha
         relojito.actualizarFecha();
 
 #pragma region AbrirApp
