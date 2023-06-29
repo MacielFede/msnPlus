@@ -72,7 +72,6 @@ string numFormat(string val)
     return val;
 }
 
-
 void getInt(string mensaje, int& numero) {
     string input;
     bool numConvertido = false;

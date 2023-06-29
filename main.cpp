@@ -138,6 +138,7 @@ int main()
 #pragma region MostrarConvers
             do
             {
+
                 if (comando[0] != '2')
                 {
                     // Si el usuario selecciono imprimir las conversaciones archivadas anteriormente (osea ya estan impresas todas las conversaciones) no imprimo de nuevo
