@@ -48,6 +48,8 @@ public:
 
     virtual bool existeMensajeYEsEmisor(int idMensaje) = 0;
 
+    virtual map<string, Usuario*> getIntegrantesConversacion() = 0;
+
 };
 
 #endif

@@ -50,6 +50,7 @@ public:
   bool existeConver(string idConver);
   bool existeMensajeYEsEmisor(int idMensaje);
   void imprimirConversaciones(bool activas);
+  map<string, Usuario*> getIntegrantesConversacion();
 
   // Destructor
   ~CConversacion();

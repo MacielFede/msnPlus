@@ -10,6 +10,11 @@ Privada::Privada(Usuario *yo, Usuario *otro)
   this->ultimoIdMensaje = 0;
 }
 
+map<string, Usuario *> Privada::getParticipantes()
+{
+  return this->participantes;
+}
+
 bool Privada::getActiva()
 {
   return this->activa;

@@ -1,9 +1,9 @@
 #include "../../h/controladores/CConversacion.h"
 
-CConversacion* CConversacion::instancia = nullptr;
+CConversacion *CConversacion::instancia = nullptr;
 // Le doy valor a la instancia como null para que solo la primera vez creemos la instancia
 
-CConversacion& CConversacion::getCConversacion()
+CConversacion &CConversacion::getCConversacion()
 {
     if (instancia == nullptr)
     {
@@ -28,18 +28,21 @@ void CConversacion::liberarInstancia()
     }
 }
 
-CConversacion& CConversacion::operator=(const CConversacion&)
+CConversacion &CConversacion::operator=(const CConversacion &)
 {
     return *this;
 }
 
-void CConversacion::imprimirConversaciones(bool activas) {
+void CConversacion::imprimirConversaciones(bool activas)
+{
     list<DtConversacion> convers = this->listarConversaciones();
     list<DtConversacion>::iterator iter;
     cout << "\tId de conversacion\tNombre de contacto\n";
-    if (activas) {
+    if (activas)
+    {
         int cantArchiv = 0;
-        for (iter = convers.begin(); iter != convers.end(); ++iter) {
+        for (iter = convers.begin(); iter != convers.end(); ++iter)
+        {
             if (iter->getActiva())
                 cout << "\t" << iter->getIdConv() << "\t" << iter->getNomUsuario() << "\n";
             else
@@ -47,9 +50,11 @@ void CConversacion::imprimirConversaciones(bool activas) {
         }
         cout << "Archivadas: " << cantArchiv << endl;
     }
-    else {
+    else
+    {
         int cantActivas = 0;
-        for (iter = convers.begin(); iter != convers.end(); ++iter) {
+        for (iter = convers.begin(); iter != convers.end(); ++iter)
+        {
             if (!iter->getActiva())
                 cout << "\t" << iter->getIdConv() << "\t" << iter->getNomUsuario() << "\n";
             else
@@ -59,21 +64,23 @@ void CConversacion::imprimirConversaciones(bool activas) {
     }
 }
 
-void CConversacion::archivarConversacion(string idConversacion) {
-    CAutenticacion& autenticador = CAutenticacion::getCAutenticacion();
-    Usuario* sesion = autenticador.getSesionActiva();
+void CConversacion::archivarConversacion(string idConversacion)
+{
+    CAutenticacion &autenticador = CAutenticacion::getCAutenticacion();
+    Usuario *sesion = autenticador.getSesionActiva();
     sesion->archivarConversacion(idConversacion);
 }
 
-list<DtConversacion> CConversacion::listarConversaciones() {
+list<DtConversacion> CConversacion::listarConversaciones()
+{
     CAutenticacion autenticador = CAutenticacion::getCAutenticacion();
-    Usuario* sesion = autenticador.getSesionActiva();
+    Usuario *sesion = autenticador.getSesionActiva();
     return sesion->buscarConver();
 }
 
-
-list<DtMensaje*> CConversacion::selConversacion(string idConversacion) {
-    Usuario* sesion = CAutenticacion::getCAutenticacion().getSesionActiva();
+list<DtMensaje *> CConversacion::selConversacion(string idConversacion)
+{
+    Usuario *sesion = CAutenticacion::getCAutenticacion().getSesionActiva();
     this->memConversacion = sesion->getConversacion(idConversacion);
     return memConversacion->buscarMensajes(sesion->getTelefono());
 }
@@ -84,9 +91,25 @@ list<DtContacto> CConversacion::listarContactos() {}
 
 void CConversacion::seleccionarContacto(string cNumTel) {}
 
-list<DtVisto> CConversacion::informacionMensaje(int idMensaje) {
-    //Devuelve el info mensaje e imprime el mensaje (asume que el mensaje existe).
+list<DtVisto> CConversacion::informacionMensaje(int idMensaje)
+{
+    // Devuelve el info mensaje e imprime el mensaje (asume que el mensaje existe).
     return memConversacion->informacionMensaje(idMensaje);
+}
+
+map<string, Usuario *> CConversacion::getIntegrantesConversacion()
+{
+    if (Grupo *grupo = dynamic_cast<Grupo *>(this->memConversacion))
+    {
+        // Crear map de integrantes
+        return grupo->getParticipantes();
+    }
+
+    else if (Privada *privada = dynamic_cast<Privada *>(this->memConversacion))
+    {
+        // Crear map de integrantes
+        return privada->getParticipantes();
+    }
 }
 
 void CConversacion::enviarMensajeSimple(string msgTxt) {}
@@ -99,21 +122,24 @@ void CConversacion::enviarContacto(string cNumTel) {}
 
 void CConversacion::crearMensaje() {}
 
-bool CConversacion::existeConver(string idConver) {
-    Usuario* sesion = CAutenticacion::getCAutenticacion().getSesionActiva();
+bool CConversacion::existeConver(string idConver)
+{
+    Usuario *sesion = CAutenticacion::getCAutenticacion().getSesionActiva();
     return sesion->existeConver(idConver);
 }
 
-bool CConversacion::existeMensajeYEsEmisor(int idMensaje) {
+bool CConversacion::existeMensajeYEsEmisor(int idMensaje)
+{
     string telSesion = CAutenticacion::getCAutenticacion().getSesionActiva()->getTelefono();
-    list<DtMensaje*> mensajes = memConversacion->buscarMensajes(telSesion);
-    list<DtMensaje*>::iterator iter;
-    for (iter = mensajes.begin(); iter != mensajes.end(); ++iter) {
+    list<DtMensaje *> mensajes = memConversacion->buscarMensajes(telSesion);
+    list<DtMensaje *>::iterator iter;
+    for (iter = mensajes.begin(); iter != mensajes.end(); ++iter)
+    {
         //(* ) esto se usa para desreferenciar, iter es un iterador a un puntero.
-        if ((*iter)->getIdMensaje() == idMensaje && (*iter)->usuarioEsEmisor(telSesion)) //Si estoy en el mensaje y el usuario es emisor -> true
+        if ((*iter)->getIdMensaje() == idMensaje && (*iter)->usuarioEsEmisor(telSesion)) // Si estoy en el mensaje y el usuario es emisor -> true
             return true;
-        else if ((*iter)->getIdMensaje() == idMensaje) //Si estoy en el mensaje pero el usuario no es emisor -> false
+        else if ((*iter)->getIdMensaje() == idMensaje) // Si estoy en el mensaje pero el usuario no es emisor -> false
             return false;
     }
-    return false; //No existe el mensaje
+    return false; // No existe el mensaje
 }
