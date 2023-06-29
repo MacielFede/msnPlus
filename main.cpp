@@ -466,8 +466,14 @@ int main()
 
                     switch (comando[0])
                     {
-                    case '1': // Texto
-                        break;
+                    case '1':
+                    { // Texto
+                        string mensajeTexto;
+                        cout << "\nIngrese el texto que quiere enviar.\n";
+                        fflush(stdin);
+                        getline(cin, mensajeTexto);
+                    }
+                    break;
                     case '2': // Imagen
                         break;
                     case '3': // Video

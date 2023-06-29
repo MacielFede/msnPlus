@@ -1,6 +1,11 @@
 #include "../../h/clases/Visto.h"
 #include "../../h/clases/Relojito.h"
 
+Visto::Visto(Usuario* recep) {
+  this->receptor = recep;
+  this->visto = false;
+}
+
 Visto::~Visto() {}
 
 void Visto::setVisto() {

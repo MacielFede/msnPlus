@@ -5,6 +5,10 @@
 // Clases
 #include "../clases/Conversacion.h"
 #include "../clases/Mensaje.h"
+#include "../clases/Texto.h"
+#include "../clases/Video.h"
+#include "../clases/Contacto.h"
+#include "../clases/Imagen.h"
 #include "../clases/Privada.h"
 #include "../clases/Grupo.h"
 // Datatypes
