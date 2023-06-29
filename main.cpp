@@ -299,7 +299,7 @@ int main()
                             {
                                 Grupo *conv = dynamic_cast<Grupo *>(Caut.getSesionActiva()->getConversacion(convSeleccionada.getIdConv()));
 
-                                map<string, DtContacto> participantesGrupo = conv->getParticipantes();
+                                map<string, DtContacto> participantesGrupo = conv->getDtContactoParticipantes();
 
                                 cout << "\nContactos inculidos en el grupo:\n\n";
 

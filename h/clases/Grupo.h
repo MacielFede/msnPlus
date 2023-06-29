@@ -31,8 +31,9 @@ public:
 
     void addParticipante(Participante * p);
 
-    map<string, DtContacto> getParticipantes();
-
+    map<string, Usuario*> getParticipantes();
+    map<string, DtContacto> getDtContactoParticipantes();
+    
     bool esAdmin(string val);
     ~Grupo();
 };

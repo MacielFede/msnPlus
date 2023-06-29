@@ -45,7 +45,7 @@ void Grupo::addParticipante(Participante *p)
 
 void Grupo::asignarAConversacion(Mensaje* m) {}
 
-map<string, DtContacto> Grupo::getParticipantes()
+map<string, DtContacto> Grupo::getDtContactoParticipantes()
 {
     map<string, DtContacto> vals;
 
