@@ -54,9 +54,6 @@ public:
 
     virtual map<string, Usuario*> getIntegrantesConversacion() = 0;
 
-    virtual void imprimirConversaciones(bool activas) = 0;
-
-
     virtual ~IConversacion() = default;
 };
 
