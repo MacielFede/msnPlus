@@ -19,3 +19,8 @@ DtFecha Participante::getFechaIngreso()
 {
     return this->fechaIngreso;
 }
+
+bool Participante::getAdminStatus()
+{
+    return this->administrador;
+}

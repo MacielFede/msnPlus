@@ -22,6 +22,7 @@ protected:
     bool activa;
     string idConversacion;
     map<int, Mensaje*> mensajes;
+    bool privada;
 public:
     virtual DtConversacion getDataConversacion(string telSesionAct) = 0;
 

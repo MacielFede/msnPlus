@@ -76,9 +76,9 @@ void Usuario::setFechaConexion(DtFecha nuevaFechaConexion)
   this->ultimaConexion = nuevaFechaConexion;
 }
 
-void Usuario::agregarGrupo(Conversacion* grupo)
-{ // Falta generador de ids de conversaciones
-  conversaciones.insert({ "sdaasdasid", grupo });
+void Usuario::agregarGrupo(string id, Conversacion *grupo)
+{
+    conversaciones.insert({id, grupo});
 }
 
 DtUsuario Usuario::setDesc(string desc)
