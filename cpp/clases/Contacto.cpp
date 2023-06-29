@@ -5,7 +5,7 @@ Contacto::Contacto(map<string, Usuario *> receptores, DtFecha fechaEnv, Usuario 
   this->contacto = contact;
   this->emisor = emisor;
   this->fechaEnvio = fechaEnv;
-  // this->id = ++ultimoId;
+  this->id = ultimoId;
 
   // Utilizar un iterador para recorrer el map de usuarios
   for (auto it = receptores.begin(); it != receptores.end(); ++it)

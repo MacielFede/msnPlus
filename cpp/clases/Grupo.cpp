@@ -7,6 +7,7 @@ Grupo::Grupo(map<string, Participante *> participantes, string nombre, string im
     this->participantes = participantes;
     this->nombre = nombre;
     this->imagen = imagen;
+    this->ultimoIdMensaje = 0;
 }
 Grupo::~Grupo() {}
 

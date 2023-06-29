@@ -19,6 +19,7 @@ using namespace std;
 class Conversacion
 {
 protected:
+    int ultimoIdMensaje;
     bool activa;
     string idConversacion;
     map<int, Mensaje*> mensajes;
@@ -34,6 +35,8 @@ public:
     void setActivaFalse();
 
     void eliminarMensaje(string idMensaje);
+
+    int getUltimoIdMensaje();
 
     bool getActiva();
 

@@ -7,6 +7,7 @@ Privada::Privada(Usuario *yo, Usuario *otro)
   this->participantes.insert({yo->getTelefono(), yo});
   this->participantes.insert({otro->getTelefono(), otro});
   this->activa = true;
+  this->ultimoIdMensaje = 0;
 }
 
 bool Privada::getActiva()

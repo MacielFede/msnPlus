@@ -1,5 +1,7 @@
 #include "../../h/clases/Mensaje.h"
 
+Mensaje::Mensaje() {}
+
 Mensaje::~Mensaje() {}
 
 list<DtVisto> Mensaje::crearInfoMsg() {

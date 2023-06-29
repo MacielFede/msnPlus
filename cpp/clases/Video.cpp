@@ -7,7 +7,7 @@ Video::Video(map<string, Usuario *> receptores, DtFecha fechaEnv, Usuario *emiso
   this->url = URL;
   this->emisor = emisor;
   this->fechaEnvio = fechaEnv;
-  // this->id = ++ultimoId;
+  this->id = ultimoId;
 
   // Utilizar un iterador para recorrer el map de usuarios
   for (auto it = receptores.begin(); it != receptores.end(); ++it)

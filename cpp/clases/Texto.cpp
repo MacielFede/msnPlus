@@ -5,7 +5,7 @@ Texto::Texto(string text, map<string, Usuario *> receptores, DtFecha fechaEnv, U
   this->texto = text;
   this->fechaEnvio = fechaEnv;
   this->emisor = emisor;
-  // this->id = ++ultimoId;
+  this->id = ultimoId;
 
   // Utilizar un iterador para recorrer el map de usuarios
   for (auto it = receptores.begin(); it != receptores.end(); ++it)
