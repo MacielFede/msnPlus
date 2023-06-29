@@ -2,7 +2,7 @@
 
 Mensaje::Mensaje() {}
 
-Mensaje::~Mensaje() {}
+//Mensaje::~Mensaje() {} Si no comento esto tira error....
 
 list<DtVisto> Mensaje::crearInfoMsg() {
   map<string, Visto*>::iterator iter;

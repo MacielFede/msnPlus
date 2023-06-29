@@ -470,7 +470,7 @@ int main()
                       
                         for (const auto &[key, value] : participantesNewGrupo)
                         {
-                            value->getUsuario()->agregarGrupo(&newGroup);
+                            value->getUsuario()->agregarGrupo(fabrica.getUniqueId(), newGroup);
                         }
                     }
                     else

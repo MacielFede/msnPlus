@@ -200,29 +200,3 @@ bool CConversacion::existeMensajeYEsER(int idMensaje) {
     }
     return false; // No existe el mensaje
 }
-
-void CConversacion::imprimirConversaciones(bool activas) {
-    list<DtConversacion> convers = listarConversaciones();
-    list<DtConversacion>::iterator iter;
-    cout << "\tId de conversacion\tNombre de contacto\n";
-    if (activas) {
-        int cantArchiv = 0;
-        for (iter = convers.begin(); iter != convers.end(); ++iter) {
-            if (iter->getActiva())
-                cout << "\t" << iter->getIdConv() << "\t" << iter->getNomUsuario() << "\n";
-            else
-                cantArchiv++;
-        }
-        cout << "Archivadas: " << cantArchiv << endl;
-    }
-    else {
-        int cantActivas = 0;
-        for (iter = convers.begin(); iter != convers.end(); ++iter) {
-            if (!iter->getActiva())
-                cout << "\t" << iter->getIdConv() << "\t" << iter->getNomUsuario() << "\n";
-            else
-                cantActivas++;
-        }
-        cout << "Activas: " << cantActivas << endl;
-    }
-}

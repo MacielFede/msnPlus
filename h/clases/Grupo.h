@@ -20,14 +20,13 @@ public:
 
     list<DtMensaje*> buscarMensajes(string telSesion);
 
-    map<string, Usuario *> getParticipantes();
-
     void asignarAConversacion(Mensaje* m);
 
     bool getActiva();
 
     Grupo(); // Lo dejo vacio porque no se bien como seria el caso de uso de crear un grupo y como se le irian pasando los parametros
     Grupo(string id, map<string, Participante *> participantes, string nombre, string imagen);
+    Grupo(map<string, Participante *> participantes, string nombre, string imagen);
     //No creo setters porque no deberiamos querer cambiar nada de los grupos
 
     string getImagen();
