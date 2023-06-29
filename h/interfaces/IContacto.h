@@ -23,6 +23,7 @@ public:
     virtual bool esContacto(string cNumTel) = 0;
 
     virtual DtContacto numToContacto(string cNumTel) = 0;
+    virtual ~IContacto() = default;
 };
 
 #endif

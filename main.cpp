@@ -15,12 +15,12 @@ int main()
 {
     string comando, idConver, numeroTelefono, modificacionPerfil;
     int idMensaje;
-    map<string, Participante *> participantesNewGrupo;
-    Relojito &relojito = Relojito::getRelojito();
-    Fabrica &fabrica = Fabrica::getFabrica();
-    IConversacion &Cconv = fabrica.getCConv();
-    IAutenticacion &Caut = fabrica.getCAut();
-    IContacto &Ccont = fabrica.getCCont();
+    map<string, Participante*> participantesNewGrupo;
+    Relojito& relojito = Relojito::getRelojito();
+    Fabrica& fabrica = Fabrica::getFabrica();
+    IConversacion& Cconv = fabrica.getCConv();
+    IAutenticacion& Caut = fabrica.getCAut();
+    IContacto& Ccont = fabrica.getCCont();
 
 #pragma region JuegoDeDatos
 
@@ -29,19 +29,19 @@ int main()
     Usuario* u3 = Caut.registrarJuegoDatosUsuario("080 24 68 10", "Pablo Iglesias", "home/img/perfil/pablo.png", "Hola! Estoy aquí", relojito.getFechaActual());
     Usuario* u4 = Caut.registrarJuegoDatosUsuario("080 66 67 77", "Sara Ruiz", "home/img/perfil/sara.png", "¡Estoy feliz!", relojito.getFechaActual());
 
-    u1 -> agregarContacto(u2);
-    u1 -> agregarContacto(u3);
-    u1 -> agregarContacto(u4);
+    u1->agregarContacto(u2);
+    u1->agregarContacto(u3);
+    u1->agregarContacto(u4);
 
-    u2 -> agregarContacto(u1);
-    u2 -> agregarContacto(u3);
+    u2->agregarContacto(u1);
+    u2->agregarContacto(u3);
 
-    u3 -> agregarContacto(u1);
-    u3 -> agregarContacto(u2);
-    u3 -> agregarContacto(u4);
+    u3->agregarContacto(u1);
+    u3->agregarContacto(u2);
+    u3->agregarContacto(u4);
 
-    u4 -> agregarContacto(u1);
-    u4 -> agregarContacto(u3);
+    u4->agregarContacto(u1);
+    u4->agregarContacto(u3);
 
     /*
         Faltan covers y mensajes
@@ -196,7 +196,7 @@ int main()
                             {
                             case '1':
                                 getInt("Ingrese el numero identificador del mensaje enviado que quiere ver.\n> ", idMensaje);
-                                if (!Cconv.existeMensajeYEsEmisor(idMensaje))
+                                if (!Cconv.existeMensajeYEsER(idMensaje))
                                     cout << "No existe el mensaje indicado o tu no eres el emisor.\n";
                                 else {
                                     list<DtVisto> infoMensaje = Cconv.informacionMensaje(idMensaje);
@@ -212,6 +212,8 @@ int main()
                                 }
                                 break;
                             case '2':
+                                getInt("Ingrese el numero identificador del mensaje que quiere eliminar.\n> ", idMensaje);
+                                Cconv.eliminarMensaje(idMensaje);
                                 break;
                             case '3':
                                 relojito.getFechaActual().imprimirFechayHora();
@@ -273,7 +275,7 @@ int main()
             /*
             Mostrar contactos del usuario
             */
-            
+
             participantesNewGrupo.clear();
             do
             {
@@ -289,7 +291,7 @@ int main()
                     std::cout << kv.first << " has value " << kv.second << std::endl;
                 }*/
 
-                for (const auto &[key, value] : participantesNewGrupo)
+                for (const auto& [key, value] : participantesNewGrupo)
                 {
                     cout << key << " - " << value->getUsuario()->getDataUsuario().getNombre() << "\n";
                 }
@@ -304,29 +306,29 @@ int main()
 
                 if (comando[0] == '1' && comando.length() == 1)
                 {//Confirmar
-                    if(participantesNewGrupo.size() > 0)
+                    if (participantesNewGrupo.size() > 0)
                     {
-                    string nombreNewGrupo;
-                    string urlNewGrupo;
+                        string nombreNewGrupo;
+                        string urlNewGrupo;
 
-                    cout << "Ingrese el nombre del nuevo grupo.\n";
-                    fflush(stdin);
-                    getline(cin, comando);
+                        cout << "Ingrese el nombre del nuevo grupo.\n";
+                        fflush(stdin);
+                        getline(cin, comando);
 
-                    nombreNewGrupo = comando;
+                        nombreNewGrupo = comando;
 
-                    cout << "Ingrese la URL de la imagen del nuevo grupo.\n";
-                    fflush(stdin);
-                    getline(cin, comando);
+                        cout << "Ingrese la URL de la imagen del nuevo grupo.\n";
+                        fflush(stdin);
+                        getline(cin, comando);
 
-                    urlNewGrupo = comando;
+                        urlNewGrupo = comando;
 
-                    Grupo newGroup = {participantesNewGrupo, nombreNewGrupo, urlNewGrupo};
-                    
-                    for (const auto &[key, value] : participantesNewGrupo)
-                    {
-                        value->getUsuario()->agregarGrupo(&newGroup);
-                    }
+                        Grupo newGroup = { participantesNewGrupo, nombreNewGrupo, urlNewGrupo };
+
+                        for (const auto& [key, value] : participantesNewGrupo)
+                        {
+                            value->getUsuario()->agregarGrupo(&newGroup);
+                        }
 
                     }
                     else
@@ -349,8 +351,8 @@ int main()
                             {
                                 if (!participantesNewGrupo.count(comando))
                                 { // Agrega
-                                    Participante p = {Caut.infoUsuario(comando), relojito.getFechaActual(), false};
-                                    participantesNewGrupo.insert({comando, &p});
+                                    Participante p = { Caut.infoUsuario(comando), relojito.getFechaActual(), false };
+                                    participantesNewGrupo.insert({ comando, &p });
                                 }
                                 else
                                 { // Elimina
@@ -386,13 +388,13 @@ int main()
         {
 #pragma region VerContactos
             // TODO: Ver contactos
-                list<DtContacto> contacts = Ccont.listarContactos();
-                int contactsSize = contacts.size();
-                cout << "Contactos del usuario: (" << contactsSize << ")\n-------------------------------\n";
-                for (list<DtContacto>::iterator it = contacts.begin(); it != contacts.end(); ++it)
-                {
-                    cout << it->getNumTel() << " - " << it->getNombre() << "\n";
-                }
+            list<DtContacto> contacts = Ccont.listarContactos();
+            int contactsSize = contacts.size();
+            cout << "Contactos del usuario: (" << contactsSize << ")\n-------------------------------\n";
+            for (list<DtContacto>::iterator it = contacts.begin(); it != contacts.end(); ++it)
+            {
+                cout << it->getNumTel() << " - " << it->getNombre() << "\n";
+            }
             do
             {
                 cout << "\nComandos:\n";

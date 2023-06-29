@@ -34,7 +34,7 @@ public:
   void archivarConversacion(string idConversacion);
   list<DtConversacion> listarConversaciones();
   list<DtMensaje*>  selConversacion(string idConversacion);
-  void eliminarMensaje(string idMensaje);
+  void eliminarMensaje(int idMensaje);
   list<DtContacto> listarContactos();
   void seleccionarContacto(string cNumTel);
   list<DtVisto> informacionMensaje(int idMensaje);
@@ -44,7 +44,7 @@ public:
   void enviarContacto(string cNumTel);
   void crearMensaje();
   bool existeConver(string idConver);
-  bool existeMensajeYEsEmisor(int idMensaje);
+  bool existeMensajeYEsER(int idMensaje);
   void imprimirConversaciones(bool activas);
   // Destructor
   ~CConversacion();

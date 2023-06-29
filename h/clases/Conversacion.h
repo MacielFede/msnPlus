@@ -33,7 +33,7 @@ public:
 
     void setActivaFalse();
 
-    void eliminarMensaje(string idMensaje);
+    void eliminarMensaje(int idMensaje, string telSesion);
 
     bool getActiva();
 
