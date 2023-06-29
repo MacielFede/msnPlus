@@ -28,7 +28,7 @@ public:
 
     virtual list<DtMensaje*> selConversacion(string idConversacion) = 0;
 
-    virtual void eliminarMensaje(string idMensaje) = 0;
+    virtual void eliminarMensaje(int idMensaje) = 0;
 
     virtual list<DtContacto> listarContactos() = 0;
 
@@ -48,12 +48,14 @@ public:
 
     virtual bool existeConver(string idConver) = 0;
 
-    virtual bool existeMensajeYEsEmisor(int idMensaje) = 0;
+    virtual bool existeMensajeYEsER(int idMensaje) = 0;
 
     virtual map<string, Usuario*> getIntegrantesConversacion() = 0;
 
     virtual void imprimirConversaciones(bool activas) = 0;
 
+
+    virtual ~IConversacion() = default;
 };
 
 #endif

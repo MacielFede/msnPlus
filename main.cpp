@@ -15,12 +15,12 @@ int main()
 {
     string comando, idConver, numeroTelefono, modificacionPerfil;
     int idMensaje;
-    map<string, Participante *> participantesNewGrupo;
-    Relojito &relojito = Relojito::getRelojito();
-    Fabrica &fabrica = Fabrica::getFabrica();
-    IConversacion &Cconv = fabrica.getCConv();
-    IAutenticacion &Caut = fabrica.getCAut();
-    IContacto &Ccont = fabrica.getCCont();
+    map<string, Participante*> participantesNewGrupo;
+    Relojito& relojito = Relojito::getRelojito();
+    Fabrica& fabrica = Fabrica::getFabrica();
+    IConversacion& Cconv = fabrica.getCConv();
+    IAutenticacion& Caut = fabrica.getCAut();
+    IContacto& Ccont = fabrica.getCCont();
 
 #pragma region JuegoDeDatos
 
@@ -203,7 +203,7 @@ int main()
                             {
                             case '1':
                                 getInt("Ingrese el numero identificador del mensaje enviado que quiere ver.\n> ", idMensaje);
-                                if (!Cconv.existeMensajeYEsEmisor(idMensaje))
+                                if (!Cconv.existeMensajeYEsER(idMensaje))
                                     cout << "No existe el mensaje indicado o tu no eres el emisor.\n";
                                 else
                                 {
@@ -222,6 +222,8 @@ int main()
                                 }
                                 break;
                             case '2':
+                                getInt("Ingrese el numero identificador del mensaje que quiere eliminar.\n> ", idMensaje);
+                                Cconv.eliminarMensaje(idMensaje);
                                 break;
                             case '3':
                                 relojito.getFechaActual().imprimirFechayHora();
@@ -299,7 +301,7 @@ int main()
                     std::cout << kv.first << " has value " << kv.second << std::endl;
                 }*/
 
-                for (const auto &[key, value] : participantesNewGrupo)
+                for (const auto& [key, value] : participantesNewGrupo)
                 {
                     cout << key << " - " << value->getUsuario()->getDataUsuario().getNombre() << "\n";
                 }
@@ -330,8 +332,13 @@ int main()
                         getline(cin, comando);
 
                         urlNewGrupo = comando;
+                      
+                        Grupo newGroup = { participantesNewGrupo, nombreNewGrupo, urlNewGrupo };
 
-                        Grupo newGroup = {participantesNewGrupo, nombreNewGrupo, urlNewGrupo};
+                        for (const auto& [key, value] : participantesNewGrupo)
+                        {
+                            value->getUsuario()->agregarGrupo(&newGroup);
+                        }
 
                         for (const auto &[key, value] : participantesNewGrupo)
                         {
@@ -358,8 +365,8 @@ int main()
                             {
                                 if (!participantesNewGrupo.count(comando))
                                 { // Agrega
-                                    Participante p = {Caut.infoUsuario(comando), relojito.getFechaActual(), false};
-                                    participantesNewGrupo.insert({comando, &p});
+                                    Participante p = { Caut.infoUsuario(comando), relojito.getFechaActual(), false };
+                                    participantesNewGrupo.insert({ comando, &p });
                                 }
                                 else
                                 { // Elimina

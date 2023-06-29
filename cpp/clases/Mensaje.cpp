@@ -33,6 +33,11 @@ bool Mensaje::esEmisor(string telefonoSesion) {
   return this->emisor->getTelefono() == telefonoSesion;
 }
 
+
 int Mensaje::getIdMensaje() {
-  this->id;
+  return this->id;
+ }
+
+void Mensaje::eliminarReceptor(string telUser) {
+  this->receptores.erase(telUser);
 }
