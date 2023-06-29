@@ -1,5 +1,8 @@
 #include "../../h/clases/Mensaje.h"
 
+Mensaje::Mensaje() {}
+
+Mensaje::~Mensaje() {}
 
 list<DtVisto> Mensaje::crearInfoMsg() {
   map<string, Visto*>::iterator iter;
@@ -29,6 +32,11 @@ void Mensaje::setVisto(string telefonoSesion) {
 bool Mensaje::esEmisor(string telefonoSesion) {
   return this->emisor->getTelefono() == telefonoSesion;
 }
+
+
+int Mensaje::getIdMensaje() {
+  return this->id;
+ }
 
 void Mensaje::eliminarReceptor(string telUser) {
   this->receptores.erase(telUser);

@@ -8,6 +8,10 @@ void Conversacion::setActivaFalse() {
     this->activa = false;
 }
 
+int Conversacion::getUltimoIdMensaje() {
+  return ++this->ultimoIdMensaje;
+}
+
 string Conversacion::getIdConversacion() {
   return this->idConversacion;
 }

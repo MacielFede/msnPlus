@@ -33,6 +33,7 @@ private:
 public:
     Usuario(string telefono, string nombre, string imagenPerfil, string descripcion, DtFecha fechaActual); // Constructor
     DtUsuario getDataUsuario();
+    DtUsuario getContacto(string cNumTel);
     void archivarConversacion(string idConversacion);
     list<DtConversacion> buscarConver();
     map<string, DtContacto> listarContactos();

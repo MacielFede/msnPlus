@@ -18,7 +18,11 @@ class IConversacion
 private:
 
 public:
+    virtual Conversacion * getConversacionActiva() = 0;
+
     virtual void archivarConversacion(string idConversacion) = 0;
+
+    virtual void imprimirConversaciones(bool activas) = 0;
 
     virtual list<DtConversacion> listarConversaciones() = 0;
 
@@ -48,7 +52,10 @@ public:
 
     virtual bool existeMensajeYEsER(int idMensaje) = 0;
 
+    virtual map<string, Usuario*> getIntegrantesConversacion() = 0;
+
     virtual void imprimirConversaciones(bool activas) = 0;
+
 
     virtual ~IConversacion() = default;
 };

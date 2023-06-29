@@ -5,6 +5,10 @@
 // Clases
 #include "../clases/Conversacion.h"
 #include "../clases/Mensaje.h"
+#include "../clases/Texto.h"
+#include "../clases/Video.h"
+#include "../clases/Contacto.h"
+#include "../clases/Imagen.h"
 #include "../clases/Privada.h"
 #include "../clases/Grupo.h"
 // Datatypes
@@ -47,6 +51,9 @@ public:
   bool existeConver(string idConver);
   bool existeMensajeYEsER(int idMensaje);
   void imprimirConversaciones(bool activas);
+  map<string, Usuario*> getIntegrantesConversacion();
+  Conversacion * getConversacionActiva();
+
   // Destructor
   ~CConversacion();
   void liberarInstancia();

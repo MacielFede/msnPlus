@@ -8,13 +8,23 @@ class Privada : public Conversacion
 {
 private:
     map<string, Usuario *> participantes;
+    map<int, Mensaje *> mensajes;
+    bool activa;
 
 public:
-    Privada(Usuario *yo, Usuario *otro); // Creo conversacion privada con los dos integrantes
+    Privada(Usuario *yo, Usuario *otro); // Creo conversacion privada con los dos integrantes\
+
+    map<string, Usuario *> getParticipantes();
+
     DtConversacion getDataConversacion(string telSesionAct);
-    string getNomUsuario(string usuarioActivo);
+
+    string getNomUsuario(string otroUsuario);
+
     list<DtMensaje *> buscarMensajes(string telSesion);
+
     void asignarAConversacion(Mensaje *m);
+
+    bool getActiva();
 
     ~Privada();
 };

@@ -1,6 +1,7 @@
 #include "../../h/clases/Grupo.h"
 #include "../../h/clases/Mensaje.h"
 
+
 Grupo::Grupo(){}
 Grupo::Grupo(string id, map<string, Participante *> participantes, string nombre, string imagen)
 {
@@ -16,19 +17,51 @@ Grupo::Grupo(string id, map<string, Participante *> participantes, string nombre
       value->getUsuario()->agregarGrupo(nombre, this); //pdria ser id
     }
 }
-Grupo::~Grupo() {}
+Grupo::Grupo(map<string, Participante *> participantes, string nombre, string imagen)
+{
+  this->participantes = participantes;
+  this->nombre = nombre;
+  this->imagen = imagen;
+  this->ultimoIdMensaje = 0;
+}
+
+map<string, Usuario *> Grupo::getParticipantes()
+{
+  map<string, Usuario *> usuarios;
+
+  // Utilizar un iterador para recorrer el map de participantes
+  for (auto it = this->participantes.begin(); it != this->participantes.end(); ++it)
+  {
+    // Saco participante
+    Participante *participante = it->second;
+    Usuario *usuario = participante->getUsuario();
+
+    // Agrego al map
+    usuarios.insert({usuario->getTelefono(), usuario});
+  }
+
+  return usuarios;
+}
 
 DtConversacion Grupo::getDataConversacion(string telSesionAct) {
   return DtConversacion(this->getIdConversacion(), this->getActiva(), "-", false);
 }
 
-list<DtMensaje*> Grupo::buscarMensajes(string telSesion) {
-  list<DtMensaje*> msj;
-  map<int, Mensaje*>::iterator iter;
-  for (iter = this->mensajes.begin(); iter != this->mensajes.end(); ++iter) {
-    //Si el usuario no esta entre los receptores o entro al grupo despues de que se envio el mensaje no mando el Dt
-    if (iter->second->esReceptor(telSesion) && iter->second->getFechaEnvio().esMayor(this->participantes.find(telSesion)->second->getFechaIngreso())) {
-      //Seteo el visto si es que nu fue visto
+bool Grupo::getActiva()
+{
+  return this->activa;
+}
+
+list<DtMensaje *> Grupo::buscarMensajes(string telSesion)
+{
+  list<DtMensaje *> msj;
+  map<int, Mensaje *>::iterator iter;
+  for (iter = this->mensajes.begin(); iter != this->mensajes.end(); ++iter)
+  {
+    // Si el usuario no esta entre los receptores o entro al grupo despues de que se envio el mensaje no mando el Dt
+    if (iter->second->esReceptor(telSesion) && iter->second->getFechaEnvio().esMayor(this->participantes.find(telSesion)->second->getFechaIngreso()))
+    {
+      // Seteo el visto si es que nu fue visto
       if (!iter->second->fueVisto(telSesion))
         iter->second->setVisto(telSesion);
       msj.push_back(iter->second->getDataMensaje());
@@ -37,13 +70,12 @@ list<DtMensaje*> Grupo::buscarMensajes(string telSesion) {
   return msj;
 }
 
+
 void Grupo::addParticipante(Participante *p)
 {
   participantes.insert({p->getUsuario()->getTelefono(), p});
   p->getUsuario()->agregarGrupo(nombre, this);//idunica en vez de nombre
 }
-
-void Grupo::asignarAConversacion(Mensaje* m) {}
 
 map<string, DtContacto> Grupo::getDtContactoParticipantes()
 {
@@ -64,4 +96,9 @@ bool Grupo::esAdmin(string val)
         return false;
 
     return participantes.at(val)->getAdminStatus();
+}
+
+void Grupo::asignarAConversacion(Mensaje *m) {
+  this->mensajes.insert({m->getIdMensaje(),m});
+
 }
