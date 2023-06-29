@@ -24,10 +24,10 @@ int main()
 
 #pragma region JuegoDeDatos
 
-    Usuario* u1 = Caut.registrarJuegoDatosUsuario("080 12 36 54", "Juan Pérez", "home/img/perfil/juan.png", "Amo usar esta app", relojito.getFechaActual());
-    Usuario* u2 = Caut.registrarJuegoDatosUsuario("080 76 54 32", "María Fernández", "home/img/perfil/maria.png", "Me encanta Prog. Avanzada", relojito.getFechaActual());
-    Usuario* u3 = Caut.registrarJuegoDatosUsuario("080 24 68 10", "Pablo Iglesias", "home/img/perfil/pablo.png", "Hola! Estoy aquí", relojito.getFechaActual());
-    Usuario* u4 = Caut.registrarJuegoDatosUsuario("080 66 67 77", "Sara Ruiz", "home/img/perfil/sara.png", "¡Estoy feliz!", relojito.getFechaActual());
+    Usuario *u1 = Caut.registrarJuegoDatosUsuario("080 12 36 54", "Juan Pérez", "home/img/perfil/juan.png", "Amo usar esta app", relojito.getFechaActual());
+    Usuario *u2 = Caut.registrarJuegoDatosUsuario("080 76 54 32", "María Fernández", "home/img/perfil/maria.png", "Me encanta Prog. Avanzada", relojito.getFechaActual());
+    Usuario *u3 = Caut.registrarJuegoDatosUsuario("080 24 68 10", "Pablo Iglesias", "home/img/perfil/pablo.png", "Hola! Estoy aquí", relojito.getFechaActual());
+    Usuario *u4 = Caut.registrarJuegoDatosUsuario("080 66 67 77", "Sara Ruiz", "home/img/perfil/sara.png", "¡Estoy feliz!", relojito.getFechaActual());
 
     u1->agregarContacto(u2);
     u1->agregarContacto(u3);
@@ -138,8 +138,10 @@ int main()
 #pragma region MostrarConvers
             do
             {
-                if (comando[0] != '2') {
-                    //Si el usuario selecciono imprimir las conversaciones archivadas anteriormente (osea ya estan impresas todas las conversaciones) no imprimo de nuevo
+
+                if (comando[0] != '2')
+                {
+                    // Si el usuario selecciono imprimir las conversaciones archivadas anteriormente (osea ya estan impresas todas las conversaciones) no imprimo de nuevo
                     Cconv.imprimirConversaciones(true);
                 }
 
@@ -162,19 +164,24 @@ int main()
                     getline(cin, idConver);
                     if (!Cconv.existeConver(idConver))
                         cout << "No existe la conversacion indicada.\n";
-                    else {
-                        do {
+                    else
+                    {
+                        do
+                        {
 
-                            list<DtMensaje*> mensajes = Cconv.selConversacion(idConver);
-                            list<DtMensaje*>::iterator iter;
+                            list<DtMensaje *> mensajes = Cconv.selConversacion(idConver);
+                            list<DtMensaje *>::iterator iter;
                             cout << "\nLos mensajes enviados comienzan con \'<\' y los recibidos comienzan con \'>\'.\n";
-                            for (iter = mensajes.begin(); iter != mensajes.end(); ++iter) {
+                            for (iter = mensajes.begin(); iter != mensajes.end(); ++iter)
+                            {
                                 //(* ) esto se usa para desreferenciar, iter es un iterador a un puntero.
-                                if ((*iter)->usuarioEsEmisor(Caut.getSesionActivaDt().getNumTel())) {
+                                if ((*iter)->usuarioEsEmisor(Caut.getSesionActivaDt().getNumTel()))
+                                {
                                     cout << "< ";
                                     (*iter)->imprimir();
                                 }
-                                else {
+                                else
+                                {
                                     cout << "> ";
                                     (*iter)->imprimir();
                                 }
@@ -198,12 +205,15 @@ int main()
                                 getInt("Ingrese el numero identificador del mensaje enviado que quiere ver.\n> ", idMensaje);
                                 if (!Cconv.existeMensajeYEsER(idMensaje))
                                     cout << "No existe el mensaje indicado o tu no eres el emisor.\n";
-                                else {
+                                else
+                                {
                                     list<DtVisto> infoMensaje = Cconv.informacionMensaje(idMensaje);
                                     list<DtVisto>::iterator iter;
                                     cout << "\tVisto por\tEl dia\n";
-                                    for (iter = infoMensaje.begin(); iter != infoMensaje.end(); ++iter) {
-                                        if (iter->getVisto()) {
+                                    for (iter = infoMensaje.begin(); iter != infoMensaje.end(); ++iter)
+                                    {
+                                        if (iter->getVisto())
+                                        {
                                             cout << "\t" << iter->getNombre() << " - " << iter->getNumTel() << "\t";
                                             iter->getFechaVisto().imprimirFechayHora();
                                             cout << endl;
@@ -305,7 +315,7 @@ int main()
                 getline(cin, comando);
 
                 if (comando[0] == '1' && comando.length() == 1)
-                {//Confirmar
+                { // Confirmar
                     if (participantesNewGrupo.size() > 0)
                     {
                         string nombreNewGrupo;
@@ -322,7 +332,7 @@ int main()
                         getline(cin, comando);
 
                         urlNewGrupo = comando;
-
+                      
                         Grupo newGroup = { participantesNewGrupo, nombreNewGrupo, urlNewGrupo };
 
                         for (const auto& [key, value] : participantesNewGrupo)
@@ -330,6 +340,10 @@ int main()
                             value->getUsuario()->agregarGrupo(&newGroup);
                         }
 
+                        for (const auto &[key, value] : participantesNewGrupo)
+                        {
+                            value->getUsuario()->agregarGrupo(&newGroup);
+                        }
                     }
                     else
                     {
@@ -380,7 +394,227 @@ int main()
 
         case '3':
 #pragma region EnviarMensaje
-            // TODO: Enviar mensaje
+            // Muestro las conversaciones del usuario una vez sola
+            Cconv.imprimirConversaciones(true);
+
+            do
+            {
+                cout << "\nComandos:\n";
+                cout << "1 - Seleccionar conversacion.\n";
+                cout << "2 - Ver conversaciones archivadas.\n";
+                cout << "3 - Crear nueva conversacion (privada).\n";
+                cout << "4 - Enviar mensaje a la conversacion seleccionada.\n";
+                cout << "5 - Volver al menu principal.\n\n";
+                cout << "Que desea hacer? >";
+                fflush(stdin);
+                getline(cin, comando);
+
+                switch (comando[0])
+                {
+                case '1':
+                    cout << "Ingrese el id de la conversacion que quiere seleccionar, si es un grupo sera el nombre, si es privada sera el numero de telefono.\n> ";
+                    fflush(stdin);
+                    getline(cin, idConver);
+                    if (!Cconv.existeConver(idConver))
+                        cout << "No existe la conversacion indicada.\n";
+                    else
+                    {
+                        // Selecciono conversacion
+                        Cconv.selConversacion(idConver);
+                        cout << "\n Se ha seleccionado dicha conversacion\n";
+                    }
+                    break;
+                case '2':
+                    Cconv.imprimirConversaciones(false); // Imprimo conversaciones archivadas
+                    break;
+                case '3':
+                {
+                    // Mostrar todos los contactos
+                    list<DtContacto> contacts = Ccont.listarContactos();
+                    int contactsSize = contacts.size();
+                    cout << "\nContactos del usuario: (" << contactsSize << ")\n-------------------------------\n";
+                    for (list<DtContacto>::iterator it = contacts.begin(); it != contacts.end(); ++it)
+                    {
+                        cout << it->getNumTel() << " - " << it->getNombre() << "\n";
+                    }
+
+                    cout << "\nIngrese el numero de telefono del usuario con el que quiere iniciar una conversacion.\n> ";
+                    cout << "\nDe lo contrario si no desea iniciar una conversacion, no ingrese nada.\n";
+                    fflush(stdin);
+                    getline(cin, numeroTelefono);
+
+                    if (!numeroTelefono.empty() && Ccont.esContacto(numeroTelefono) && !Cconv.existeConver(numeroTelefono))
+                    {
+                        Caut.getSesionActiva()->crearConversacion(numeroTelefono); // Crear conversacion con este salame
+                        Cconv.selConversacion(numeroTelefono);                     // y dejarla como seleccionada en el controller
+                        cout << "\nSe ha creado una conversacion con el contacto con numero de telefono " << numeroTelefono << " y se marco como seleccionada." << endl;
+                    }
+                    else if (!Ccont.esContacto(numeroTelefono))
+                    {
+                        cout << "\nEl numero de contacto ingresado no existe. Volviendo al menu...\n";
+                    }
+                    else if (Cconv.existeConver(numeroTelefono))
+                    {
+                        cout << "\n Ya tiene una conversacion con este usuario. Volviendo al menu...\n";
+                    }
+                }
+                break;
+
+                case '4':
+                    // Enviar mensaje ctm
+                    cout << "\nComandos:\n";
+                    cout << "1 - Enviar mensaje de texto.\n";
+                    cout << "2 - Enviar mensaje con imagen.\n";
+                    cout << "3 - Enviar mensaje con video.\n";
+                    cout << "4 - Enviar mensaje con contacto.\n";
+                    cout << "5 - Volver al menu anterior.\n\n";
+                    cout << "Que desea hacer? >";
+                    fflush(stdin);
+                    getline(cin, comando);
+
+                    switch (comando[0])
+                    {
+                    case '1':
+                    { // Texto
+                        string mensajeTexto;
+                        cout << "\nIngrese el texto que quiere enviar.\n";
+                        fflush(stdin);
+                        getline(cin, mensajeTexto);
+                        Cconv.enviarMensajeSimple(mensajeTexto);
+                        // Prompt
+                        cout << "\nDesea enviar el mensaje? [S] o [N]\n";
+                        fflush(stdin);
+                        getline(cin, comando);
+                        if (comando[0] == 'S' || comando[0] == 's')
+                        {
+                            Cconv.crearMensaje();
+                        }
+                        else
+                        {
+                            cout << "\n El mensaje no fue enviado.\n";
+                        }
+                    }
+                    break;
+                    case '2':
+                    { // Imagen
+                        string url, formato, tamano, descripcion;
+                        // Url
+                        cout << "\nIngrese la url de la imagen.\n";
+                        fflush(stdin);
+                        getline(cin, url);
+                        // Formato
+                        cout << "\nIngrese el formato de la imagen.\n";
+                        fflush(stdin);
+                        getline(cin, formato);
+                        // Tamano
+                        cout << "\nIngrese el tamaño de la imagen.\n";
+                        fflush(stdin);
+                        getline(cin, tamano);
+                        // Descripcion
+                        cout << "\nIngrese una descripcion para la imagen (opcional).\n";
+                        fflush(stdin);
+                        getline(cin, descripcion);
+                        // Creo mensaje y lo guardo en memoria
+                        Cconv.enviarImg(url, formato, tamano, descripcion);
+                        // Prompt
+                        cout << "\nDesea enviar el mensaje? [S] o [N]\n";
+                        fflush(stdin);
+                        getline(cin, comando);
+                        if (comando[0] == 'S' || comando[0] == 's')
+                        {
+                            Cconv.crearMensaje();
+                        }
+                        else
+                        {
+                            cout << "\n El mensaje no fue enviado.\n";
+                        }
+                    }
+                    break;
+                    case '3':
+                    { // Video
+                        string url, duracion;
+                        // Url
+                        cout << "\nIngrese la url del video.\n";
+                        fflush(stdin);
+                        getline(cin, url);
+                        // Duracion
+                        cout << "\nIngrese la duracion del video.\n";
+                        fflush(stdin);
+                        getline(cin, duracion);
+                        // Creo mensaje y lo guardo en memoria
+                        Cconv.enviarVideo(url, duracion);
+                        // Prompt
+                        cout << "\nDesea enviar el mensaje? [S] o [N]\n";
+                        fflush(stdin);
+                        getline(cin, comando);
+                        if (comando[0] == 'S' || comando[0] == 's')
+                        {
+                            Cconv.crearMensaje();
+                        }
+                        else
+                        {
+                            cout << "\n El mensaje no fue enviado.\n";
+                        }
+                    }
+
+                    break;
+                    case '4':
+                    { // Contacto
+                      // Mostrar todos los contactos
+                        list<DtContacto> contacts = Ccont.listarContactos();
+                        int contactsSize = contacts.size();
+                        cout << "\nContactos del usuario: (" << contactsSize << ")\n-------------------------------\n";
+                        for (list<DtContacto>::iterator it = contacts.begin(); it != contacts.end(); ++it)
+                        {
+                            cout << it->getNumTel() << " - " << it->getNombre() << "\n";
+                        }
+
+                        string numeroContacto;
+                        // Numero de contacto
+                        cout << "\nIngrese el numero del contacto que desea enviar.\n";
+                        fflush(stdin);
+                        getline(cin, numeroContacto);
+                        // Si el numero ingresado es contacto del usuario
+                        if (Ccont.esContacto(numeroContacto))
+                        {
+                            // Creo mensaje y lo guardo en memoria
+                            Cconv.enviarContacto(numeroContacto);
+                            // Prompt
+                            cout << "\nDesea enviar el mensaje? [S] o [N]\n";
+                            fflush(stdin);
+                            getline(cin, comando);
+                            if (comando[0] == 'S' || comando[0] == 's')
+                            {
+                                Cconv.crearMensaje();
+                            }
+                            else
+                            {
+                                cout << "\n El mensaje no fue enviado.\n";
+                            }
+                        }
+                        else
+                        {
+                            cout << "\n El numero ingresado no es un contacto del usuario.\n";
+                        }
+                    }
+                    break;
+                    case '5':
+                        cout << "\nVolviendo al menu anterior.\n";
+                        break;
+                    default:
+                        cout << "Ingresaste un comando inexistente.\n";
+                        break;
+                    }
+                    break;
+                case '5':
+                    cout << "Volviendo al menu principal.\n";
+                    break;
+                default:
+                    cout << "Ingresaste un comando inexistente.\n";
+                    break;
+                }
+            } while (comando[0] != '5');
+
 #pragma endregion
             break;
 

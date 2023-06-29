@@ -6,10 +6,10 @@
 class Imagen : public Mensaje
 {
 private:
-  string formatoImg, tamano, descripcion;
+  string formatoImg, tamano, descripcion, url;
 
 public:
-  Imagen(map<string, Usuario*> receptores, DtFecha fechaEnv, Usuario* emisor, int ultimoId, string formato, string tam, string desc);
+  Imagen(map<string, Usuario*> receptores, DtFecha fechaEnv, Usuario* emisor, int ultimoId, string formato, string tam, string desc, string url);
 
   string getUrl();
   string getFormato();

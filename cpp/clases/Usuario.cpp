@@ -33,9 +33,10 @@ Conversacion* Usuario::crearConversacion(string cNumTel)
     // Verificar si se encontró el contacto
     if (it != contactos.end())
     {
-      contacto = it->second;                                         // Almacenar el puntero al contacto encontrado
-      Conversacion* nuevaConver = new Privada(contacto, yo);         // Crear conversacion
-      conversaciones.insert({ contacto->getTelefono(), nuevaConver }); // Agregarla al map de conversaciones
+      contacto = it->second;                                               // Almacenar el puntero al contacto encontrado
+      Conversacion *nuevaConver = new Privada(contacto, yo);               // Crear conversacion
+      this->conversaciones.insert({contacto->getTelefono(), nuevaConver}); // Agregarla al map de conversaciones
+      contacto->conversaciones.insert({this->getTelefono(), nuevaConver}); // Agregarla al map del contacto
       cout << "Conversacion con " << contacto->getNombre() << " creada satisfactoriamente." << endl;
       return nuevaConver;
     }
@@ -57,10 +58,10 @@ list<DtConversacion> Usuario::buscarConver()
   map<string, Conversacion*>::iterator iter;
   for (iter = this->conversaciones.begin(); iter != this->conversaciones.end(); ++iter)
   {
-    if (Grupo* grupo = dynamic_cast<Grupo*>(iter->second))
-      convers.push_back(grupo->getDataConversacion("-"));
-    else if (Privada* privada = dynamic_cast<Privada*>(iter->second))
-      convers.push_back(privada->getDataConversacion(this->getNombre()));
+    if (Grupo *grupo = dynamic_cast<Grupo *>(iter->second))
+      convers.push_back(iter->second->getDataConversacion("-"));
+    else if (Privada *privada = dynamic_cast<Privada *>(iter->second))
+      convers.push_back(iter->second->getDataConversacion(iter->first));
   }
   return convers;
 }
@@ -78,7 +79,7 @@ void Usuario::setFechaConexion(DtFecha nuevaFechaConexion)
 
 void Usuario::agregarGrupo(Conversacion* grupo)
 { // Falta generador de ids de conversaciones
-  conversaciones.insert({ "sdaasdasid", grupo });
+  conversaciones.insert({"sdaasdasid", grupo});
 }
 
 DtUsuario Usuario::setDesc(string desc)
@@ -105,7 +106,7 @@ map<string, DtContacto> Usuario::listarContactos()
 
   for (const auto& [key, value] : contactos)
   {
-    //cout << key << " - " << value->getUsuario()->getDataUsuario().getNombre() << "\n";
+    // cout << key << " - " << value->getUsuario()->getDataUsuario().getNombre() << "\n";
     DtUsuario u = value->getDataUsuario();
     DtContacto c = { u.getNumTel(), u.getNombre(), u.getImagenPerfil() };
     dtContacts.insert({ key, c });
@@ -140,4 +141,10 @@ Conversacion* Usuario::getConversacion(string idConversacion)
 string Usuario::getTelefono()
 {
   return this->telefono;
+}
+
+DtUsuario Usuario::getContacto(string cNumTel)
+{
+  Usuario *contacto = this->contactos.find(cNumTel)->second;
+  return contacto->getDataUsuario();
 }
