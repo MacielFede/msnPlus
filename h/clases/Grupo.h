@@ -7,6 +7,7 @@
 class Grupo : public Conversacion
 {
 private:
+    string idUnica;
     string nombre;
     string imagen;
     DtFecha fechaCreacion;
@@ -26,15 +27,19 @@ public:
     bool getActiva();
 
     Grupo(); // Lo dejo vacio porque no se bien como seria el caso de uso de crear un grupo y como se le irian pasando los parametros
-    Grupo(map<string, Participante *> participantes, string nombre, string imagen);
+    Grupo(string id, map<string, Participante *> participantes, string nombre, string imagen);
     //No creo setters porque no deberiamos querer cambiar nada de los grupos
 
     string getImagen();
 
     DtFecha getFechaCreacion();
 
-    //list<DtParticipantes> getParticipantes(); No se si es necesario pero dejo la firma por las dudas
+    void addParticipante(Participante * p);
 
+    map<string, Usuario*> getParticipantes();
+    map<string, DtContacto> getDtContactoParticipantes();
+    
+    bool esAdmin(string val);
     ~Grupo();
 };
 

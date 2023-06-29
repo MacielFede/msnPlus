@@ -39,7 +39,7 @@ public:
     map<string, DtContacto> listarContactos();
     void agregarContacto(Usuario* c);
     Conversacion* crearConversacion(string cNumTel);
-    void agregarGrupo(Conversacion* grupo);
+    void agregarGrupo(string id, Conversacion* grupo);
     void sincronizarConversacion(Conversacion* conver);
     void setFechaConexion(DtFecha nuevaFechaConexion);
     Conversacion* getConversacion(string idConversacion);

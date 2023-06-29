@@ -26,6 +26,8 @@ public:
 
     virtual list<DtConversacion> listarConversaciones() = 0;
 
+    virtual  list<DtConversacion> listarGrupos() = 0;
+
     virtual list<DtMensaje*> selConversacion(string idConversacion) = 0;
 
     virtual void eliminarMensaje(int idMensaje) = 0;

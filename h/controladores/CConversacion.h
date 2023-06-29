@@ -37,6 +37,7 @@ public:
   // crea una instancia de CConversacion si es que no se creo y la retorna.
   void archivarConversacion(string idConversacion);
   list<DtConversacion> listarConversaciones();
+  list<DtConversacion> listarGrupos();
   list<DtMensaje*>  selConversacion(string idConversacion);
   void eliminarMensaje(int idMensaje);
   list<DtContacto> listarContactos();

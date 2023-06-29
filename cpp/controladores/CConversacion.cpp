@@ -78,6 +78,20 @@ list<DtConversacion> CConversacion::listarConversaciones()
     return sesion->buscarConver();
 }
 
+
+list<DtConversacion> CConversacion::listarGrupos() {
+    CAutenticacion autenticador = CAutenticacion::getCAutenticacion();
+    Usuario* sesion = autenticador.getSesionActiva();
+    list<DtConversacion> conversaciones = sesion->buscarConver();
+    list<DtConversacion> grupos;
+
+    for (list<DtConversacion>::iterator it = conversaciones.begin(); it != conversaciones.end(); ++it)
+        if(!it->getPrivada()) grupos.push_back(*it);
+
+    return grupos;
+}
+
+
 list<DtMensaje *> CConversacion::selConversacion(string idConversacion)
 {
     Usuario *sesion = CAutenticacion::getCAutenticacion().getSesionActiva();

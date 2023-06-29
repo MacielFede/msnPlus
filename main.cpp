@@ -15,7 +15,6 @@ int main()
 {
     string comando, idConver, numeroTelefono, modificacionPerfil;
     int idMensaje;
-    map<string, Participante*> participantesNewGrupo;
     Relojito& relojito = Relojito::getRelojito();
     Fabrica& fabrica = Fabrica::getFabrica();
     IConversacion& Cconv = fabrica.getCConv();
@@ -46,6 +45,16 @@ int main()
     /*
         Faltan covers y mensajes
     */
+    map<string, Participante *> participantesNewGrupo;
+    participantesNewGrupo.insert({u1->getTelefono(), new Participante(u1, DtFecha(22,5,2023,15 ,35), true)});
+    participantesNewGrupo.insert({u2->getTelefono(), new Participante(u2, DtFecha(22,5,2023,15 ,35), false)});
+    participantesNewGrupo.insert({u3->getTelefono(), new Participante(u3, DtFecha(22,5,2023,15 ,35), false)});
+    participantesNewGrupo.insert({u4->getTelefono(), new Participante(u4, DtFecha(22,5,2023,15 ,35), false)});
+
+    Grupo* G1 = new Grupo(fabrica.getUniqueId(), participantesNewGrupo, "Amigos", "home/img/amigos.png ");
+    Conversacion* CS2 = u1->crearConversacion(u2->getTelefono());
+    Conversacion* CS3 = u3->crearConversacion(u4->getTelefono());
+
 #pragma endregion
 
     cout << "\nBienvenido a su mejor chat. Recuerde, para ejecutar los comandos debe ingresar siempre el numero del mismo.\n\n";
@@ -263,8 +272,127 @@ int main()
 
                     break;
                 case '4':
-                    relojito.getFechaActual().imprimirFechayHora();
-                    break;
+                {
+
+                    list<DtConversacion> grupos = Cconv.listarGrupos();
+
+                    if (grupos.size() > 0)
+                    {
+
+                        cout << "Grupos del usuario:\n";
+                        for (list<DtConversacion>::iterator it = grupos.begin(); it != grupos.end(); ++it)
+                        {
+                            cout << it->getIdConv() << "\n";
+                        }
+
+                        cout << "\nIngrese el nombre del grupo al que desea agregar participantes.\n";
+
+                        fflush(stdin);
+                        getline(cin, comando);
+
+                        DtConversacion convSeleccionada;
+                        bool found = false;
+
+                        for (list<DtConversacion>::iterator it = grupos.begin(); it != grupos.end(); ++it)
+                        {
+                            if (comando == it->getIdConv())
+                            {
+                                convSeleccionada = *it;
+                                found = true;
+                                break;
+                            }
+                        }
+
+                        if (found)
+                        {
+                            do
+                            {
+                                Grupo *conv = dynamic_cast<Grupo *>(Caut.getSesionActiva()->getConversacion(convSeleccionada.getIdConv()));
+
+                                map<string, DtContacto> participantesGrupo = conv->getDtContactoParticipantes();
+
+                                cout << "\nContactos inculidos en el grupo:\n\n";
+
+                                for (const auto &[key, value] : participantesGrupo)
+                                {
+                                    if (key != Caut.getSesionActiva()->getTelefono())
+                                    {
+                                        DtContacto dtc = value;
+                                        cout << key << " - " << dtc.getNombre() << "\n";
+                                    }
+                                }
+
+                                cout << "\nContactos no inculidos en el grupo:\n\n";
+                                list<DtContacto> contactos = Ccont.listarContactos();
+                                for (list<DtContacto>::iterator it = contactos.begin(); it != contactos.end(); ++it)
+                                {
+                                    if (!participantesGrupo.count(it->getNumTel()))
+                                        cout << it->getNumTel() << " - " << it->getNombre() << "\n";
+                                }
+
+                                cout << "\nComandos:\n";
+                                cout << "(Numero de contacto sin espacios) - Agrega el contacto del grupo.\n";
+                                cout << "1 - Regresar.\n";
+
+                                fflush(stdin);
+                                getline(cin, comando);
+
+                                if (comando.length() > 1)
+                                {
+                                    if (conv->esAdmin(Caut.getSesionActiva()->getTelefono()))
+                                    {
+                                        comando = numFormat(comando);
+
+                                        if (comando.length() == 9)
+                                        {
+                                            if (Caut.esUsuario(comando))
+                                            {
+                                                if (Ccont.esContacto(comando))
+                                                {
+                                                    if (!participantesGrupo.count(comando))
+                                                    { // Agrega
+                                                        Participante *p = new Participante(Caut.infoUsuario(comando), relojito.getFechaActual(), false);
+                                                        conv->addParticipante(p);
+                                                        cout << "\nContacto agregado " << p->getUsuario()->getNombre() << "\n";
+                                                    }
+                                                    else
+                                                    {
+                                                        cout << "\nEl contacto ya es parte del grupo!\n";
+                                                    }
+                                                }
+                                                else
+                                                {
+                                                    cout << "Error, no existe un contacto con el numero" << comando << ".\n";
+                                                }
+                                            }
+                                            else
+                                            {
+                                                cout << "Error, no existe un usuario con el numero" << comando << ".\n";
+                                            }
+                                        }
+                                        else
+                                        {
+                                            cout << "Error, el formato del numero ingresado no es valido.\n";
+                                        }
+                                    }
+                                    else
+                                    {
+                                        cout << "Error, se requieren privilegios de administrador para agregar participantes a un grupo\n";
+                                    }
+                                }
+                            } while (comando != "1");
+                        }
+                        else
+                        {
+                            cout << "Error, el grupo ingresado no es valido.";
+                        }
+                    }
+                    else
+                    {
+                        cout << "Error, no pertenece a ningun grupo.";
+                    }
+                }
+                break;
                 case '5':
                     menuFechayHora();
                     break;
@@ -280,28 +408,26 @@ int main()
 #pragma endregion
 
         case '2':
+        {
 #pragma region Crear grupo
             // TODO: Crear grupo
             /*
             Mostrar contactos del usuario
             */
-
-            participantesNewGrupo.clear();
+            map<string, Participante *> participantesNewGrupo;
             do
             {
-                cout << "\nContactos del usuario no inculidos en el grupo:\n\n";
-                for (list<DtContacto>::iterator it = Ccont.listarContactos().begin(); it != Ccont.listarContactos().end(); ++it)
+                cout << "\nContactos no inculidos en el grupo:\n\n";
+                list<DtContacto> contactos = Ccont.listarContactos();
+                for (list<DtContacto>::iterator it = contactos.begin(); it != contactos.end(); ++it)
                 {
                     if (!participantesNewGrupo.count(it->getNumTel()))
                         cout << it->getNumTel() << " - " << it->getNombre() << "\n";
                 }
 
-                /*for (const auto &kv : participantesNewGrupo)
-                {
-                    std::cout << kv.first << " has value " << kv.second << std::endl;
-                }*/
+                cout << "\nContactos inculidos en el grupo:\n\n";
 
-                for (const auto& [key, value] : participantesNewGrupo)
+                for (const auto &[key, value] : participantesNewGrupo)
                 {
                     cout << key << " - " << value->getUsuario()->getDataUsuario().getNombre() << "\n";
                 }
@@ -332,14 +458,16 @@ int main()
                         getline(cin, comando);
 
                         urlNewGrupo = comando;
+
+                        Participante *p = new Participante(Caut.getSesionActiva(), relojito.getFechaActual(), true); // Agrega al usuario creador como administrador
+                        participantesNewGrupo.insert({Caut.getSesionActiva()->getTelefono(), p});
+
+                        Grupo *newGroup = new Grupo(fabrica.getUniqueId(), participantesNewGrupo, nombreNewGrupo, urlNewGrupo);
+
+                        cout << "Grupo creado correctamente!";
+
+                        comando = "2";
                       
-                        Grupo newGroup = { participantesNewGrupo, nombreNewGrupo, urlNewGrupo };
-
-                        for (const auto& [key, value] : participantesNewGrupo)
-                        {
-                            value->getUsuario()->agregarGrupo(&newGroup);
-                        }
-
                         for (const auto &[key, value] : participantesNewGrupo)
                         {
                             value->getUsuario()->agregarGrupo(&newGroup);
@@ -347,16 +475,26 @@ int main()
                     }
                     else
                     {
-                        cout << "Error, debe seleccionar al menos 1 partcipante en el grupo.\n";
+                        cout << "\nError, debe seleccionar al menos 1 partcipante en el grupo. ¿Como desea continuar?\n";
                         cout << "1 - Agregar mas participantes.\n";
                         cout << "2 - Cancelar.\n";
 
                         fflush(stdin);
                         getline(cin, comando);
+
+                        while (comando != "1" && comando != "2")
+                        {
+                            cout << "Error, opcion incorrecta.";
+
+                            fflush(stdin);
+                            getline(cin, comando);
+                        }
                     }
                 }
                 else
                 {
+                    comando = numFormat(comando);
+
                     if (comando.length() == 9)
                     {
                         if (Caut.esUsuario(comando))
@@ -365,11 +503,13 @@ int main()
                             {
                                 if (!participantesNewGrupo.count(comando))
                                 { // Agrega
-                                    Participante p = { Caut.infoUsuario(comando), relojito.getFechaActual(), false };
-                                    participantesNewGrupo.insert({ comando, &p });
+                                    Participante *p = new Participante(Caut.infoUsuario(comando), relojito.getFechaActual(), false);
+                                    participantesNewGrupo.insert({comando, p});
+                                    cout << "\nContacto agregado " << p->getUsuario()->getNombre() << "\n";
                                 }
                                 else
                                 { // Elimina
+                                    cout << "\nContacto eliminado\n";
                                     participantesNewGrupo.erase(comando);
                                 }
                             }
@@ -388,9 +528,10 @@ int main()
                         cout << "Error, el formato del numero ingresado no es valido.\n";
                     }
                 }
-            } while (comando[0] != '2' && comando.length() == 1);
+            } while (comando != "2");
 #pragma endregion
-            break;
+        }
+        break;
 
         case '3':
 #pragma region EnviarMensaje

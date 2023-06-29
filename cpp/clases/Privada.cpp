@@ -4,9 +4,10 @@
 Privada::Privada(Usuario *yo, Usuario *otro)
 {
   // Inserto ambos participantes y listo
-  this->participantes.insert({yo->getTelefono(), yo});
-  this->participantes.insert({otro->getTelefono(), otro});
+  this->participantes.insert({yo->getTelefono(),yo});
+  this->participantes.insert({otro->getTelefono(),otro});
   this->activa = true;
+  this->privada = true;
   this->ultimoIdMensaje = 0;
 }
 

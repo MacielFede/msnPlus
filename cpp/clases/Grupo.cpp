@@ -1,7 +1,22 @@
 #include "../../h/clases/Grupo.h"
 #include "../../h/clases/Mensaje.h"
 
-Grupo::Grupo() {}
+
+Grupo::Grupo(){}
+Grupo::Grupo(string id, map<string, Participante *> participantes, string nombre, string imagen)
+{
+    this->idConversacion = nombre;
+    this->idUnica = id;
+    this->participantes = participantes;
+    this->nombre = nombre;
+    this->imagen = imagen;
+    this->activa = true;
+    this->privada = false;
+    for (const auto &[key, value] : participantes)
+    {
+      value->getUsuario()->agregarGrupo(nombre, this); //pdria ser id
+    }
+}
 Grupo::Grupo(map<string, Participante *> participantes, string nombre, string imagen)
 {
   this->participantes = participantes;
@@ -28,16 +43,13 @@ map<string, Usuario *> Grupo::getParticipantes()
   return usuarios;
 }
 
-Grupo::~Grupo() {}
+DtConversacion Grupo::getDataConversacion(string telSesionAct) {
+  return DtConversacion(this->getIdConversacion(), this->getActiva(), "-", false);
+}
 
 bool Grupo::getActiva()
 {
   return this->activa;
-}
-
-DtConversacion Grupo::getDataConversacion(string telSesionAct)
-{
-  return DtConversacion(this->getIdConversacion(), this->getActiva(), "-");
 }
 
 list<DtMensaje *> Grupo::buscarMensajes(string telSesion)
@@ -58,6 +70,35 @@ list<DtMensaje *> Grupo::buscarMensajes(string telSesion)
   return msj;
 }
 
+
+void Grupo::addParticipante(Participante *p)
+{
+  participantes.insert({p->getUsuario()->getTelefono(), p});
+  p->getUsuario()->agregarGrupo(nombre, this);//idunica en vez de nombre
+}
+
+map<string, DtContacto> Grupo::getDtContactoParticipantes()
+{
+    map<string, DtContacto> vals;
+
+    for (const auto &[key, value] : participantes)
+    {
+        Usuario* u = value->getUsuario();
+        vals.insert({key, DtContacto(u->getTelefono(), u->getNombre(), u->getDataUsuario().getImagenPerfil())});
+    }
+
+    return vals;
+}
+
+bool Grupo::esAdmin(string val)
+{
+    if (!participantes.count(val))
+        return false;
+
+    return participantes.at(val)->getAdminStatus();
+}
+
 void Grupo::asignarAConversacion(Mensaje *m) {
   this->mensajes.insert({m->getIdMensaje(),m});
+
 }
