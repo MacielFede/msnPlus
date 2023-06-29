@@ -51,6 +51,7 @@ public:
   bool existeMensajeYEsEmisor(int idMensaje);
   void imprimirConversaciones(bool activas);
   map<string, Usuario*> getIntegrantesConversacion();
+  Conversacion * getConversacionActiva();
 
   // Destructor
   ~CConversacion();

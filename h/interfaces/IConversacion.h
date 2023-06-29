@@ -18,6 +18,8 @@ class IConversacion
 private:
 
 public:
+    virtual Conversacion * getConversacionActiva() = 0;
+
     virtual void archivarConversacion(string idConversacion) = 0;
 
     virtual void imprimirConversaciones(bool activas) = 0;

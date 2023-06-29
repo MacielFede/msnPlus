@@ -472,14 +472,124 @@ int main()
                         cout << "\nIngrese el texto que quiere enviar.\n";
                         fflush(stdin);
                         getline(cin, mensajeTexto);
+                        Cconv.enviarMensajeSimple(mensajeTexto);
+                        // Prompt
+                        cout << "\nDesea enviar el mensaje? [S] o [N]\n";
+                        fflush(stdin);
+                        getline(cin, comando);
+                        if (comando[0] == 'S' || comando[0] == 's')
+                        {
+                            Cconv.crearMensaje();
+                        }
+                        else
+                        {
+                            cout << "\n El mensaje no fue enviado.\n";
+                        }
                     }
                     break;
-                    case '2': // Imagen
-                        break;
-                    case '3': // Video
-                        break;
-                    case '4': // Contacto
-                        break;
+                    case '2':
+                    { // Imagen
+                        string url, formato, tamano, descripcion;
+                        // Url
+                        cout << "\nIngrese la url de la imagen.\n";
+                        fflush(stdin);
+                        getline(cin, url);
+                        // Formato
+                        cout << "\nIngrese el formato de la imagen.\n";
+                        fflush(stdin);
+                        getline(cin, formato);
+                        // Tamano
+                        cout << "\nIngrese el tamaño de la imagen.\n";
+                        fflush(stdin);
+                        getline(cin, tamano);
+                        // Descripcion
+                        cout << "\nIngrese una descripcion para la imagen (opcional).\n";
+                        fflush(stdin);
+                        getline(cin, descripcion);
+                        // Creo mensaje y lo guardo en memoria
+                        Cconv.enviarImg(url, formato, tamano, descripcion);
+                        // Prompt
+                        cout << "\nDesea enviar el mensaje? [S] o [N]\n";
+                        fflush(stdin);
+                        getline(cin, comando);
+                        if (comando[0] == 'S' || comando[0] == 's')
+                        {
+                            Cconv.crearMensaje();
+                        }
+                        else
+                        {
+                            cout << "\n El mensaje no fue enviado.\n";
+                        }
+                    }
+                    break;
+                    case '3':
+                    { // Video
+                        string url, duracion;
+                        // Url
+                        cout << "\nIngrese la url del video.\n";
+                        fflush(stdin);
+                        getline(cin, url);
+                        // Duracion
+                        cout << "\nIngrese la duracion del video.\n";
+                        fflush(stdin);
+                        getline(cin, duracion);
+                        // Creo mensaje y lo guardo en memoria
+                        Cconv.enviarVideo(url, duracion);
+                        // Prompt
+                        cout << "\nDesea enviar el mensaje? [S] o [N]\n";
+                        fflush(stdin);
+                        getline(cin, comando);
+                        if (comando[0] == 'S' || comando[0] == 's')
+                        {
+                            Cconv.crearMensaje();
+                        }
+                        else
+                        {
+                            cout << "\n El mensaje no fue enviado.\n";
+                        }
+                    }
+
+                    break;
+                    case '4':
+                    { // Contacto
+                      // Mostrar todos los contactos
+                        list<DtContacto> contacts = Ccont.listarContactos();
+                        int contactsSize = contacts.size();
+                        cout << "\nContactos del usuario: (" << contactsSize << ")\n-------------------------------\n";
+                        for (list<DtContacto>::iterator it = contacts.begin(); it != contacts.end(); ++it)
+                        {
+                            cout << it->getNumTel() << " - " << it->getNombre() << "\n";
+                        }
+
+                        string numeroContacto;
+                        // Numero de contacto
+                        cout << "\nIngrese el numero del contacto que desea enviar.\n";
+                        fflush(stdin);
+                        getline(cin, numeroContacto);
+                        // Si el numero ingresado es contacto del usuario
+                        if (Ccont.esContacto(numeroContacto))
+                        {
+                            // Creo mensaje y lo guardo en memoria
+                            Cconv.enviarContacto(numeroContacto);
+                            // Prompt
+                            cout << "\nDesea enviar el mensaje? [S] o [N]\n";
+                            fflush(stdin);
+                            getline(cin, comando);
+                            if (comando[0] == 'S' || comando[0] == 's')
+                            {
+                                Cconv.crearMensaje();
+                            }
+                            else
+                            {
+                                cout << "\n El mensaje no fue enviado.\n";
+                            }
+                        }
+                        else
+                        {
+                            cout << "\n El numero ingresado no es un contacto del usuario.\n";
+                        }
+                    }
+                    break;
                     case '5':
                         cout << "\nVolviendo al menu anterior.\n";
                         break;

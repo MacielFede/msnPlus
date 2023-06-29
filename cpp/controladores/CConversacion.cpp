@@ -112,15 +112,56 @@ map<string, Usuario *> CConversacion::getIntegrantesConversacion()
     }
 }
 
-void CConversacion::enviarMensajeSimple(string msgTxt) {}
+Conversacion *CConversacion::getConversacionActiva()
+{
+    return this->memConversacion;
+}
 
-void CConversacion::enviarImg(string url, string formato, string size, string desc) {}
+// Creo mensaje de texto y lo guardo en memoria
+void CConversacion::enviarMensajeSimple(string msgTxt)
+{
+    Mensaje *nuevoMensaje = new Texto(msgTxt, this->getIntegrantesConversacion(), Relojito::getRelojito().getFechaActual(), CAutenticacion::getCAutenticacion().getSesionActiva(), this->getConversacionActiva()->getUltimoIdMensaje());
+    this->memMensaje = nuevoMensaje;
+    cout << "\n El mensaje fue creado correctamente.\n";
+}
 
-void CConversacion::enviarVideo(string url, string duracion) {}
+// Creo mensaje de imagen y lo guardo en memoria
+void CConversacion::enviarImg(string url, string formato, string size, string desc)
+{
+    Mensaje *nuevoMensaje = new Imagen(this->getIntegrantesConversacion(), Relojito::getRelojito().getFechaActual(), CAutenticacion::getCAutenticacion().getSesionActiva(), this->getConversacionActiva()->getUltimoIdMensaje(), formato, size, desc, url);
+    this->memMensaje = nuevoMensaje;
+    cout << "\n El mensaje fue creado correctamente.\n";
+}
 
-void CConversacion::enviarContacto(string cNumTel) {}
+// Creo mensaje de video y lo guardo en memoria
+void CConversacion::enviarVideo(string url, string duracion)
+{
+    Mensaje *nuevoMensaje = new Video(this->getIntegrantesConversacion(), Relojito::getRelojito().getFechaActual(), CAutenticacion::getCAutenticacion().getSesionActiva(), url, duracion, this->getConversacionActiva()->getUltimoIdMensaje());
+    this->memMensaje = nuevoMensaje;
+    cout << "\n El mensaje fue creado correctamente.\n";
+}
 
-void CConversacion::crearMensaje() {}
+// Creo mensaje de contacto y lo guardo en memoria
+void CConversacion::enviarContacto(string cNumTel)
+{
+    DtUsuario contacto = CAutenticacion::getCAutenticacion().getSesionActiva()->getContacto(cNumTel);
+    Mensaje *nuevoMensaje = new Contacto(this->getIntegrantesConversacion(), Relojito::getRelojito().getFechaActual(), CAutenticacion::getCAutenticacion().getSesionActiva(), this->getConversacionActiva()->getUltimoIdMensaje(), contacto);
+    this->memMensaje = nuevoMensaje;
+    cout << "\n El mensaje fue creado correctamente.\n";
+}
+
+void CConversacion::crearMensaje()
+{
+    try
+    {
+        this->memConversacion->asignarAConversacion(this->memMensaje);
+        cout << "\nEl mensaje enviado a la conversacion seleccionada.\n";
+    }
+    catch (const std::exception &e)
+    {
+        std::cerr << e.what() << '\n';
+    }
+}
 
 bool CConversacion::existeConver(string idConver)
 {

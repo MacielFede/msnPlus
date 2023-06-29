@@ -58,4 +58,6 @@ list<DtMensaje *> Grupo::buscarMensajes(string telSesion)
   return msj;
 }
 
-void Grupo::asignarAConversacion(Mensaje *m) {}
+void Grupo::asignarAConversacion(Mensaje *m) {
+  this->mensajes.insert({m->getIdMensaje(),m});
+}

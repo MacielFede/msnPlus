@@ -31,6 +31,7 @@ public:
   void eliminarReceptor(Usuario user);
   virtual DtMensaje* getDataMensaje() = 0;
   list<DtVisto> crearInfoMsg();
+  int getIdMensaje();
 };
 
 #endif

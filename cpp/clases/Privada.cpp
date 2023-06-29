@@ -55,4 +55,6 @@ list<DtMensaje *> Privada::buscarMensajes(string telSesion)
   return msj;
 }
 
-void Privada::asignarAConversacion(Mensaje *m) {}
+void Privada::asignarAConversacion(Mensaje *m) {
+  this->mensajes.insert({m->getIdMensaje(),m});
+}

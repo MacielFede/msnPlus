@@ -1,6 +1,6 @@
 #include "../../h/clases/Imagen.h"
 
-Imagen::Imagen(map<string, Usuario *> receptores, DtFecha fechaEnv, Usuario *emisor, int ultimoId, string formato, string tam, string desc)
+Imagen::Imagen(map<string, Usuario *> receptores, DtFecha fechaEnv, Usuario *emisor, int ultimoId, string formato, string tam, string desc, string url)
 {
 
   this->descripcion = desc;
@@ -8,6 +8,7 @@ Imagen::Imagen(map<string, Usuario *> receptores, DtFecha fechaEnv, Usuario *emi
   this->tamano = tam;
   this->emisor = emisor;
   this->fechaEnvio = fechaEnv;
+  this->url = url;
   this->id = ultimoId;
 
   // Utilizar un iterador para recorrer el map de usuarios

@@ -32,3 +32,7 @@ void Mensaje::setVisto(string telefonoSesion) {
 bool Mensaje::esEmisor(string telefonoSesion) {
   return this->emisor->getTelefono() == telefonoSesion;
 }
+
+int Mensaje::getIdMensaje() {
+  this->id;
+}

@@ -142,3 +142,9 @@ string Usuario::getTelefono()
 {
   return this->telefono;
 }
+
+DtUsuario Usuario::getContacto(string cNumTel)
+{
+  Usuario *contacto = this->contactos.find(cNumTel)->second;
+  return contacto->getDataUsuario();
+}
