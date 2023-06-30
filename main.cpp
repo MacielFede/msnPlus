@@ -523,7 +523,7 @@ int main()
                         cout << "Grupo creado correctamente!";
 
                         comando = "2";
-
+                      
                     }
                     else
                     {
