@@ -2,7 +2,7 @@
 CC = g++
 
 # Flags del compilador, se puede agregar -Werror si queremos que trate las warnings como errores
-CFLAGS = -g -Wall -Wno-unknown-pragmas
+CFLAGS = -g -Wno-unknown-pragmas
 
 # Ejecutable
 PRINCIPAL = main

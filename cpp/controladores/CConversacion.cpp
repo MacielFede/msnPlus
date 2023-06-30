@@ -138,17 +138,19 @@ list<DtVisto> CConversacion::informacionMensaje(int idMensaje)
 
 map<string, Usuario *> CConversacion::getIntegrantesConversacion()
 {
+    map<string,Usuario*> integrantes;
     if (Grupo *grupo = dynamic_cast<Grupo *>(this->memConversacion))
     {
         // Crear map de integrantes
-        return grupo->getParticipantes();
+        integrantes = grupo->getParticipantes();
     }
 
     else if (Privada *privada = dynamic_cast<Privada *>(this->memConversacion))
     {
         // Crear map de integrantes
-        return privada->getParticipantes();
+        integrantes = privada->getParticipantes();
     }
+    return integrantes;
 }
 
 Conversacion *CConversacion::getConversacionActiva()

@@ -21,12 +21,12 @@ class Conversacion
 {
 protected:
     int ultimoIdMensaje;
-    bool activa;
+    map<string,bool> activa;
     string idConversacion;
     map<int, Mensaje*> mensajes;
     bool privada;
 public:
-    virtual DtConversacion getDataConversacion(string telSesionAct) = 0;
+    virtual DtConversacion getDataConversacion(string telSesionAct, string telefonoOtro) = 0;
 
     virtual list<DtMensaje*> buscarMensajes(string telSesion) = 0;
 
@@ -38,13 +38,13 @@ public:
 
     virtual void asignarAConversacion(Mensaje* m) = 0;
 
-    void setActivaFalse();
+    virtual void setActivaFalse(string idUsuario) = 0;
 
     virtual void eliminarMensaje(int idMensaje, string telSesion) = 0;
 
     int getUltimoIdMensaje();
 
-    bool getActiva();
+    virtual bool getActiva(string idUsuario) = 0;
 
     string getIdConversacion();
 

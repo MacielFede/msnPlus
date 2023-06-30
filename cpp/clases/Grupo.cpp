@@ -13,11 +13,11 @@ Grupo::Grupo(string id, map<string, Participante *> participantes, string nombre
   this->participantes = participantes;
   this->nombre = nombre;
   this->imagen = imagen;
-  this->activa = true;
   this->privada = false;
   for (const auto &[key, value] : participantes)
   {
-    value->getUsuario()->agregarGrupo(nombre, this); // pdria ser id
+    value->getUsuario()->agregarGrupo(nombre, this);                 // pdria ser id
+    this->activa.insert({value->getUsuario()->getTelefono(), true}); // Agrego activa en true para cada participante
   }
 }
 Grupo::Grupo(map<string, Participante *> participantes, string nombre, string imagen)
@@ -26,6 +26,15 @@ Grupo::Grupo(map<string, Participante *> participantes, string nombre, string im
   this->nombre = nombre;
   this->imagen = imagen;
   this->ultimoIdMensaje = 0;
+}
+
+void Grupo::setActivaFalse(string idUsuario)
+{
+  auto it = this->activa.find(idUsuario);
+  if (it != this->activa.end())
+  {
+    it->second = false;
+  }
 }
 
 void Grupo::eliminarMensaje(int idMensaje, string telSesion)
@@ -105,14 +114,14 @@ list<DtVisto> Grupo::infoMensajeCtm(int idMensaje)
   return mens->crearInfoMsg();
 }
 
-DtConversacion Grupo::getDataConversacion(string telSesionAct)
+DtConversacion Grupo::getDataConversacion(string telSesionAct, string telefonoOtro)
 {
-  return DtConversacion(this->getIdConversacion(), this->getActiva(), "-", false);
+  return DtConversacion(this->getIdConversacion(), this->getActiva(telSesionAct), "-", false);
 }
 
-bool Grupo::getActiva()
+bool Grupo::getActiva(string idUsuario)
 {
-  return this->activa;
+  return this->activa.find(idUsuario)->second;
 }
 
 list<DtMensaje *> Grupo::buscarMensajes(string telSesion)

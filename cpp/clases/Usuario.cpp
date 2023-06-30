@@ -3,6 +3,8 @@
 #include "../../h/clases/Grupo.h"
 #include "../../h/clases/Privada.h"
 
+using namespace std;
+
 Usuario::Usuario(string telefono, string nombre, string imagenPerfil, string descripcion, DtFecha fechaActual)
 {
   this->telefono = telefono;
@@ -59,9 +61,9 @@ list<DtConversacion> Usuario::buscarConver()
   for (iter = this->conversaciones.begin(); iter != this->conversaciones.end(); ++iter)
   {
     if (Grupo *grupo = dynamic_cast<Grupo *>(iter->second))
-      convers.push_back(iter->second->getDataConversacion("-"));
+      convers.push_back(iter->second->getDataConversacion(this->getTelefono(),"-"));
     else if (Privada *privada = dynamic_cast<Privada *>(iter->second))
-      convers.push_back(iter->second->getDataConversacion(iter->first));
+      convers.push_back(iter->second->getDataConversacion(this->getTelefono(),iter->first));
   }
   return convers;
 }
@@ -123,12 +125,17 @@ DtUsuario Usuario::getDataUsuario()
 void Usuario::archivarConversacion(string idConversacion)
 {
   auto it = this->conversaciones.find(idConversacion);
-  cout << it->second->getActiva() << endl;
   if (it != this->conversaciones.end())
-  {                               // Si no encuetra un objeto con esa clave, retorna un iterador del final del map
-    it->second->setActivaFalse(); // Como lo encontro, seteo en falso activa
+  { // Si no encuetra un objeto con esa clave, retorna un iterador del final del map
+    if (Grupo *grupo = dynamic_cast<Grupo *>(it->second))
+    {
+      grupo->setActivaFalse(this->getTelefono());
+    }
+    else if (Privada *privada = dynamic_cast<Privada *>(it->second))
+    {
+      privada->setActivaFalse(this->getTelefono());
+    }
   }
-  cout << it->second->getActiva() << endl;
 }
 
 bool Usuario::existeConver(string idConver)

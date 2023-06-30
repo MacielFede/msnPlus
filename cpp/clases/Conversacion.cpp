@@ -6,10 +6,6 @@
 
 Conversacion::~Conversacion() {}
 
-void Conversacion::setActivaFalse()
-{
-    this->activa = false;
-}
 
 int Conversacion::getUltimoIdMensaje()
 {
@@ -19,11 +15,6 @@ int Conversacion::getUltimoIdMensaje()
 string Conversacion::getIdConversacion()
 {
   return this->idConversacion;
-}
-
-bool Conversacion::getActiva()
-{
-  return this->activa;
 }
 
 list<DtVisto> Conversacion::informacionMensaje(int idMensaje)

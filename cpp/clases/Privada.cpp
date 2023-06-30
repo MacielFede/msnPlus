@@ -10,9 +10,20 @@ Privada::Privada(Usuario *yo, Usuario *otro)
   // Inserto ambos participantes y listo
   this->participantes.insert({yo->getTelefono(), yo});
   this->participantes.insert({otro->getTelefono(), otro});
-  this->activa = true;
   this->privada = true;
+  this->activa.insert({yo->getTelefono(), true});
+  this->activa.insert({otro->getTelefono(), true});
+
   this->ultimoIdMensaje = 0;
+}
+
+void Privada::setActivaFalse(string idUsuario)
+{
+  auto it = this->activa.find(idUsuario);
+  if (it != this->activa.end())
+  {
+    it->second = false;
+  }
 }
 
 void Privada::eliminarMensaje(int idMensaje, string telSesion)
@@ -20,12 +31,14 @@ void Privada::eliminarMensaje(int idMensaje, string telSesion)
   map<int, Mensaje *>::iterator iterMsj = mensajes.find(idMensaje);
   if (iterMsj != mensajes.end())
   {
-    if (iterMsj->second->esReceptor(telSesion))
-      iterMsj->second->eliminarReceptor(telSesion);
-    else if (iterMsj->second->esReceptor(telSesion) && iterMsj->second->esEmisor(telSesion))
+    if (iterMsj->second->esReceptor(telSesion) && iterMsj->second->esEmisor(telSesion))
     {
       delete iterMsj->second;
       mensajes.erase(idMensaje);
+    }
+    else if (iterMsj->second->esReceptor(telSesion))
+    {
+      iterMsj->second->eliminarReceptor(telSesion);
     }
     else
       cout << "Ya eliminaste el mensaje indicado.\n";
@@ -79,16 +92,16 @@ map<string, Usuario *> Privada::getParticipantes()
   return this->participantes;
 }
 
-bool Privada::getActiva()
+bool Privada::getActiva(string idUsuario)
 {
-  return this->activa;
+  return this->activa.find(idUsuario)->second;
 }
 
 Privada::~Privada() {}
 
-DtConversacion Privada::getDataConversacion(string telSesionAct)
+DtConversacion Privada::getDataConversacion(string telSesionAct, string telefonoOtro)
 {
-  return DtConversacion(telSesionAct, this->getActiva(), this->getNomUsuario(telSesionAct));
+  return DtConversacion(telefonoOtro, this->getActiva(telSesionAct), this->getNomUsuario(telefonoOtro));
 }
 
 string Privada::getNomUsuario(string otroUsuario)

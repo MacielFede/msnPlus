@@ -11,14 +11,15 @@ private:
     string nombre;
     string imagen;
     DtFecha fechaCreacion;
-    bool activa;
 
     map<string, Participante*> participantes;
     map<int, Mensaje*> mensajes;
 public:
-    DtConversacion getDataConversacion(string telSesionAct);
+    DtConversacion getDataConversacion(string telSesionAct, string telefonoOtro);
 
     void eliminarMensaje(int idMensaje, string telSesion);
+
+    void setActivaFalse(string idUsuario);
 
     list<DtVisto> infoMensajeCtm(int idMensaje);
 
@@ -26,7 +27,7 @@ public:
 
     void asignarAConversacion(Mensaje* m);
 
-    bool getActiva();
+    bool getActiva(string idUsuario);
 
     Grupo(); // Lo dejo vacio porque no se bien como seria el caso de uso de crear un grupo y como se le irian pasando los parametros
     Grupo(string id, map<string, Participante *> participantes, string nombre, string imagen);
