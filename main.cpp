@@ -15,11 +15,11 @@ int main()
 {
     string comando, idConver, numeroTelefono, modificacionPerfil;
     int idMensaje;
-    Relojito& relojito = Relojito::getRelojito();
-    Fabrica& fabrica = Fabrica::getFabrica();
-    IConversacion& Cconv = fabrica.getCConv();
-    IAutenticacion& Caut = fabrica.getCAut();
-    IContacto& Ccont = fabrica.getCCont();
+    Relojito &relojito = Relojito::getRelojito();
+    Fabrica &fabrica = Fabrica::getFabrica();
+    IConversacion &Cconv = fabrica.getCConv();
+    IAutenticacion &Caut = fabrica.getCAut();
+    IContacto &Ccont = fabrica.getCCont();
 
 #pragma region JuegoDeDatos
 
@@ -46,57 +46,57 @@ int main()
         Faltan covers y mensajes
     */
     map<string, Participante *> participantesNewGrupo;
-    participantesNewGrupo.insert({u1->getTelefono(), new Participante(u1, DtFecha(22,5,2023,15 ,35), true)});
-    participantesNewGrupo.insert({u2->getTelefono(), new Participante(u2, DtFecha(22,5,2023,15 ,35), false)});
-    participantesNewGrupo.insert({u3->getTelefono(), new Participante(u3, DtFecha(22,5,2023,15 ,35), false)});
-    participantesNewGrupo.insert({u4->getTelefono(), new Participante(u4, DtFecha(22,5,2023,15 ,35), false)});
+    participantesNewGrupo.insert({u1->getTelefono(), new Participante(u1, DtFecha(22, 5, 2023, 15, 35), true)});
+    participantesNewGrupo.insert({u2->getTelefono(), new Participante(u2, DtFecha(22, 5, 2023, 15, 35), false)});
+    participantesNewGrupo.insert({u3->getTelefono(), new Participante(u3, DtFecha(22, 5, 2023, 15, 35), false)});
+    participantesNewGrupo.insert({u4->getTelefono(), new Participante(u4, DtFecha(22, 5, 2023, 15, 35), false)});
 
-    Grupo* G1 = new Grupo(fabrica.getUniqueId(), participantesNewGrupo, "Amigos", "home/img/amigos.png ");
-    Conversacion* CS2 = u1->crearConversacion(u2->getTelefono());
-    Conversacion* CS3 = u3->crearConversacion(u4->getTelefono());
+    Grupo *G1 = new Grupo(fabrica.getUniqueId(), participantesNewGrupo, "Amigos", "home/img/amigos.png ");
+    Conversacion *CS2 = u1->crearConversacion(u2->getTelefono());
+    Conversacion *CS3 = u3->crearConversacion(u4->getTelefono());
 
-    //m1
+    // m1
     Cconv.selConversacion("Amigos", u4);
-    relojito.actualizarFecha(DtFecha(22,5,2023,18,04));
+    relojito.actualizarFecha(DtFecha(22, 5, 2023, 18, 04));
     Cconv.enviarMensajeSimple("¡Miren que bueno este video!", u4);
     Cconv.crearMensaje();
 
-    //m2
+    // m2
     Cconv.selConversacion("Amigos", u4);
-    relojito.actualizarFecha(DtFecha(22,5,2023,18,05));
+    relojito.actualizarFecha(DtFecha(22, 5, 2023, 18, 05));
     Cconv.enviarVideo("urlvid", "05 min", u4);
     Cconv.crearMensaje();
 
-    //m3
+    // m3
     Cconv.selConversacion("Amigos", u1);
-    relojito.actualizarFecha(DtFecha(22,5,2023,18,12));
+    relojito.actualizarFecha(DtFecha(22, 5, 2023, 18, 12));
     Cconv.enviarMensajeSimple("¡Muy gracioso!", u1);
     Cconv.crearMensaje();
 
-    //m4
+    // m4
     Cconv.selConversacion("Amigos", u3);
-    relojito.actualizarFecha(DtFecha(22,5,2023,18,13));
+    relojito.actualizarFecha(DtFecha(22, 5, 2023, 18, 13));
     Cconv.enviarMensajeSimple("¡Excelente!", u3);
     Cconv.crearMensaje();
 
-    //m5
+    // m5
     Cconv.selConversacion(u1->getTelefono(), u2);
-    relojito.actualizarFecha(DtFecha(23,5,2023,12,23));
+    relojito.actualizarFecha(DtFecha(23, 5, 2023, 12, 23));
     Cconv.enviarMensajeSimple("Hola, me pasas el contacto de Sara que no lo tengo", u2);
     Cconv.crearMensaje();
-    //m6
+    // m6
     Cconv.selConversacion(u2->getTelefono(), u1);
-    relojito.actualizarFecha(DtFecha(23,5,2023,12,25));
+    relojito.actualizarFecha(DtFecha(23, 5, 2023, 12, 25));
     Cconv.enviarContacto(numFormat("080 66 67 77"), u1);
     Cconv.crearMensaje();
-    //m7
+    // m7
     Cconv.selConversacion(u1->getTelefono(), u2);
-    relojito.actualizarFecha(DtFecha(23,5,2023,12,27));
+    relojito.actualizarFecha(DtFecha(23, 5, 2023, 12, 27));
     Cconv.enviarMensajeSimple("Gracias", u2);
     Cconv.crearMensaje();
-    //m8
+    // m8
     Cconv.selConversacion(u3->getTelefono(), u4);
-    relojito.actualizarFecha(DtFecha(23,5,2023,18,30));
+    relojito.actualizarFecha(DtFecha(23, 5, 2023, 18, 30));
     Cconv.enviarMensajeSimple(" Hola Pablo, cómo estas?", u4);
     Cconv.crearMensaje();
 
@@ -261,7 +261,9 @@ int main()
                                     cout << "No existe el mensaje indicado o tu no eres el emisor.\n";
                                 else
                                 {
+
                                     list<DtVisto> infoMensaje = Cconv.informacionMensaje(idMensaje);
+
                                     list<DtVisto>::iterator iter;
                                     cout << "\tVisto por\tEl dia\n";
                                     for (iter = infoMensaje.begin(); iter != infoMensaje.end(); ++iter)
@@ -498,7 +500,7 @@ int main()
 
                         nombreNewGrupo = comando;
 
-                        while(Cconv.existeConver(nombreNewGrupo))
+                         while(Cconv.existeConver(nombreNewGrupo))
                         {
                             cout << "Error, ya existe una conversacion con ese nombre\nVuelva a ingresar el nombre\n";
                             fflush(stdin);
@@ -521,6 +523,7 @@ int main()
                         cout << "Grupo creado correctamente!";
 
                         comando = "2";
+                      
                     }
                     else
                     {
@@ -874,6 +877,7 @@ int main()
         break;
 
         case '5':
+        {
 #pragma region ModificarPerfil
             cout << "\nQue quiere modificar? Nombre (N/n), Foto (F/f), Descripcion (D/d).\n";
             cout << "Si no indica nada o indica algo incorrecto se cancelara la operacion.\n";
@@ -882,7 +886,7 @@ int main()
             fflush(stdin);
             getline(cin, comando);
 
-            // DtUsuario usuarioCambiado;
+            DtUsuario usuarioCambiado;
 
             if (comando[0] == 'N' || comando[0] == 'n')
             {
@@ -891,7 +895,7 @@ int main()
                 fflush(stdin);
                 getline(cin, modificacionPerfil);
 
-                // usuarioCambiado = Caut.cambiarNombre(modificacionPerfil);
+                usuarioCambiado = Caut.cambiarNombre(modificacionPerfil);
             }
             else if (comando[0] == 'F' || comando[0] == 'f')
             {
@@ -900,7 +904,7 @@ int main()
                 fflush(stdin);
                 getline(cin, modificacionPerfil);
 
-                // usuarioCambiado = Caut.cambiarFoto(modificacionPerfil);
+                usuarioCambiado = Caut.cambiarFoto(modificacionPerfil);
             }
             else if (comando[0] == 'D' || comando[0] == 'd')
             {
@@ -909,16 +913,17 @@ int main()
                 fflush(stdin);
                 getline(cin, modificacionPerfil);
 
-                // usuarioCambiado = Caut.cambiarDescripcion(modificacionPerfil);
+                usuarioCambiado = Caut.cambiarDescripcion(modificacionPerfil);
             }
 
-            // cout << "\nTu nueva informacion:\n";
-            // cout << "Numero de telefono: " << usuarioCambiado->getNumTel() <<endl;
-            // cout << "Imagen de perfil: " << usuarioCambiado->getImagenPerfil() <<endl;
-            // cout << "Descripcion: " << usuarioCambiado->getDescripcion() <<endl;
+            cout << "\nTu nueva informacion:\n";
+            cout << "Nombre: " << usuarioCambiado.getNombre() << endl;
+            cout << "Imagen de perfil: " << usuarioCambiado.getImagenPerfil() << endl;
+            cout << "Descripcion: " << usuarioCambiado.getDescripcion() << endl;
 
-            break;
 #pragma endregion
+        }
+        break;
 
         case '6':
 #pragma region VerReloj
