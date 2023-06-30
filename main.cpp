@@ -498,6 +498,15 @@ int main()
 
                         nombreNewGrupo = comando;
 
+                        while(Cconv.existeConver(nombreNewGrupo))
+                        {
+                            cout << "Error, ya existe una conversacion con ese nombre\nVuelva a ingresar el nombre\n";
+                            fflush(stdin);
+                            getline(cin, comando);
+
+                            nombreNewGrupo = comando;
+                        }
+
                         cout << "Ingrese la URL de la imagen del nuevo grupo.\n";
                         fflush(stdin);
                         getline(cin, comando);
@@ -512,11 +521,6 @@ int main()
                         cout << "Grupo creado correctamente!";
 
                         comando = "2";
-                      
-                        for (const auto &[key, value] : participantesNewGrupo)
-                        {
-                            value->getUsuario()->agregarGrupo(fabrica.getUniqueId(), newGroup);
-                        }
                     }
                     else
                     {
