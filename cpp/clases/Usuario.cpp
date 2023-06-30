@@ -15,17 +15,17 @@ Usuario::Usuario(string telefono, string nombre, string imagenPerfil, string des
 
 Usuario::~Usuario() {}
 
-void Usuario::agregarContacto(Usuario* c)
+void Usuario::agregarContacto(Usuario *c)
 {
-  contactos.insert({ c->getDataUsuario().getNumTel(), c });
+  contactos.insert({c->getDataUsuario().getNumTel(), c});
 }
 
-Conversacion* Usuario::crearConversacion(string cNumTel)
+Conversacion *Usuario::crearConversacion(string cNumTel)
 {
   try
   {
-    Usuario* contacto = nullptr; // Puntero para almacenar el contacto encontrado
-    Usuario* yo = this;
+    Usuario *contacto = nullptr; // Puntero para almacenar el contacto encontrado
+    Usuario *yo = this;
 
     // Buscar el contacto en el map de contactos
     auto it = contactos.find(cNumTel);
@@ -46,7 +46,7 @@ Conversacion* Usuario::crearConversacion(string cNumTel)
       throw invalid_argument("\n Usted no tiene un contacto con dicho numero.\n");
     }
   }
-  catch (const std::exception& e)
+  catch (const std::exception &e)
   {
     std::cerr << e.what() << '\n';
   }
@@ -55,7 +55,7 @@ Conversacion* Usuario::crearConversacion(string cNumTel)
 list<DtConversacion> Usuario::buscarConver()
 {
   list<DtConversacion> convers;
-  map<string, Conversacion*>::iterator iter;
+  map<string, Conversacion *>::iterator iter;
   for (iter = this->conversaciones.begin(); iter != this->conversaciones.end(); ++iter)
   {
     if (Grupo *grupo = dynamic_cast<Grupo *>(iter->second))
@@ -79,7 +79,7 @@ void Usuario::setFechaConexion(DtFecha nuevaFechaConexion)
 
 void Usuario::agregarGrupo(string id, Conversacion *grupo)
 {
-    conversaciones.insert({id, grupo});
+  conversaciones.insert({id, grupo});
 }
 
 DtUsuario Usuario::setDesc(string desc)
@@ -104,12 +104,12 @@ map<string, DtContacto> Usuario::listarContactos()
 {
   map<string, DtContacto> dtContacts;
 
-  for (const auto& [key, value] : contactos)
+  for (const auto &[key, value] : contactos)
   {
     // cout << key << " - " << value->getUsuario()->getDataUsuario().getNombre() << "\n";
     DtUsuario u = value->getDataUsuario();
-    DtContacto c = { u.getNumTel(), u.getNombre(), u.getImagenPerfil() };
-    dtContacts.insert({ key, c });
+    DtContacto c = {u.getNumTel(), u.getNombre(), u.getImagenPerfil()};
+    dtContacts.insert({key, c});
   }
 
   return dtContacts;
@@ -122,10 +122,13 @@ DtUsuario Usuario::getDataUsuario()
 
 void Usuario::archivarConversacion(string idConversacion)
 {
-  if (this->conversaciones.find(idConversacion) != this->conversaciones.end())
-  {                                                         // Si no encuetra un objeto con esa clave, retorna un iterador del final del map
-    this->conversaciones[idConversacion]->setActivaFalse(); // Como lo encontro, seteo en falso activa
+  auto it = this->conversaciones.find(idConversacion);
+  cout << it->second->getActiva() << endl;
+  if (it != this->conversaciones.end())
+  {                               // Si no encuetra un objeto con esa clave, retorna un iterador del final del map
+    it->second->setActivaFalse(); // Como lo encontro, seteo en falso activa
   }
+  cout << it->second->getActiva() << endl;
 }
 
 bool Usuario::existeConver(string idConver)
@@ -133,7 +136,7 @@ bool Usuario::existeConver(string idConver)
   return conversaciones.find(idConver) != conversaciones.end();
 }
 
-Conversacion* Usuario::getConversacion(string idConversacion)
+Conversacion *Usuario::getConversacion(string idConversacion)
 {
   return conversaciones.find(idConversacion)->second;
 }

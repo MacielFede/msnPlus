@@ -16,6 +16,10 @@ public:
 
     map<string, Usuario *> getParticipantes();
 
+    void eliminarMensaje(int idMensaje, string telSesion);
+
+    list<DtVisto> infoMensajeCtm(int idMensaje);
+
     DtConversacion getDataConversacion(string telSesionAct);
 
     string getNomUsuario(string otroUsuario);

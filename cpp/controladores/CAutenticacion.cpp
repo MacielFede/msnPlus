@@ -157,13 +157,13 @@ DtUsuario CAutenticacion::cambiarDescripcion(string des)
 
 DtUsuario CAutenticacion::cambiarFoto(string url)
 {
-    this->memUsuario->setDesc(url);
+    this->memUsuario->setImagen(url);
     return this->memUsuario->getDataUsuario();
 }
 
 DtUsuario CAutenticacion::cambiarNombre(string nom)
 {
-    this->memUsuario->setDesc(nom);
+    this->memUsuario->setNombre(nom);
     return this->memUsuario->getDataUsuario();
 }
 

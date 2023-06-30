@@ -18,6 +18,10 @@ private:
 public:
     DtConversacion getDataConversacion(string telSesionAct);
 
+    void eliminarMensaje(int idMensaje, string telSesion);
+
+    list<DtVisto> infoMensajeCtm(int idMensaje);
+
     list<DtMensaje*> buscarMensajes(string telSesion);
 
     void asignarAConversacion(Mensaje* m);

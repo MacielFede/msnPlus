@@ -78,19 +78,19 @@ list<DtConversacion> CConversacion::listarConversaciones()
     return sesion->buscarConver();
 }
 
-
-list<DtConversacion> CConversacion::listarGrupos() {
+list<DtConversacion> CConversacion::listarGrupos()
+{
     CAutenticacion autenticador = CAutenticacion::getCAutenticacion();
-    Usuario* sesion = autenticador.getSesionActiva();
+    Usuario *sesion = autenticador.getSesionActiva();
     list<DtConversacion> conversaciones = sesion->buscarConver();
     list<DtConversacion> grupos;
 
     for (list<DtConversacion>::iterator it = conversaciones.begin(); it != conversaciones.end(); ++it)
-        if(!it->getPrivada()) grupos.push_back(*it);
+        if (!it->getPrivada())
+            grupos.push_back(*it);
 
     return grupos;
 }
-
 
 list<DtMensaje *> CConversacion::selConversacion(string idConversacion)
 {
@@ -99,15 +99,24 @@ list<DtMensaje *> CConversacion::selConversacion(string idConversacion)
     return memConversacion->buscarMensajes(sesion->getTelefono());
 }
 
-list<DtMensaje *> CConversacion::selConversacion(string idConversacion, Usuario* from)
+list<DtMensaje *> CConversacion::selConversacion(string idConversacion, Usuario *from)
 {
     Usuario *sesion = from;
     this->memConversacion = sesion->getConversacion(idConversacion);
     return memConversacion->buscarMensajes(sesion->getTelefono());
 }
 
-void CConversacion::eliminarMensaje(int idMensaje) {
-    this->memConversacion->eliminarMensaje(idMensaje, CAutenticacion::getCAutenticacion().getSesionActivaDt().getNumTel());
+void CConversacion::eliminarMensaje(int idMensaje)
+{
+    // Devuelve el info mensaje e imprime el mensaje (asume que el mensaje existe).
+    if (Grupo *grupo = dynamic_cast<Grupo *>(this->memConversacion))
+    {
+        grupo->eliminarMensaje(idMensaje, CAutenticacion::getCAutenticacion().getSesionActivaDt().getNumTel());
+    }
+    else if (Privada *privada = dynamic_cast<Privada *>(this->memConversacion))
+    {
+        privada->eliminarMensaje(idMensaje, CAutenticacion::getCAutenticacion().getSesionActivaDt().getNumTel());
+    }
 }
 
 list<DtContacto> CConversacion::listarContactos() {}
@@ -117,7 +126,14 @@ void CConversacion::seleccionarContacto(string cNumTel) {}
 list<DtVisto> CConversacion::informacionMensaje(int idMensaje)
 {
     // Devuelve el info mensaje e imprime el mensaje (asume que el mensaje existe).
-    return memConversacion->informacionMensaje(idMensaje);
+    if (Grupo *grupo = dynamic_cast<Grupo *>(this->memConversacion))
+    {
+        return grupo->infoMensajeCtm(idMensaje);
+    }
+    else if (Privada *privada = dynamic_cast<Privada *>(this->memConversacion))
+    {
+        return privada->infoMensajeCtm(idMensaje);
+    }
 }
 
 map<string, Usuario *> CConversacion::getIntegrantesConversacion()
@@ -148,7 +164,7 @@ void CConversacion::enviarMensajeSimple(string msgTxt)
     cout << "\n El mensaje fue creado correctamente.\n";
 }
 
-void CConversacion::enviarMensajeSimple(string msgTxt, Usuario* emisor)
+void CConversacion::enviarMensajeSimple(string msgTxt, Usuario *emisor)
 {
     Mensaje *nuevoMensaje = new Texto(msgTxt, this->getIntegrantesConversacion(), Relojito::getRelojito().getFechaActual(), emisor, this->getConversacionActiva()->getUltimoIdMensaje());
     this->memMensaje = nuevoMensaje;
@@ -171,7 +187,7 @@ void CConversacion::enviarVideo(string url, string duracion)
     cout << "\n El mensaje fue creado correctamente.\n";
 }
 
-void CConversacion::enviarVideo(string url, string duracion, Usuario* emisor)
+void CConversacion::enviarVideo(string url, string duracion, Usuario *emisor)
 {
     Mensaje *nuevoMensaje = new Video(this->getIntegrantesConversacion(), Relojito::getRelojito().getFechaActual(), emisor, url, duracion, this->getConversacionActiva()->getUltimoIdMensaje());
     this->memMensaje = nuevoMensaje;
@@ -187,7 +203,7 @@ void CConversacion::enviarContacto(string cNumTel)
     cout << "\n El mensaje fue creado correctamente.\n";
 }
 
-void CConversacion::enviarContacto(string cNumTel, Usuario* emisor)
+void CConversacion::enviarContacto(string cNumTel, Usuario *emisor)
 {
     DtUsuario contacto = emisor->getContacto(cNumTel);
     Mensaje *nuevoMensaje = new Contacto(this->getIntegrantesConversacion(), Relojito::getRelojito().getFechaActual(), emisor, this->getConversacionActiva()->getUltimoIdMensaje(), contacto);
@@ -214,17 +230,17 @@ bool CConversacion::existeConver(string idConver)
     return sesion->existeConver(idConver);
 }
 
-
-bool CConversacion::existeMensajeYEsER(int idMensaje) {
+bool CConversacion::existeMensajeYEsER(int idMensaje)
+{
     string telSesion = CAutenticacion::getCAutenticacion().getSesionActiva()->getTelefono();
     list<DtMensaje *> mensajes = memConversacion->buscarMensajes(telSesion);
     list<DtMensaje *>::iterator iter;
     for (iter = mensajes.begin(); iter != mensajes.end(); ++iter)
     {
         //(* ) esto se usa para desreferenciar, iter es un iterador a un puntero.
-        if ((*iter)->getIdMensaje() == idMensaje && (*iter)->usuarioEsReceptor(telSesion) && (*iter)->usuarioEsEmisor(telSesion)) //Si estoy en el mensaje y el usuario es emisor -> true
+        if ((*iter)->getIdMensaje() == idMensaje && (*iter)->usuarioEsReceptor(telSesion) && (*iter)->usuarioEsEmisor(telSesion)) // Si estoy en el mensaje y el usuario es emisor -> true
             return true;
-        else if ((*iter)->getIdMensaje() == idMensaje) //Si estoy en el mensaje pero el usuario no es emisor u receptor -> false 
+        else if ((*iter)->getIdMensaje() == idMensaje) // Si estoy en el mensaje pero el usuario no es emisor u receptor -> false
             return false;
     }
     return false; // No existe el mensaje

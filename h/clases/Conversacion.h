@@ -34,11 +34,13 @@ public:
 
     list<DtVisto> informacionMensaje(int idMensaje);
 
+    virtual list<DtVisto> infoMensajeCtm(int idMensaje) = 0;
+
     virtual void asignarAConversacion(Mensaje* m) = 0;
 
     void setActivaFalse();
 
-    void eliminarMensaje(int idMensaje, string telSesion);
+    virtual void eliminarMensaje(int idMensaje, string telSesion) = 0;
 
     int getUltimoIdMensaje();
 
